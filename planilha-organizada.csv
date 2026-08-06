@@ -1,0 +1,349 @@
+codigo,nome,categoria,preco,estoque,ativo
+COL-24,Colar Terço,Colares,,,
+COL-27,Colar com 2 Filhos,Colares,"99,9",,sim
+COL-28,Colar Riviera 3 Pontas 3mm,Colares,"439,9",,sim
+COL-29,Colar Riviera 3 Pontas 4mm,Colares,"439,9",,sim
+COL-30,Colar Snake P Ouro,Colares,"129,9",,sim
+COL-31,Colar Snake P Ródio Branco,Colares,"129,9",,sim
+COL-32,Colar Coração Cravejado com Menino,Colares,"99,9",,sim
+COL-34,Colar Coração com Menina,Colares,"79,9",,sim
+COL-35,Colar Coração com Menino,Colares,"79,9",,sim
+COL-36,Colar com Duas Meninas,Colares,"119,9",,sim
+COL-64,Colar Patuá Ródio Branco,Colares,"99,9",,sim
+COL-65,Colar São Bento Pérola,Colares,"79,9",,sim
+COL-60,Chocker Elos Português PP Ouro,Chocker,"69,9",,sim
+COL-39,Colar Solitário Zircônia Ouro,Colares,,,
+COL-40,Colar Elos Longo Ouro,Colares,,,
+COL-41,Colar Cobra Longo Ouro,Colares,,,
+COL-42,Colar Bolinhas Achatadas Ouro,Colares,,,
+COL-43,Colar Coração Liso Ouro,Colares,,,
+COL-44,Colar Cadeado Fino Ouro,Colares,,,
+COL-45,Colar Corações Achatados Prata Longo,Colares,,,
+COL-46,Colar Corações Achatados Prata,Colares,,,
+COL-47,Colar Cruz Zircônia Retângulo Ouro,Colares,,,
+COL-48,Colar Solitário Zircônia Prata,Colares,,,
+COL-49,Colar Raquete Beach Tennis Prata,Colares,,,
+COL-50,Colar Coração Liso Prata,Colares,,,
+COL-51,Colar Cadeado Fino Longo Ouro,Colares,,,
+COL-52,Colar Raquete Bola Beach Tennis Prata,Colares,,,
+COL-53,Colar Raquete Beach Tennis Ouro,Colares,,,
+COL-54,Colar Bolinha Única Ouro,Colares,,,
+COL-55,Colar Bolinhas Achatadas Prata,Colares,,,
+COL-56,Colar Bolinhas Ouro Longo,Colares,,,
+COL-66,Colar Iniciais Duplas,Colares,,,
+COL-67,Colar Menino Ouro,Colares,,,
+COL-68,Colar Menina Zircônia Ouro,Colares,,,
+COL-69,Colar Terço Pérola,Colares,,,
+BRA-01,Bracelete Nó Fino Ouro,Braceletes,"79,9",2,
+BRA-02,Bracelete Abaulado Grosso Ouro,Braceletes,"139,9",1,
+BRA-03,Bracelete Abaulado Fino Ouro,Braceletes,"139,9",1,
+BRA-04,Bracelete Fio Liso Fecho Jóia Ouro,Braceletes,"79,9",1,
+BRA-05,Bracelete Cordão Torcido Fino Ouro,Braceletes,"79,9",2,
+BRA-06,Bracelete Ponto de Luz Quadrado Ródio Branco,Braceletes,"159,9",2,
+BRA-07,Bracelete Duplo Cravejado Delicado Ródio Branco,Braceletes,"79,9",1,
+BRA-08,Bracelete Cruzado Cravejado Ouro,Braceletes,"139,9",1,
+BRA-09,Bracelete Fino Bolinha Ouro,Braceletes,"79,9",1,
+BRA-10,Bracelete São Bento Aberto Ouro,Braceletes,"79,9",1,
+BRA-11,Bracelete Chapa Fina Ouro,Braceletes,"79,9",2,
+BRA-18,Bracelete Gota Dupla Ouro,Braceletes,"139,9",1,
+BRA-19,Bracelete Coração Cravejado Ouro,Braceletes,"139,9",1,
+BRA-21,Bracelete Ondulado Largo,Braceletes,"139,9",,
+BRA-22,Bracelete Liso Grosso 2,Braceletes,,,
+BRA-23,Bracelete Espiral Grosso,Braceletes,"139,9",1,
+BRA-24,Bracelete Martelado Grosso,Braceletes,"149,9",1,
+BRA-25,Bracelete Detalhes Risca,Braceletes,"139,9",,
+BRC-01,Bracelete Martelado,Braceletes,"139,9",,sim
+BRC-02,Bracelete Facetado,Braceletes,"139,9",,sim
+BRC-03,Bracelete Bambu Trançado,Braceletes,"139,9",,sim
+BRC-04,Bracelete Liso Abaulado,Braceletes,"139,9",,sim
+BRC-05,Bracelete Gota Lisa,Braceletes,"139,9",,sim
+BRC-06,Bracelete Ondulado Largo,Braceletes,"149,9",,sim
+AAP-01,Argolinha Abaulada Prata,Brincos,"39,9",,sim
+ABD-01,Argolinha Bolinha Dourada,Brincos,"39,9",2,sim
+ABP-01,Argola Bolinhas Prata,Brincos,"39,9",2,sim
+ACD-01,Argola Canelada Fina Dourada,Brincos,,,sim
+ACD-01-G,Argola Canelada Fina Dourada (G),Brincos,"59,9",,sim
+ACD-01-M,Argola Canelada Fina Dourada (M),Brincos,"49,9",,sim
+ACP-02,Argola Canelada Prata,Brincos,"49,9",,sim
+ACX-01,Brinco Argola com Cruz,Brincos,"49,9",,sim
+AGD-01,Argola Gota Zircônia Dourada,Brincos,"39,9",0,sim
+AGP-01,Brinco Bolinha Dourado,Brincos,,,sim
+AGP-01-P,Brinco Bolinha Dourado (P),Brincos,"39,9",,sim
+AGP-01-PP,Brinco Bolinha Dourado (PP),Brincos,"29,9",,sim
+ALD-01,Argola Retangular Fina Dourada,Brincos,"49,9",,sim
+ARG-01,Brinco Argola Dupla,Brincos,"129,9",,sim
+ARG-02,Brinco Croissant,Brincos,"129,9",,sim
+ARG-03,Brinco Bolhas,Brincos,"139,9",0,sim
+ARG-18,Argola Fecho Italiano,Brincos,"69,9",,sim
+ARG-19,Argola Larga Trançada,Brincos,"79,9",0,sim
+ARG-20,Argola 3 Fios Grossa,Brincos,"79,9",,sim
+ARG-21,Brinco EarHook Cravejado,Brincos,"79,9",,sim
+ARL-01,Brinco Argola Larga Lisa,Brincos,"59,9",,sim
+BLD-01,Brinco Redondo Navete Cravejado,Brincos,"79,9",,sim
+BNO-01,Brinco Flor Nó Dourado,Brincos,"89,9",,sim
+BOL-01,Argola de Bolinhas,Brincos,,,sim
+BOL-01-G,Argola de Bolinhas (G),Brincos,"49,9",,sim
+BOL-01-M,Argola de Bolinhas (M),Brincos,"45,9",,sim
+BOR-01,Brinco Borboleta Cravejada,Brincos,"49,9",,sim
+BPP-01,Brinco Bola com Pérolas Prata,Brincos,"99,9",,sim
+BRP-01,Brinco Espiral Ródio Branco,Brincos,"99,9",,sim
+BRP-02,Brinco Cacho de Bolhas Ródio Branco,Brincos,"99,9",,sim
+BRP-03,Brinco Meia-Argola Larga Ródio Branco,Brincos,"119,9",,sim
+BTF-01,Brinco Botão Flor,Brincos,"79,9",,sim
+CAN-01,Brinco Tubo Canelado Médio,Brincos,"89,9",,sim
+CAN-02,Brinco Tubo Canelado Grosso,Brincos,"119,9",,sim
+CLA-01,Brinco Coração Duo,Brincos,"79,9",,sim
+CLA-02,Brinco Botão Dourado,Brincos,"99,9",,sim
+COR-01,Brinco Coração Cravejado Dourado,Brincos,"59,9",,sim
+COR-02,Brinco Coração Cravejado Prata,Brincos,"59,9",,sim
+CRA-01,Brinco Redondo Cravejado,Brincos,"99,9",0,sim
+CRA-02,Brinco Gota Cravejada,Brincos,"69,9",0,sim
+CRA-03,Brinco Gota Cristais,Brincos,"99,9",,sim
+CRV-01,Brinco Cristal Vermelho Prata,Brincos,"49,9",,sim
+CRZ-01,Brinco Cristal Azul Prata,Brincos,"49,9",,sim
+ESC-01,Brinco Earcuff Cristais Prata,Brincos,"119,9",,sim
+ESC-02,Brinco Earcuff Coração,Brincos,"79,9",,sim
+ENT-01,Brinco Entrelaçado,Brincos,"79,9",,sim
+PDT-01,Brinco Pendente Ouro,Brincos,"79,9",,sim
+PDT-02,Brinco Pendente Ródio Branco,Brincos,"79,9",,sim
+DUP-01,Brinco Duplo Argolinha Correntinha Strass,Brincos,,,
+HAL-01,Brinco Botão Halo Cravejado,Brincos,,,
+AGV-01,Brinco Argolinha Cravejada Prata,Brincos,,,
+AGV-02,Brinco Argolinha Cravejada Dourada,Brincos,,,
+DUP-02,Brinco Duplo Argolinha Correntinha Cristais,Brincos,,,
+EST-01,Brinco Earline com Estrela,Brincos,"89,9",,sim
+FLD-01,Brinco Folha e Disco,Brincos,"79,9",,sim
+FLR-01,Brinco Flor com Pérola,Brincos,"89,9",,sim
+GOT-01,Brinco Gota Cravejada Dourado,Brincos,"59,9",,sim
+GOT-02,Brinco Gota Cravejada Prata,Brincos,"59,9",0,sim
+GTL-01,Brinco Gota Lisa Dourada,Brincos,"79,9",,sim
+HUG-01,Brinco Argola Pingentes,Brincos,"59,9",,sim
+HUP-01,Argola Cravejada Quadrada Grossa,Brincos,"49,9",,sim
+MRQ-01,Brinco Navete Cravejado,Brincos,"69,9",0,sim
+NSA-01,Brinco Nossa Senhora Aparecida Dourado,Brincos,"39,9",,sim
+NSA-02,Brinco Nossa Senhora Aparecida Azul,Brincos,"39,9",,sim
+NSR-01,Argolinha Nossa Senhora,Brincos,"59,9",,sim
+ODI-01,Brinco Orgânico Disco,Brincos,"49,9",,sim
+ORG-01,Brinco Orgânico Oval,Brincos,"59,9",Coluna 1,sim
+PAV-01,Argola Click Cravejada Grossa,Brincos,"59,9",,sim
+PAV-01-G,Argola Click Cravejada Grossa (G),Brincos,"69,9",,sim
+PAV-01-M,Argola Click Cravejada Grossa (M),Brincos,"59,9",,sim
+PEN-01,Brinco Espiral Ondulado,Brincos,"119,9",1,sim
+PEN-02,Brinco Elos Orgânicos,Brincos,"129,9",1,sim
+PEN-03,Brinco Cascata Ródio Branco,Brincos,"129,9",1,sim
+SOL-01,Brinco Solitário Prata,Brincos,"69,9",,sim
+SOL-02,Brinco Solitário Pequeno Prata,Brincos,"39,9",,sim
+SOL-03,Brinco Solitário 12mm Prata,Brincos,"99,9",,sim
+SOL-04,Brinco Gota Zircônia Prata,Brincos,"39,9",1,sim
+SOL-05,Brinco Solitário 12mm Dourado,Brincos,"99,9",,sim
+SOL-06,Brinco Solitário Prata PP,Brincos,"39,9",,sim
+SOL-07,Brinco Solitário Prata Mini,Brincos,"39,9",,sim
+SOL-08,Brinco Solitário Prata Médio,Brincos,"49,9",,sim
+SOL-09,Brinco Solitário Dourado Médio,Brincos,"49,9",,sim
+TRC-01,Argola Trançada Dourada G,Brincos,"69,9",2,sim
+TRC-02,Argola Trançada Dourada M,Brincos,"59,9",,sim
+TRI-01,Brinco Triângulo Cravejado Prata,Brincos,"79,9",0,sim
+TRV-01,Brinco Trevo Cravejado,Brincos,89.9,,sim
+ZIR-01,Brinco Duplo Solitário Virginia,Brincos,"79,9",,sim
+CHK-03,Chocker Pérolas,Chocker,,,
+CHK-04,Chocker Zircônias Cravejadas,Chocker,,,
+CHK-07,Chocker Pérolas Barrocas,Chocker,,,
+CHK-08,Chocker Bolinhas Douradas,Chocker,,,
+CHK-09,Chocker Elo Cartier,Chocker,,,
+CHK-11,Chocker Corações Cravejados,Chocker,,,
+COL-12,Chocker Riviera Baguette Ródio Branco,Chocker,"149,9",,
+COL-15,Chocker Elo Cartier Ródio Branco,Chocker,"79,9",,
+COL-16,Chocker Corações Entrelaçados Ouro,Chocker,"59,9",,
+COL-17,Chocker Fita M Ouro,Chocker,"129,9",,
+COL-18,Chocker Elos Ródio Branco,Chocker,"99,9",,
+COL-19,Chocker Bolinhas Ovais Ouro,Chocker,"89,9",,
+COL-20,Chocker Fita P Ouro,Chocker,"89,9",,
+COL-22,Chocker Fita P Ródio Branco,Chocker,"89,9",,
+COL-23,Chocker Cordão Baiano Fino Ouro,Chocker,"89,9",,
+COL-01,Colar Cordão Baiano Fino Ródio Branco,Colares,"99,9",,sim
+COL-02,Colar Fio Ródio Branco,Colares,"69,9",,sim
+COL-03,Colar Bicolor Coração Vazado Ródio Branco,Colares,"79,9",,sim
+COL-04,Colar Com Uma Pérola Ouro,Colares,"69,9",,sim
+COL-05,Colar Riviera Fino Ródio Branco,Colares,"129,9",,sim
+COL-06,Colar Coração Vazado Ouro,Colares,"119,9",,sim
+COL-07,Colar Árvore da Vida Coração Ouro,Colares,"139,9",,sim
+COL-08,Colar Árvore da Vida Redondo Ouro,Colares,"139,9",,sim
+COL-09,Colar Espírito Santo Bicolor Ródio Branco,Colares,"119,9",,sim
+COL-10,Colar Relicário Redondo Ouro,Colares,"129,9",,sim
+COL-13,Colar Riviera Colorida Ouro,Colares,"149,9",,
+LET-01,Colar de Letra,Colares,"99,9",,sim
+LET-01-B,Colar de Letra B,Colares,,2,sim
+LET-01-D,Colar de Letra D,Colares,,2,sim
+LET-01-E,Colar de Letra E,Colares,,2,sim
+LET-01-F,Colar de Letra F,Colares,,2,sim
+LET-01-M,Colar de Letra M,Colares,,3,sim
+LET-01-N,Colar de Letra N,Colares,,2,sim
+LET-01-P,Colar de Letra P,Colares,,2,sim
+LET-01-S,Colar de Letra S,Colares,,2,sim
+LET-01-T,Colar de Letra T,Colares,,1,sim
+LET-01-U,Colar de Letra U,Colares,,1,sim
+LET-01-V,Colar de Letra V,Colares,,1,sim
+LET-01-Z,Colar de Letra Z,Colares,,1,sim
+CONJ-01,Conjunto Pérola Delicado,Conjuntos,"79,9",,sim
+CONJ-02,Conjunto Pérola,Conjuntos,"99,9",,sim
+CONJ-03,Conjunto Coração,Conjuntos,"119,9",,sim
+CONJ-04,Conjunto Ponto de Pérola Ouro,Conjuntos,"79,9",,sim
+CONJ-05,Conjunto Ponto de Luz Ródio Branco,Conjuntos,"99,9",,sim
+CONJ-07,Conjunto Coração Cravejado Prata,Conjuntos,,,
+CONJ-08,Conjunto Madre Pérola com Aro,Conjuntos,"199,9",,sim
+CONJ-09,Conjunto Redondo Orgânico Ouro,Conjuntos,"99,9",,sim
+CONJ-06,Conjunto Bolinha Ouro,Conjuntos,,,
+ACR-01,Argolinha Croissant Dourada,Duplas de brincos,,,sim
+ACR-01-G,Argolinha Croissant Dourada (G),Duplas de brincos,"59,9",0,sim
+ACR-01-M,Argolinha Croissant Dourada (M),Duplas de brincos,"49,9",1,sim
+ARG-04,Argolinha Lisa Clássica,Duplas de brincos,,,sim
+ARG-04-G,Argolinha Lisa Clássica (G),Duplas de brincos,"49,9",,sim
+ARG-04-P,Argolinha Lisa Clássica (P),Duplas de brincos,"39,9",,sim
+ARG-05,Argolinha Martelada,Duplas de brincos,,,sim
+ARG-05-G,Argolinha Martelada (G),Duplas de brincos,"49,9",2,sim
+ARG-05-P,Argolinha Martelada (P),Duplas de brincos,"39,9",,sim
+ARG-06,Argolinha Retangular,Duplas de brincos,,,sim
+ARG-06-G,Argolinha Retangular (G),Duplas de brincos,"59,9",,sim
+ARG-06-P,Argolinha Retangular (P),Duplas de brincos,"49,9",,sim
+ARG-07,Argolinha Quadrada Cravejada,Duplas de brincos,,,sim
+ARG-07-G,Argola Quadrada Cravejada (G) EX,Duplas de brincos,"45,9",,sim
+ARG-07-P,Argolinha Quadrada Cravejada (P),Duplas de brincos,"39,9",,sim
+ARG-08,Argolinha Duas Fileiras Cravejada,Duplas de brincos,,,sim
+ARG-08-G,Argolinha Duas Fileiras Cravejada (G),Duplas de brincos,"45,9",,sim
+ARG-08-P,Argolinha Duas Fileiras Cravejada (P),Duplas de brincos,"39,9",,sim
+ARG-09,Argolinha Canelada Dourada,Duplas de brincos,,,sim
+ARG-09-G,Argolinha Canelada Dourada (G),Duplas de brincos,"59,9",,sim
+ARG-09-P,Argolinha Canelada Dourada (P),Duplas de brincos,"49,9",,sim
+ESCP-01,Pulseira Medalinhas Ouro,Escapulários,"79,9",,sim
+ESCP-02,Escapulário N. Senhora Redondo Ouro,Escapulários,"79,9",,sim
+ESCP-03,Escapulário São Bento Redondo Veneziana Ouro,Escapulários,"79,9",,sim
+ESCP-04,Escapulário N. Senhora Mini Quadrado Elos Ródio Branco,Escapulários,"79,9",,sim
+ESCP-05,Escapulário N. Sra. do Carmo Veneziana Ouro,Escapulários,"79,9",,sim
+ESCP-06,Escapulário Veneziana Crucifixo Ródio Branco,Escapulários,"79,9",,sim
+ESCP-07,Escapulário N. Senhora Mini Quadrado Veneziana Ródio Branco,Escapulários,"79,9",,sim
+ESCP-08,"Escapulário Coração e Espirito Santo Ouro - infantil, pequeno",Escapulários,"79,9",2,sim
+ESCP-09,Escapulário Cartier São Jorge Ródio Branco,Escapulários,"99,9",,sim
+ESCP-10,Escapulário Sagrado Coração Ouro,Escapulários,"79,9",,sim
+ESCP-11,Escapulário Cartier São Jorge Ouro,Escapulários,"99,9",,sim
+ESCP-12,Escapulário N. Senhora Quadrado Ródio Branco,Escapulários,"79,9",,sim
+PIE-01,Piercing Cartilagem,Piercing Fake,"49,9",,
+PIE-02,Piercing Helix,Piercing Fake,"49,9",,
+PIE-03,Piercing Fake 4 Fileiras de Zircônia Dourado,Piercing Fake,"49,9",,
+PIE-04,Piercing Fake Bolinhas,Piercing Fake,"59,9",,
+PIE-05,Piercing Fake 4 Listras,Piercing Fake,"39,9",,
+PIE-06,Piercing Fake 4 Fileiras de Zircônia Prata,Piercing Fake,"49,9",,
+PIE-07,Piercing Fake Duplo Zircônia,Piercing,"49,9",,sim
+PIN-CRU,Pingente Crucifixo,Pingentes,"49,9",,sim
+PIN-ESR,Pingente Espírito Santo Redondo,Pingentes,"49,9",2,sim
+PIN-13,Pingente Coração Cravejado,Pingentes,"49,9",,sim
+PIN-14,Pingente Espírito Santo Mini,Pingentes,"39,9",,sim
+PIN-15,Pingente Coração Espírito Santo,Pingentes,"49,9",,sim
+PIN-16,Pingente Cruz Cravejada Redonda,Pingentes,"49,9",,sim
+PIN-17,Pingente Espírito Santo Detalhado,Pingentes,"49,9",,sim
+PIN-18,Pingente Medalha Pai Nosso,Pingentes,"49,9",,sim
+PIN-19,Pingente Árvore da Vida Cravejada,Pingentes,"49,9",,sim
+PIN-20,Pingente Mickey Cravejado,Pingentes,"49,9",,sim
+PIN-21,Pingente Medalha Pai Nosso Ondulada,Pingentes,"49,9",,sim
+PIN-22,Pingente Coração Cravejado Mini,Pingentes,"39,9",,sim
+PIN-23,Pingente Estrela Cravejada,Pingentes,"49,9",,sim
+BRA-14,Pulseira Riviera 3 Pontas 3mm Ródio Branco,Pulseiras,"199,9",,
+PUL-01,Pulseira Medalinhas Ouro,Pulseiras,"49,9",,
+PUL-02,Pulseira Cartier Ouro,Pulseiras,"59,9",,
+PUL-03,Pulseira Snake Ouro,Pulseiras,"69,9",,
+PUL-04,Pulseira Uma Bolinha Ouro,Pulseiras,"49,9",,
+PUL-05,Pulseira Pérolas Redondas Ouro,Pulseiras,"59,9",,
+PUL-06,Pulseira Terço Pérolas Ouro,Pulseiras,"59,9",,
+PUL-07,Pulseira Pérolas Ovais Ouro,Pulseiras,"59,9",2,
+PUL-08,Pulseira Tiffany Ouro,Pulseiras,"59,9",2,
+PUL-09,Pulseira Bolinhas Ródio Branco,Pulseiras,"59,9",,
+PUL-10,Pulseira Riviera Fina Ródio Branco,Pulseiras,"69,9",,
+PUL-12,Pulseira Pérolas Barrocas Ouro,Pulseiras,"59,9",,
+PUL-13,Pulseira Elos Gourmet Ouro,Pulseiras,"49,9",,
+PUL-14,Pulseira Cordão Baiano Fino,Pulseiras,"59,9",,
+TOR-01,Tornozeleira Medalinhas Ouro,Tornozeleiras,"59,9",1,
+TOR-02,Tornozeleira Pendentes Ouro,Tornozeleiras,"59,9",1,
+1,Argolinha Ondulada Dourada,Trios de brincos,,,sim
+ACP-01,Argola Cravejada Prata,Trios de brincos,,,sim
+ACP-01-G,Argola Cravejada Prata (G),Trios de brincos,"49,9",,sim
+ACP-01-M,Argola Cravejada Prata (M),Trios de brincos,"45,9",,sim
+ACP-01-P,Argola Cravejada Prata (P),Trios de brincos,"39,9",,sim
+AGC-01-G,Argolinha Ondulada Dourada (G),Trios de brincos,"59,9",1,sim
+AGC-01-M,Argolinha Ondulada Dourada (M),Trios de brincos,"49,9",1,sim
+AGC-01-P,Argolinha Ondulada Dourada (P),Trios de brincos,"39,9",2,sim
+AGC-02,Argolinha Ondulada Prata,Trios de brincos,,,sim
+AGC-02-G,Argolinha Ondulada Prata (G),Trios de brincos,"59,9",2,sim
+AGC-02-M,Argolinha Ondulada Prata (M),Trios de brincos,"49,9",2,sim
+AGC-02-P,Argolinha Ondulada Prata (P),Trios de brincos,"39,9",2,sim
+AGL-01,Argolinha Gota Lisa Dourada,Trios de brincos,,,sim
+AGL-01-G,Argolinha Gota Lisa Dourada (G),Trios de brincos,"59,9",1,sim
+AGL-01-M,Argolinha Gota Lisa Dourada (M),Trios de brincos,"55,9",2,sim
+AGL-01-P,Argolinha Gota Lisa Dourada (P),Trios de brincos,"49,9",2,sim
+AGP-02,Argolinha Gota Cravejada Dourada,Trios de brincos,,,sim
+AGP-02-G,Argolinha Gota Cravejada Dourada (G),Trios de brincos,"59,9",,sim
+AGP-02-M,Argolinha Gota Cravejada Dourada (M),Trios de brincos,"55,9",,sim
+AGP-02-P,Argolinha Gota Cravejada Dourada (P),Trios de brincos,"49,9",,sim
+ALA-01,Argolinha Lisa Abaulada Dourada,Trios de brincos,,,sim
+ALA-01-G,Argolinha Lisa Abaulada Dourada (G),Trios de brincos,"49,9",3,sim
+ALA-01-M,Argolinha Lisa Abaulada Dourada (M),Trios de brincos,"45,9",3,sim
+ALA-01-P,Argolinha Lisa Abaulada Dourada (P),Trios de brincos,"39,9",3,sim
+ALP-01,Argolinha Lisa Prata,Trios de brincos,,,sim
+ALP-01-G,Argolinha Lisa Prata (G),Trios de brincos,"49,9",,sim
+ALP-01-M,Argolinha Lisa Prata (M),Trios de brincos,"45,9",,sim
+ALP-01-P,Argolinha Lisa Prata (P),Trios de brincos,"39,9",,sim
+AMC-01,Argolinha Meia Cravejada Dourada,Trios de brincos,,,sim
+AMC-01-G,Argolinha Meia Cravejada Dourada (G),Trios de brincos,"59,9",,sim
+AMC-01-M,Argolinha Meia Cravejada Dourada (M),Trios de brincos,"55,9",,sim
+AMC-01-P,Argolinha Meia Cravejada Dourada (P),Trios de brincos,"49,9",,sim
+AOF-01,Argolinha em V Dourada,Trios de brincos,"39,9",,sim
+AOF-01-G,Argolinha em V Dourada (G),Trios de brincos,"59,9",2,sim
+AOF-01-M,Argolinha em V Dourada (M),Trios de brincos,"55,9",2,sim
+AOF-01-P,Argolinha em V Dourada (P),Trios de brincos,"49,9",2,sim
+ADL-01-P,Argolinha Delicada Ouro (P),Trios de brincos,"39,9",,sim
+ADL-01-M,Argolinha Delicada Ouro (M),Trios de brincos,"49,9",,sim
+ADL-01-G,Argolinha Delicada Ouro (G),Trios de brincos,"59,9",,sim
+AQF-01,Argolinha Quadrada Fina Dourada,Trios de brincos,"39,9",9,sim
+ARG-10,Argolinha Redonda Lisa,Trios de brincos,,,sim
+ARG-10-G,Argolinha Redonda Lisa (G),Trios de brincos,"49,9",2,sim
+ARG-10-M,Argolinha Redonda Lisa (M),Trios de brincos,"45,9",2,sim
+ARG-10-P,Argolinha Redonda Lisa (P),Trios de brincos,"39,9",2,sim
+ARG-11,Argolinha Grossa Lisa,Trios de brincos,,,sim
+ARG-11-G,Argolinha Grossa Lisa (G),Trios de brincos,"59,9",2,sim
+ARG-11-M,Argolinha Grossa Lisa (M),Trios de brincos,"55,9",,sim
+ARG-11-P,Argolinha Grossa Lisa (P),Trios de brincos,"49,9",2,sim
+ARG-12,Argolinha Fina Lisa,Trios de brincos,,,sim
+ARG-12-G,Argolinha Fina Lisa (G),Trios de brincos,"49,9",3,sim
+ARG-12-M,Argolinha Fina Lisa (M),Trios de brincos,"45,9",2,sim
+ARG-12-P,Argolinha Fina Lisa (P),Trios de brincos,"39,9",3,sim
+ARG-13,Argolinha Torcida,Trios de brincos,,,sim
+ARG-13-G,Argolinha Torcida (G),Trios de brincos,"49,9",3,sim
+ARG-13-M,Argolinha Torcida (M),Trios de brincos,"45,9",,sim
+ARG-13-P,Argolinha Torcida (P),Trios de brincos,"39,9",2,sim
+ARG-14,Argolinha Cravejada Grossa,Trios de brincos,,,sim
+ARG-14-G,Argolinha Cravejada Grossa (G),Trios de brincos,"59,9",,sim
+ARG-14-M,Argolinha Cravejada Grossa (M),Trios de brincos,"55,9",,sim
+ARG-14-P,Argolinha Cravejada Grossa (P),Trios de brincos,"49,9",,sim
+ARG-15,Argolinha Cravejada Fina,Trios de brincos,,,sim
+ARG-15-G,Argolinha Cravejada Fina (G),Trios de brincos,"49,9",,sim
+ARG-15-M,Argolinha Cravejada Fina (M),Trios de brincos,"45,9",2,sim
+ARG-15-P,Argolinha Cravejada Fina (P),Trios de brincos,"39,9",,sim
+ARG-16,Argolinha Coração Cravejado,Trios de brincos,,,sim
+ARG-16-G,Argolinha Coração Cravejado (G),Trios de brincos,"49,9",,sim
+ARG-16-M,Argolinha Coração Cravejado (M),Trios de brincos,"45,9",,sim
+ARG-16-P,Argolinha Coração Cravejado (P),Trios de brincos,"39,9",,sim
+ARG-17,Argolinha Coração Liso,Trios de brincos,,,sim
+ARG-17-G,Argolinha Coração Liso (G),Trios de brincos,"49,9",,sim
+ARG-17-M,Argolinha Coração Liso (M),Trios de brincos,"45,9",,sim
+ARG-17-P,Argolinha Coração Liso (P),Trios de brincos,"39,9",,sim
+ARQ-01,Argolinha Triangular Dourada,Trios de brincos,,,sim
+ARQ-01-G,Argolinha Triangular Dourada (G),Trios de brincos,"59,9",3,sim
+ARQ-01-M,Argolinha Triangular Dourada (M),Trios de brincos,"55,9",3,sim
+ARQ-01-P,Argolinha Triangular Dourada (P),Trios de brincos,"49,9",3,sim
+TRB-01,Trio Ponto de Luz com Base Dourado,Trios de brincos,"79,9",,sim
+TRB-02,Trio Ponto de Luz Prata,Trios de brincos,"79,9",,sim
+TRB-03,Trio Ponto de Luz Dourado,Trios de brincos,"79,9",,sim
+TRB-04,Trio Gota Zircônia Dourado,Trios de brincos,"79,9",,sim
+TRB-05,Trio Sortido Dourado,Trios de brincos,"89,9",,sim
+TRB-06,Trio Geométrico Prata,Trios de brincos,"99,9",,sim
+TRB-07,Trio Ponto de Luz Dourado Grande,Trios de brincos,"79,9",,sim
+TRB-08,Trio Geométrico Dourado,Trios de brincos,"99,9",,sim
+TRB-09,Trio Bolinha Dourado,Trios de brincos,"79,9",2,sim

@@ -1,0 +1,171 @@
+﻿codigo,nome,categoria,preco,estoque,ativo
+PEN-01,Brinco Espiral Ondulado,Brincos,"119,90",,sim
+PEN-02,Brinco Elos Orgânicos,Brincos,"129,90",,sim
+PEN-03,Brinco Cascata Prata,Brincos,"129,90",,sim
+ARG-01,Brinco Argola Dupla,Brincos,"129,90",,sim
+ARG-02,Brinco Croissant,Brincos,"129,90",,sim
+ARG-03,Brinco Bolhas,Brincos,"139,90",,sim
+CRA-01,Brinco Redondo Cravejado,Brincos,"99,90",,sim
+CRA-02,Brinco Gota Cravejada,Brincos,"69,90",,sim
+CRA-03,Brinco Gota Cristais,Brincos,"99,90",,sim
+CLA-01,Brinco Coração Duo,Brincos,"79,90",,sim
+CLA-02,Brinco Botão Dourado,Brincos,"99,90",,sim
+ARG-04,Argola Lisa Clássica,Duplas de brincos,,,sim
+ARG-04-P,Argola Lisa Clássica (P),Duplas de brincos,"39,90",,sim
+ARG-04-G,Argola Lisa Clássica (G),Duplas de brincos,"49,90",,sim
+ARG-05,Argola Martelada,Duplas de brincos,,,sim
+ARG-05-P,Argola Martelada (P),Duplas de brincos,"39,90",,sim
+ARG-05-G,Argola Martelada (G),Duplas de brincos,"49,90",,sim
+ARG-06,Argola Retangular,Duplas de brincos,,,sim
+ARG-06-P,Argola Retangular (P),Duplas de brincos,"49,90",,sim
+ARG-06-G,Argola Retangular (G),Duplas de brincos,"59,90",,sim
+ARG-07,Argola Quadrada Cravejada,Duplas de brincos,,,sim
+ARG-07-P,Argola Quadrada Cravejada (P),Duplas de brincos,"39,90",,sim
+ARG-07-G,Argola Quadrada Cravejada (G),Duplas de brincos,"45,90",,sim
+ARG-08,Argola Cravejada,Duplas de brincos,,,sim
+ARG-08-P,Argola Cravejada (P),Duplas de brincos,"39,90",,sim
+ARG-08-G,Argola Cravejada (G),Duplas de brincos,"45,90",,sim
+ARG-09,Argola Canelada,Duplas de brincos,,,sim
+ARG-09-P,Argola Canelada (P),Duplas de brincos,"49,90",,sim
+ARG-09-G,Argola Canelada (G),Duplas de brincos,"59,90",,sim
+ARG-10,Argola Redonda Lisa,Trios de brincos,,,sim
+ARG-10-P,Argola Redonda Lisa (P),Trios de brincos,"39,90",,sim
+ARG-10-M,Argola Redonda Lisa (M),Trios de brincos,"45,90",,sim
+ARG-10-G,Argola Redonda Lisa (G),Trios de brincos,"49,90",,sim
+ARG-11,Argola Grossa Lisa,Trios de brincos,,,sim
+ARG-11-P,Argola Grossa Lisa (P),Trios de brincos,"49,90",,sim
+ARG-11-M,Argola Grossa Lisa (M),Trios de brincos,"55,90",,sim
+ARG-11-G,Argola Grossa Lisa (G),Trios de brincos,"59,90",,sim
+ARG-12,Argola Fina Lisa,Trios de brincos,,,sim
+ARG-12-P,Argola Fina Lisa (P),Trios de brincos,"39,90",,sim
+ARG-12-M,Argola Fina Lisa (M),Trios de brincos,"45,90",,sim
+ARG-12-G,Argola Fina Lisa (G),Trios de brincos,"49,90",,sim
+ARG-13,Argola Cordão Torcido,Trios de brincos,,,sim
+ARG-13-P,Argola Cordão Torcido (P),Trios de brincos,"39,90",,sim
+ARG-13-M,Argola Cordão Torcido (M),Trios de brincos,"45,90",,sim
+ARG-13-G,Argola Cordão Torcido (G),Trios de brincos,"49,90",,sim
+ARG-14,Argola Cravejada Grossa,Trios de brincos,,,sim
+ARG-14-P,Argola Cravejada Grossa (P),Trios de brincos,"49,90",,sim
+ARG-14-M,Argola Cravejada Grossa (M),Trios de brincos,"55,90",,sim
+ARG-14-G,Argola Cravejada Grossa (G),Trios de brincos,"59,90",,sim
+ARG-15,Argola Cravejada Fina,Trios de brincos,,,sim
+ARG-15-P,Argola Cravejada Fina (P),Trios de brincos,"39,90",,sim
+ARG-15-M,Argola Cravejada Fina (M),Trios de brincos,"45,90",,sim
+ARG-15-G,Argola Cravejada Fina (G),Trios de brincos,"49,90",,sim
+ARG-16,Argola Texturizada,Trios de brincos,,,sim
+ARG-16-P,Argola Texturizada (P),Trios de brincos,"39,90",,sim
+ARG-16-M,Argola Texturizada (M),Trios de brincos,"45,90",,sim
+ARG-16-G,Argola Texturizada (G),Trios de brincos,"49,90",,sim
+ARG-17,Argola Ondulada,Trios de brincos,,,sim
+ARG-17-P,Argola Ondulada (P),Trios de brincos,"39,90",,sim
+ARG-17-M,Argola Ondulada (M),Trios de brincos,"45,90",,sim
+ARG-17-G,Argola Ondulada (G),Trios de brincos,"49,90",,sim
+COL-01,Colar Cordão Baiano Fino,Colares,"99,90",,sim
+COL-02,Colar Fino,Colares,"69,90",,sim
+COL-03,Colar Bicolor Coração Vazado,Colares,"79,90",,sim
+COL-04,Colar Com Pérola,Colares,"69,90",,sim
+COL-05,Colar Riviera Fino,Colares,"129,90",,sim
+ARG-18,Argola Angular Pequena,Brincos,"69,90",,sim
+ARG-19,Argola Larga Trançada,Brincos,"79,90",,sim
+ARG-20,Argola Trançada Grossa,Brincos,"79,90",,sim
+ARG-21,Argola Trançada Fina,Brincos,"79,90",,sim
+BRP-01,Brinco Bolha Trançado Prata,Brincos,"99,90",,sim
+BRP-02,Brinco Cacho de Bolhas Prata,Brincos,"99,90",,sim
+BRP-03,Brinco Meia-Argola Larga Prata,Brincos,"119,90",,sim
+CONJ-01,Conjunto Pérola Delicado,Conjuntos,"79,90",,sim
+CONJ-02,Conjunto Pérola,Conjuntos,"99,90",,sim
+CONJ-03,Conjunto Coração,Conjuntos,"119,90",,sim
+CONJ-04,Conjunto Ponto de Luz,Conjuntos,"119,90",,sim
+CONJ-05,Conjunto Ponto de Luz Prata,Conjuntos,"99,90",,sim
+CONJ-06,Conjunto Bolinha Ouro,Conjuntos,,,
+CONJ-07,Conjunto Coração Cravejado Prata,Conjuntos,,,
+CONJ-08,Conjunto Madre Pérola com Aro,Conjuntos,"199,90",,sim
+CONJ-09,Conjunto Redondo Orgânico Ouro,Conjuntos,"99,90",,sim
+COL-06,Colar Coração Vazado,Colares,"119,90",,sim
+COL-07,Colar Árvore da Vida Coração,Colares,"139,90",,sim
+COL-08,Colar Árvore da Vida Redondo,Colares,"139,90",,sim
+COL-09,Colar Espírito Santo Prata,Colares,"119,90",,sim
+COL-10,Colar Relicário Redondo,Colares,"129,90",,sim
+LET-01,Colar de Letra,Colares,"99,90",,sim
+LET-01-B,Colar de Letra B,Colares,,2,sim
+LET-01-D,Colar de Letra D,Colares,,2,sim
+LET-01-E,Colar de Letra E,Colares,,2,sim
+LET-01-F,Colar de Letra F,Colares,,2,sim
+LET-01-M,Colar de Letra M,Colares,,3,sim
+LET-01-N,Colar de Letra N,Colares,,2,sim
+LET-01-P,Colar de Letra P,Colares,,2,sim
+LET-01-S,Colar de Letra S,Colares,,2,sim
+LET-01-T,Colar de Letra T,Colares,,1,sim
+LET-01-U,Colar de Letra U,Colares,,1,sim
+LET-01-V,Colar de Letra V,Colares,,2,sim
+LET-01-Z,Colar de Letra Z,Colares,,1,sim
+BRC-01,Bracelete Martelado,Braceletes,"139,90",,sim
+BRC-02,Bracelete Facetado,Braceletes,"139,90",,sim
+BRC-03,Bracelete Bambu Trançado,Braceletes,"139,90",,sim
+BRC-04,Bracelete Liso Abaulado,Braceletes,"139,90",,sim
+BRC-05,Bracelete Gota Lisa,Braceletes,"139,90",,sim
+BRC-06,Bracelete Ondulado Largo,Braceletes,"149,90",,sim
+COL-27,Colar com 2 Filhos,Colares,"99,90",,sim
+COL-28,Colar Riviera 3 Pontas 3mm,Colares,"439,90",,sim
+COL-29,Colar Riviera 3 Pontas 4mm,Colares,"439,90",,sim
+COL-30,Colar Snake P Ouro,Colares,"129,90",,sim
+COL-31,Colar Snake P Ródio Branco,Colares,"129,90",,sim
+COL-32,Colar Coração Cravejado com Menino,Colares,"99,90",,sim
+COL-34,Colar Coração com Menina,Colares,"79,90",,sim
+COL-35,Colar Coração com Menino,Colares,"79,90",,sim
+COL-36,Colar com Duas Meninas,Colares,"119,90",,sim
+COL-39,Colar Solitário Zircônia Ouro,Colares,,,
+COL-40,Colar Elos Longo Ouro,Colares,,,
+COL-41,Colar Cobra Longo Ouro,Colares,,,
+COL-42,Colar Bolinhas Achatadas Ouro,Colares,,,
+COL-43,Colar Coração Liso Ouro,Colares,,,
+COL-44,Colar Cadeado Fino Ouro,Colares,,,
+COL-45,Colar Corações Achatados Prata Longo,Colares,,,
+COL-46,Colar Corações Achatados Prata,Colares,,,
+COL-47,Colar Cruz Zircônia Retângulo Ouro,Colares,,,
+COL-48,Colar Solitário Zircônia Prata,Colares,,,
+COL-49,Colar Raquete Beach Tennis Prata,Colares,,,
+COL-50,Colar Coração Liso Prata,Colares,,,
+COL-51,Colar Cadeado Fino Longo Ouro,Colares,,,
+COL-52,Colar Raquete Bola Beach Tennis Prata,Colares,,,
+COL-53,Colar Raquete Beach Tennis Ouro,Colares,,,
+COL-54,Colar Bolinha Única Ouro,Colares,,,
+COL-55,Colar Bolinhas Achatadas Prata,Colares,,,
+COL-56,Colar Bolinhas Ouro Longo,Colares,,,
+COL-60,Chocker Elos Português PP Ouro,Chocker,"69,90",,sim
+COL-64,Colar Patuá Ródio Branco,Colares,"99,90",,sim
+COL-65,Colar São Bento Pérola,Colares,"79,90",,sim
+COL-66,Colar Iniciais Duplas,Colares,,,
+COL-67,Colar Menino Ouro,Colares,,,
+COL-68,Colar Menina Zircônia Ouro,Colares,,,
+COL-69,Colar Terço Pérola,Colares,,,
+ESC-02,Brinco Earcuff Coração,Brincos,"79,90",,sim
+ENT-01,Brinco Entrelaçado,Brincos,"79,90",,sim
+PDT-01,Brinco Pendente Ouro,Brincos,"79,90",,sim
+PDT-02,Brinco Pendente Ródio Branco,Brincos,"79,90",,sim
+DUP-01,Brinco Duplo Argolinha Correntinha Strass,Brincos,,,
+HAL-01,Brinco Botão Halo Cravejado,Brincos,,,
+AGV-01,Brinco Argolinha Cravejada Prata,Brincos,,,
+AGV-02,Brinco Argolinha Cravejada Dourada,Brincos,,,
+DUP-02,Brinco Duplo Argolinha Correntinha Cristais,Brincos,,,
+PIE-07,Piercing Fake Duplo Zircônia,Piercing,"49,90",,sim
+ANE-01,Anel Duplo Gota Dourado,Anéis,,,
+ANE-02,Anel Chevalier Oval Dourado,Anéis,,,
+ANE-03,Anel Duplo Gota Dourado Grande,Anéis,,,
+ANE-04,Anel Medalha Trabalhada Dourado,Anéis,,,
+ANE-04-11,Anel Medalha Trabalhada Dourado (11),Anéis,,,
+ANE-04-13,Anel Medalha Trabalhada Dourado (13),Anéis,,,
+ANE-05,Anel Cruzado Cravejado Rosé,Anéis,,,
+ANE-06,Anel Trançado Fino Dourado,Anéis,,,
+ANE-07,Anel Ondulado Fino Dourado,Anéis,,,
+ANE-08,Anel Navete Cravejado Prata,Anéis,,,
+ANE-09,Anel Duplo Cravejado Dourado,Anéis,,,
+ANE-10,Anel Coração Vazado Prata,Anéis,,,
+ANE-11,Anel Chevalier Retangular Dourado,Anéis,,,
+ANE-12,Anel Duplo Cravejado Rosé,Anéis,,,
+ANE-13,Anel Statement Retangular Cravejado Dourado,Anéis,,,
+ANE-14,Anel Meia Aliança Cravejada Prata,Anéis,,,
+ANE-15,Anel Corda Dourado,Anéis,,,
+ANE-16,Anel Trabalhado Largo Dourado,Anéis,,,
+ANE-17,Anel Coração Chevalier Dourado,Anéis,,,
+ANE-18,Anel Nó Fino Dourado,Anéis,,,

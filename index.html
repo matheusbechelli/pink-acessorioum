@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Acessorium · Semijoias</title>
+<meta name="description" content="Semijoias delicadas e elegantes. Brincos, colares, pulseiras e anéis com o charme Pink Acessorium.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     CONFIGURAÇÃO RÁPIDA — edite tudo no bloco <script> lá embaixo
+     (nome, WhatsApp, PIX, Instagram, frete e a lista de produtos)
+     ============================================================ */
+
+  :root{
+    --rosa-bg:      #fff8fb;
+    --rosa-suave:   #fdeef4;
+    --rosa-medio:   #f7cfe0;
+    --rosa:         #ec9cc0;
+    --rosa-forte:   #d96e9c;
+    --rosa-escuro:  #b34e7d;
+    --texto:        #4a2f3d;
+    --texto-claro:  #8a6b78;
+    --branco:       #ffffff;
+    --sombra:       0 14px 40px rgba(217,110,156,.13);
+    --sombra-sm:    0 6px 20px rgba(217,110,156,.10);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', system-ui, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--sans);
+    color:var(--texto);
+    background:var(--rosa-bg);
+    line-height:1.6;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:var(--serif); font-weight:500; line-height:1.15; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  svg{ display:block; }
+  .container{ width:min(1180px, 92%); margin-inline:auto; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    font-family:var(--sans); font-weight:400; letter-spacing:.04em;
+    padding:.85rem 1.8rem; border-radius:999px; border:none; cursor:pointer;
+    font-size:.9rem; transition:.25s ease; text-transform:uppercase;
+  }
+  .btn-primary{ background:var(--rosa-forte); color:#fff; box-shadow:var(--sombra-sm); }
+  .btn-primary:hover{ background:var(--rosa-escuro); transform:translateY(-2px); }
+  .btn-ghost{ background:transparent; border:1px solid var(--rosa); color:var(--rosa-forte); }
+  .btn-ghost:hover{ background:var(--rosa-suave); }
+
+  /* ---------- Barra de anúncio ---------- */
+  .anuncio{
+    background:var(--rosa-forte); color:#fff; text-align:center;
+    font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;
+    padding:.55rem 1rem; font-weight:400;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,248,251,.82); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--rosa-suave);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:1rem 0; }
+  .logo{ font-family:var(--sans); font-size:1.3rem; font-weight:300; color:var(--rosa-escuro); letter-spacing:.34em; text-transform:uppercase; }
+  .logo span{ display:block; font-family:var(--sans); font-size:.52rem; letter-spacing:.55em; text-transform:uppercase; color:var(--texto-claro); margin-top:4px; font-weight:400; }
+  .nav-links{ display:flex; gap:2rem; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; }
+  .nav-links a{ position:relative; padding:.2rem 0; color:var(--texto); }
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--rosa-forte); transition:.3s; }
+  .nav-links a:hover{ color:var(--rosa-escuro); }
+  .nav-links a:hover::after{ width:100%; }
+  .cart-btn{ position:relative; background:none; border:none; cursor:pointer; color:var(--rosa-escuro); line-height:1; display:flex; }
+  .cart-btn svg{ width:24px; height:24px; }
+  .cart-count{
+    position:absolute; top:-8px; right:-10px; background:var(--rosa-forte); color:#fff;
+    font-family:var(--sans); font-size:.65rem; font-weight:600; min-width:19px; height:19px;
+    border-radius:999px; display:flex; align-items:center; justify-content:center; padding:0 4px;
+  }
+  .menu-toggle{ display:none; background:none; border:none; color:var(--rosa-escuro); cursor:pointer; }
+  .menu-toggle svg{ width:24px; height:24px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; text-align:center; padding:6rem 0 5.5rem;
+    background:
+      radial-gradient(circle at 20% 20%, #ffe6f1 0%, transparent 45%),
+      radial-gradient(circle at 85% 30%, #fce4ef 0%, transparent 40%),
+      linear-gradient(160deg, #fff8fb 0%, #fdeef4 100%);
+    overflow:hidden;
+  }
+  .hero .eyebrow{ font-size:.8rem; letter-spacing:.4em; text-transform:uppercase; color:var(--rosa-forte); margin-bottom:1.2rem; }
+  .hero h1{ font-size:clamp(2.6rem, 6vw, 4.6rem); color:var(--texto); margin-bottom:1rem; }
+  .hero h1 em{ color:var(--rosa-forte); font-style:italic; }
+  .hero p{ max-width:520px; margin:0 auto 2rem; color:var(--texto-claro); font-size:1.05rem; }
+  .hero-cta{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- Faixa de benefícios ---------- */
+  .beneficios{ background:var(--branco); border-block:1px solid var(--rosa-suave); }
+  .beneficios .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; padding:1.8rem 0; text-align:center; }
+  .beneficios .item{ font-size:.82rem; color:var(--texto-claro); letter-spacing:.04em; }
+  .beneficios .item strong{ display:block; font-family:var(--serif); font-size:1.05rem; color:var(--texto); font-weight:600; letter-spacing:0; }
+  .beneficios .ic{ display:flex; justify-content:center; margin-bottom:.55rem; }
+  .beneficios .ic svg{ width:26px; height:26px; stroke:var(--rosa-forte); }
+
+  /* ---------- Seções ---------- */
+  section{ padding:4.5rem 0; }
+  .sec-head{ text-align:center; margin-bottom:3rem; }
+  .sec-head .eyebrow{ font-size:.78rem; letter-spacing:.35em; text-transform:uppercase; color:var(--rosa-forte); margin-bottom:.6rem; }
+  .sec-head h2{ font-size:clamp(2rem,4vw,2.8rem); color:var(--texto); }
+  .sec-head p{ color:var(--texto-claro); margin-top:.6rem; }
+
+  /* ---------- Categorias ---------- */
+  .categorias{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1.2rem; }
+  .sem-produtos{ grid-column:1/-1; text-align:center; color:var(--texto-claro); padding:2.5rem 1rem; }
+  .cat{
+    background:var(--branco); border-radius:20px; padding:2.4rem 1rem; text-align:center;
+    box-shadow:var(--sombra-sm); transition:.28s; cursor:pointer; border:1px solid transparent;
+  }
+  .cat:hover{ transform:translateY(-5px); border-color:var(--rosa-medio); box-shadow:var(--sombra); }
+  .cat h3{ font-size:1.45rem; margin-bottom:.5rem; }
+  .cat h3::after{ content:''; display:block; width:26px; height:1px; background:var(--rosa-medio); margin:.6rem auto 0; }
+  .cat span{ font-size:.76rem; letter-spacing:.08em; color:var(--texto-claro); text-transform:uppercase; }
+
+  /* ---------- Busca ---------- */
+  .busca-box{
+    position:relative; max-width:420px; margin:0 auto 1.6rem;
+  }
+  .busca-box svg{
+    position:absolute; left:1rem; top:50%; transform:translateY(-50%);
+    width:18px; height:18px; stroke:var(--rosa-escuro); pointer-events:none;
+  }
+  .busca-box input{
+    width:100%; padding:.75rem 1rem .75rem 2.6rem; border-radius:999px;
+    border:1px solid var(--rosa-medio); background:var(--branco); color:var(--texto);
+    font-family:var(--sans); font-size:.92rem; outline:none; transition:.22s;
+  }
+  .busca-box input:focus{ border-color:var(--rosa-forte); box-shadow:0 0 0 3px var(--rosa-suave); }
+  .busca-box input::placeholder{ color:var(--texto-claro); }
+
+  /* ---------- Filtros ---------- */
+  .filtros{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
+  .filtro{
+    background:var(--branco); border:1px solid var(--rosa-medio); color:var(--rosa-escuro);
+    padding:.5rem 1.3rem; border-radius:999px; font-family:var(--sans); font-size:.82rem;
+    letter-spacing:.05em; cursor:pointer; transition:.22s; text-transform:uppercase;
+  }
+  .filtro:hover{ background:var(--rosa-suave); }
+  .filtro.ativo{ background:var(--rosa-forte); color:#fff; border-color:var(--rosa-forte); }
+
+  /* ---------- Produtos ---------- */
+  .produtos{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.6rem; }
+  .mostrar-mais-wrap{ grid-column:1 / -1; text-align:center; margin-top:1rem; }
+  .mostrar-mais{ padding:.75rem 2.2rem; }
+  .card{
+    background:var(--branco); border-radius:20px; overflow:hidden;
+    box-shadow:var(--sombra-sm); transition:.28s; display:flex; flex-direction:column;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:var(--sombra); }
+  .card .foto{
+    aspect-ratio:1/1; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(150deg, var(--rosa-suave), var(--rosa-medio));
+  }
+  .card .foto img{ width:100%; height:100%; object-fit:cover; }
+  .card .foto .gem{ width:56px; height:56px; color:#fff; opacity:.8; }
+  .card .tag{
+    position:absolute; top:.8rem; left:.8rem; background:var(--rosa-forte); color:#fff;
+    font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; padding:.28rem .7rem; border-radius:999px; z-index:3;
+  }
+  /* ---- Carrossel de fotos (produtos com várias imagens) ---- */
+  .card .carousel{ position:absolute; inset:0; }
+  .card .car-track{ display:flex; height:100%; transition:transform .35s ease; }
+  .card .car-track img{ flex:0 0 100%; width:100%; height:100%; object-fit:cover; }
+  .card .car-nav{
+    position:absolute; top:50%; transform:translateY(-50%); width:32px; height:32px;
+    border:none; border-radius:50%; background:rgba(255,255,255,.82); color:var(--rosa-escuro);
+    font-size:1.3rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--sombra-sm); transition:.2s; z-index:2; padding-bottom:2px;
+  }
+  .card .car-nav:hover{ background:#fff; }
+  .card .car-prev{ left:.5rem; }
+  .card .car-next{ right:.5rem; }
+  .card .car-dots{ position:absolute; bottom:.6rem; left:0; right:0; display:flex; gap:.35rem; justify-content:center; z-index:2; }
+  .card .car-dot{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.55); transition:.25s; }
+  .card .car-dot.ativo{ background:#fff; width:18px; border-radius:999px; }
+  .card .info{ padding:1.1rem 1.1rem 1.3rem; display:flex; flex-direction:column; flex:1; }
+  .card .cat-label{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--rosa); margin-bottom:.25rem; }
+  .card h3{ font-size:1.25rem; margin-bottom:.5rem; }
+  .card .preco{ font-family:var(--sans); font-size:1.2rem; font-weight:600; letter-spacing:.01em; color:var(--rosa-escuro); margin-bottom:.9rem; }
+  .card .preco small{ font-family:var(--sans); font-size:.72rem; color:var(--texto-claro); text-decoration:line-through; font-weight:300; margin-left:.4rem; }
+  .card .tam-label{ font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--texto-claro); margin-bottom:.35rem; }
+  .card .tamanhos{ display:flex; gap:.4rem; margin-bottom:.7rem; flex-wrap:wrap; }
+  .card .tam{ min-width:34px; padding:.32rem .55rem; border:1px solid var(--rosa-medio); background:var(--branco); color:var(--rosa-escuro); border-radius:9px; font-family:var(--sans); font-size:.8rem; font-weight:400; cursor:pointer; transition:.2s; }
+  .card .tam:hover{ background:var(--rosa-suave); }
+  .card .tam.ativo{ background:var(--rosa-forte); color:#fff; border-color:var(--rosa-forte); }
+  .card .estoque{ font-size:.72rem; color:var(--texto-claro); letter-spacing:.03em; margin-bottom:.7rem; }
+  .card .tam[disabled]{ opacity:.35; cursor:not-allowed; text-decoration:line-through; }
+  .card .add.esg{ background:var(--rosa-medio); color:#fff; opacity:.75; cursor:not-allowed; }
+  .card.card-esg .foto img, .card.card-esg .car-track img{ filter:grayscale(.4) opacity(.8); }
+  .card .tag-esg{ left:auto; right:.8rem; background:#8a6b78; }
+  .card .tag-consulta{ background:var(--texto-claro); }
+  .ci .ci-tam{ font-size:.72rem; color:var(--texto-claro); letter-spacing:.05em; }
+  .card .add{ margin-top:auto; width:100%; }
+
+  /* ---------- Instagram ---------- */
+  .insta{ background:linear-gradient(160deg, #fdeef4, #fff8fb); }
+  .insta-wrap{ text-align:center; }
+  .insta-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:.8rem; margin:2.5rem 0; }
+  .insta-grid a{ aspect-ratio:1/1; border-radius:16px; overflow:hidden; position:relative; }
+  .insta-grid .ph{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(150deg, var(--rosa-medio), var(--rosa)); color:#fff; transition:.3s;
+  }
+  .insta-grid .ph svg{ width:30px; height:30px; opacity:.85; }
+  .insta-grid a:hover .ph{ filter:brightness(1.06) saturate(1.08); transform:scale(1.05); }
+  .insta-embed{ margin:2.5rem 0; border-radius:20px; overflow:hidden; box-shadow:var(--sombra-sm); background:var(--branco); }
+
+  /* ---------- Cuidados ---------- */
+  .cuidados{ background:linear-gradient(160deg,#fff8fb,#fdeef4); }
+  .cuidados .intro{ max-width:660px; margin:0 auto 2.5rem; text-align:center; }
+  .cuidados .intro p{ color:var(--texto-claro); margin-bottom:.7rem; }
+  .cuidados-lista{ max-width:760px; margin:0 auto; list-style:none; display:grid; gap:.9rem; }
+  .cuidados-lista li{ display:flex; gap:.9rem; align-items:flex-start; background:var(--branco); border-radius:14px; padding:1rem 1.2rem; box-shadow:var(--sombra-sm); }
+  .cuidados-lista li svg{ flex-shrink:0; width:22px; height:22px; stroke:var(--rosa-forte); margin-top:2px; }
+  .cuidados-lista li span{ font-size:.95rem; color:var(--texto); }
+  .cuidados .fecho{ max-width:680px; margin:2.8rem auto 0; text-align:center; background:var(--branco); border:1px solid var(--rosa-medio); border-radius:20px; padding:2.2rem 1.8rem; box-shadow:var(--sombra-sm); }
+  .cuidados .fecho h3{ font-size:1.6rem; color:var(--rosa-escuro); margin-bottom:.8rem; }
+  .cuidados .fecho p{ color:var(--texto-claro); font-size:.95rem; }
+
+  /* ---------- Vouchers ---------- */
+  .vouchers{ background:var(--branco); border-block:1px solid var(--rosa-suave); }
+  .vouchers-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .vouchers-foto{ aspect-ratio:1/1; border-radius:24px; box-shadow:var(--sombra); overflow:hidden; }
+  .vouchers-foto img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .vouchers-texto h2{ font-size:clamp(1.8rem,3.6vw,2.4rem); margin-bottom:1.2rem; }
+  .vouchers-texto p{ color:var(--texto-claro); margin-bottom:1rem; }
+
+  /* ---------- Sobre ---------- */
+  .sobre-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .sobre-foto{
+    aspect-ratio:4/5; border-radius:24px; box-shadow:var(--sombra);
+    background:linear-gradient(150deg, var(--rosa-medio), var(--rosa-forte));
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .sobre-foto img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .sobre-foto svg{ width:96px; height:96px; color:#fff; opacity:.85; }
+  .sobre-texto h2{ font-size:clamp(2rem,4vw,2.7rem); margin-bottom:1.2rem; }
+  .sobre-texto p{ color:var(--texto-claro); margin-bottom:1rem; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--texto); color:#f6e3ec; padding:3.5rem 0 1.5rem; }
+  .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:2.5rem; margin-bottom:2.5rem; }
+  .footer-grid .logo{ color:#fff; }
+  .footer-grid .logo span{ color:#d6a9bd; }
+  footer p{ color:#d6a9bd; font-size:.9rem; margin-top:.8rem; }
+  footer h4{ font-family:var(--sans); font-size:.82rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:1rem; color:#fff; }
+  footer ul{ list-style:none; }
+  footer ul li{ margin-bottom:.6rem; }
+  footer ul a{ color:#d6a9bd; font-size:.9rem; transition:.2s; }
+  footer ul a:hover{ color:#fff; }
+  .footer-bottom{ text-align:center; border-top:1px solid rgba(255,255,255,.12); padding-top:1.5rem; font-size:.78rem; color:#c096ac; letter-spacing:.05em; }
+
+  /* ---------- Carrinho (drawer) ---------- */
+  .overlay{ position:fixed; inset:0; background:rgba(74,47,61,.4); backdrop-filter:blur(2px); opacity:0; visibility:hidden; transition:.3s; z-index:90; }
+  .overlay.aberto{ opacity:1; visibility:visible; }
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(420px, 100%);
+    background:var(--rosa-bg); z-index:100; transform:translateX(100%); transition:.35s ease;
+    display:flex; flex-direction:column; box-shadow:-10px 0 40px rgba(217,110,156,.2);
+  }
+  .drawer.aberto{ transform:translateX(0); }
+  .drawer-head{ display:flex; align-items:center; justify-content:space-between; padding:1.4rem 1.5rem; border-bottom:1px solid var(--rosa-suave); }
+  .drawer-head h3{ font-size:1.5rem; }
+  .drawer-close{ background:none; border:none; font-size:1.6rem; color:var(--texto-claro); cursor:pointer; line-height:1; }
+  .drawer-body{ flex:1; overflow-y:auto; padding:1rem 1.5rem; }
+  .vazio{ text-align:center; color:var(--texto-claro); padding:3rem 1rem; }
+  .vazio svg{ width:48px; height:48px; margin:0 auto 1rem; stroke:var(--rosa-medio); }
+  .ci{ display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--rosa-suave); }
+  .ci .thumb{ width:64px; height:64px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,var(--rosa-suave),var(--rosa-medio)); overflow:hidden; }
+  .ci .thumb img{ width:100%; height:100%; object-fit:cover; }
+  .ci .thumb .gem{ width:28px; height:28px; color:#fff; opacity:.85; }
+  .ci .ci-info{ flex:1; }
+  .ci .ci-info h4{ font-family:var(--serif); font-size:1.05rem; font-weight:600; }
+  .ci .ci-info .p{ color:var(--rosa-escuro); font-weight:500; font-size:.95rem; }
+  .qtd{ display:inline-flex; align-items:center; gap:.7rem; margin-top:.4rem; background:var(--branco); border-radius:999px; padding:.2rem .3rem; border:1px solid var(--rosa-suave); }
+  .qtd button{ width:24px; height:24px; border-radius:50%; border:none; background:var(--rosa-suave); color:var(--rosa-escuro); cursor:pointer; font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center; }
+  .qtd button:hover{ background:var(--rosa-medio); }
+  .qtd span{ font-size:.9rem; min-width:16px; text-align:center; }
+  .remover{ background:none; border:none; color:var(--texto-claro); cursor:pointer; font-size:.75rem; text-decoration:underline; align-self:flex-start; }
+  .drawer-foot{ padding:1.3rem 1.5rem; border-top:1px solid var(--rosa-suave); background:var(--branco); }
+  .total-row{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:.4rem; }
+  .total-row.grande{ font-family:var(--sans); font-size:1.25rem; font-weight:600; color:var(--texto); }
+  .total-row .sub{ font-size:.85rem; color:var(--texto-claro); }
+  .drawer-foot .btn{ width:100%; margin-top:1rem; }
+  .checkout-box{ margin-top:1rem; }
+  .checkout-box label{ display:block; font-size:.78rem; color:var(--texto-claro); margin-bottom:.35rem; }
+  .checkout-box input, .checkout-box select{
+    width:100%; padding:.65rem .9rem; border-radius:10px; border:1px solid var(--rosa-medio);
+    background:var(--rosa-bg); color:var(--texto); font-family:var(--sans); font-size:.92rem; outline:none;
+  }
+  .checkout-box input:focus, .checkout-box select:focus{ border-color:var(--rosa-forte); }
+
+  /* ---------- Modal PIX / checkout ---------- */
+  .modal{ position:fixed; inset:0; background:rgba(74,47,61,.5); backdrop-filter:blur(3px); z-index:110; display:none; align-items:center; justify-content:center; padding:1rem; }
+  .modal.aberto{ display:flex; }
+  .modal-box{ background:var(--rosa-bg); border-radius:24px; max-width:440px; width:100%; padding:2.2rem; text-align:center; box-shadow:var(--sombra); max-height:90vh; overflow-y:auto; }
+  .modal-box .ic svg{ width:44px; height:44px; margin:0 auto; stroke:var(--rosa-forte); }
+  .modal-box h3{ font-size:1.8rem; margin:.7rem 0 .5rem; }
+  .modal-box p{ color:var(--texto-claro); font-size:.92rem; margin-bottom:1.2rem; }
+  .pix-box{ background:var(--branco); border:1px dashed var(--rosa-medio); border-radius:14px; padding:1rem; margin-bottom:1rem; }
+  .pix-box .label{ font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--texto-claro); }
+  .pix-box .chave{ font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--rosa-escuro); word-break:break-all; margin:.3rem 0; }
+  .modal-box .btn{ width:100%; margin-bottom:.7rem; }
+  .passo{ text-align:left; font-size:.88rem; color:var(--texto); background:var(--rosa-suave); border-radius:12px; padding:.9rem 1rem; margin-bottom:1.2rem; line-height:1.9; }
+  .passo b{ color:var(--rosa-escuro); }
+
+  /* ---------- Toast ---------- */
+  .toast{ position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%) translateY(120%); background:var(--rosa-escuro); color:#fff; padding:.8rem 1.6rem; border-radius:999px; font-size:.88rem; z-index:120; transition:.35s; box-shadow:var(--sombra); }
+  .toast.show{ transform:translateX(-50%) translateY(0); }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width:960px){
+    .produtos, .categorias, .insta-grid{ grid-template-columns:repeat(2,1fr); }
+    .beneficios .grid{ grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    .sobre-grid, .footer-grid, .vouchers-grid{ grid-template-columns:1fr; }
+    .footer-grid{ gap:1.8rem; }
+  }
+  @media (max-width:640px){
+    .nav-links{
+      display:none; position:absolute; top:100%; left:0; right:0; background:var(--rosa-bg);
+      flex-direction:column; gap:0; padding:1rem 0; box-shadow:var(--sombra-sm); text-align:center;
+    }
+    .nav-links.aberto{ display:flex; }
+    .nav-links a{ padding:.8rem 0; }
+    .menu-toggle{ display:block; }
+    .produtos{ grid-template-columns:repeat(2,1fr); gap:1rem; }
+    .card h3{ font-size:1.05rem; }
+    .hero{ padding:3.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ====== BARRA DE ANÚNCIO ====== -->
+  <div class="anuncio" id="barraAnuncio">Semijoias banhadas com garantia · Enviamos para todo o Brasil</div>
+
+  <!-- ====== HEADER ====== -->
+  <header>
+    <div class="container nav">
+      <a href="#top" class="logo" id="logoTexto">Pink Acessorium<span>Semijoias</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#produtos">Produtos</a>
+        <a href="#categorias">Categorias</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#cuidados">Cuidados</a>
+        <a href="#instagram">Instagram</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <button class="cart-btn" onclick="irParaBusca()" aria-label="Pesquisar semijoias">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </button>
+        <button class="cart-btn" onclick="abrirCarrinho()" aria-label="Abrir carrinho">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+          <span class="cart-count" id="cartCount" style="display:none;">0</span>
+        </button>
+        <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('aberto')" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="top">
+    <div class="container">
+      <p class="eyebrow">Semijoias que encantam</p>
+      <h1>Delicadeza em cada <em>detalhe</em></h1>
+      <p>Peças escolhidas a dedo para brilhar com você. Semijoias banhadas, resistentes e cheias de charme — do dia a dia aos momentos especiais.</p>
+      <div class="hero-cta">
+        <a href="#produtos" class="btn btn-primary">Ver coleção</a>
+        <a href="#instagram" class="btn btn-ghost">Nosso Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== BENEFÍCIOS ====== -->
+  <div class="beneficios">
+    <div class="container grid">
+      <div class="item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="17" cy="18" r="1.7"/></svg></span>
+        <strong>Enviamos</strong>para todo o Brasil
+      </div>
+      <div class="item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4v-4H4V5z"/></svg></span>
+        <strong>Atendimento</strong>rápido no WhatsApp
+      </div>
+      <div class="item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <strong>Garantia</strong>do folheado
+      </div>
+      <div class="item">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M3 12h18M12 8v12M12 8c-1.5-3-5-3-5-.5 0 1.4 2 .5 5 .5zM12 8c1.5-3 5-3 5-.5 0 1.4-2 .5-5 .5z"/></svg></span>
+        <strong>Embalagem</strong>para presente
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== VOUCHERS ====== -->
+  <section class="vouchers" id="vouchers">
+    <div class="container">
+      <div class="vouchers-grid">
+        <div class="vouchers-foto">
+          <img src="fotos/vouchers.jpg" alt="Gift Voucher Pink Acessorium">
+        </div>
+        <div class="vouchers-texto">
+          <p class="eyebrow" style="color:var(--rosa-forte); letter-spacing:.35em; text-transform:uppercase; font-size:.78rem; margin-bottom:.6rem;">Presenteie com carinho</p>
+          <h2>Gift Vouchers Pink Acessorium</h2>
+          <p>Não sabe qual peça escolher? Dê um vale-presente e deixe quem você ama escolher a semijoia perfeita.</p>
+          <p>Disponível nos valores de R$ 80, R$ 100, R$ 150 e R$ 200 · válido por 30 dias.</p>
+          <a href="#" id="btnVoucher" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:1rem;">Pedir pelo WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CATEGORIAS ====== -->
+  <section id="categorias">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow">Explore por tipo</p>
+        <h2>Nossas categorias</h2>
+      </div>
+      <div class="categorias" id="categoriasGrid"></div>
+    </div>
+  </section>
+
+  <!-- ====== PRODUTOS ====== -->
+  <section id="produtos" style="padding-top:1rem;">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow">Selecionadas para você</p>
+        <h2>Nossa coleção</h2>
+        <p>Toque em uma peça para adicioná-la à sacola</p>
+      </div>
+      <div class="busca-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="buscaInput" placeholder="Pesquisar semijoias..." oninput="buscar(this.value)">
+      </div>
+      <div class="filtros" id="filtros"></div>
+      <div class="produtos" id="produtosGrid"></div>
+    </div>
+  </section>
+
+  <!-- ====== SOBRE ====== -->
+  <section id="sobre" style="background:var(--branco);">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-foto">
+          <img src="fotos/sobre-capa.jpg" alt="Pink Acessorium">
+        </div>
+        <div class="sobre-texto">
+          <p class="eyebrow" style="color:var(--rosa-forte); letter-spacing:.35em; text-transform:uppercase; font-size:.78rem; margin-bottom:.6rem;">Nossa história</p>
+          <h2>Feito com amor, para você se sentir linda</h2>
+          <p>A Pink Acessorium nasceu do carinho por peças que traduzem feminilidade e delicadeza. Cada semijoia é escolhida pensando em qualidade, brilho e naquele detalhe que faz toda a diferença no seu look.</p>
+          <p>Folheados resistentes, acabamento impecável e um atendimento pertinho de você. Aqui, você não compra só um acessório — leva um pedacinho de charme.</p>
+          <a href="#produtos" class="btn btn-primary" style="margin-top:1rem;">Conhecer as peças</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CUIDADOS ====== -->
+  <section id="cuidados" class="cuidados">
+    <div class="container">
+      <div class="sec-head">
+        <p class="eyebrow">Para durar mais</p>
+        <h2>Cuidados com sua semijoia</h2>
+      </div>
+      <div class="intro">
+        <p>Na Pink Acessorium, trabalhamos com semijoias de alta qualidade, desenvolvidas com excelente acabamento e banhos de ouro ou ródio, proporcionando brilho, elegância e durabilidade.</p>
+        <p>Para preservar a beleza das suas peças por muito mais tempo, recomendamos alguns cuidados:</p>
+      </div>
+      <ul class="cuidados-lista">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.3l2.6 2.6 4.8-5.4"/></svg><span>Evite o contato com perfumes, cremes, protetor solar, cosméticos e produtos de limpeza.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.3l2.6 2.6 4.8-5.4"/></svg><span>Retire as peças antes do banho, de entrar na piscina ou no mar e durante atividades físicas.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.3l2.6 2.6 4.8-5.4"/></svg><span>Evite dormir com as semijoias, pois a pressão e o atrito podem comprometer o banho e as cravações.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.3l2.6 2.6 4.8-5.4"/></svg><span>Guarde as peças em local seco, preferencialmente separadas umas das outras, evitando riscos e atritos.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.3l2.6 2.6 4.8-5.4"/></svg><span>Para manter o brilho, utilize apenas uma flanela macia e própria para limpeza de joias.</span></li>
+      </ul>
+      <div class="fecho">
+        <h3>Qualidade que acompanha você</h3>
+        <p>Na Pink Acessorium, selecionamos semijoias de alta qualidade para que você possa usá-las em diferentes ocasiões com confiança. Como toda semijoia banhada, as peças estão sujeitas ao desgaste natural ao longo do tempo. Com os cuidados adequados, elas permanecerão bonitas e brilhantes por muito mais tempo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== INSTAGRAM ====== -->
+  <section id="instagram" class="insta">
+    <div class="container insta-wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Siga a gente</p>
+        <h2>@pink.acessorium</h2>
+        <p>Novidades, lançamentos e inspirações todos os dias no nosso feed</p>
+      </div>
+      <!-- Feed do Instagram (Behold). Para trocar, gere um novo feed e substitua o feed-id abaixo. -->
+      <div class="insta-embed">
+        <behold-widget feed-id="3CRQoAoseKkX057UMqyd"></behold-widget>
+      </div>
+      <script>
+        (() => {
+          if(window.__bhldScript) return; window.__bhldScript = true;
+          const d=document, s=d.createElement("script"); s.type="module";
+          s.src="https://w.behold.so/widget.js"; setTimeout(() => { d.head.append(s); }, 0);
+        })();
+      </script>
+      <a href="https://www.instagram.com/pink.acessorium/" target="_blank" rel="noopener" class="btn btn-primary">Seguir no Instagram</a>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo">Pink Acessorium<span>Semijoias</span></div>
+          <p>Semijoias delicadas, banhadas e cheias de charme. Feito com amor para você brilhar todos os dias.</p>
+        </div>
+        <div>
+          <h4>Navegar</h4>
+          <ul>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#cuidados">Cuidados</a></li>
+            <li><a href="#sobre">Sobre nós</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/pink.acessorium/" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="#" id="footerWhats" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="ano"></span> Pink Acessorium · Semijoias
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== CARRINHO (DRAWER) ====== -->
+  <div class="overlay" id="overlay" onclick="fecharCarrinho()"></div>
+  <aside class="drawer" id="drawer" aria-label="Sacola de compras">
+    <div class="drawer-head">
+      <h3>Sua sacola</h3>
+      <button class="drawer-close" onclick="fecharCarrinho()" aria-label="Fechar">×</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot" style="display:none;">
+      <div class="total-row grande"><span>Total</span><span id="total">R$ 0,00</span></div>
+      <div class="checkout-box">
+        <label for="nomeInput">Seu nome</label>
+        <input type="text" id="nomeInput" placeholder="Seu nome completo" oninput="localStorage.setItem('pinkNome', this.value)">
+      </div>
+      <div class="checkout-box">
+        <label for="pagamentoSelect">Forma de pagamento</label>
+        <select id="pagamentoSelect" onchange="localStorage.setItem('pinkPagamento', this.value)">
+          <option value="PIX">PIX</option>
+          <option value="Cartão crédito">Cartão crédito</option>
+          <option value="Cartão débito">Cartão débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+      </div>
+      <div class="checkout-box">
+        <label for="entregaSelect">Forma de entrega</label>
+        <select id="entregaSelect" onchange="localStorage.setItem('pinkEntrega', this.value)">
+          <option value="Envio (Correio)">Envio (Correio)</option>
+          <option value="Retirada">Retirada</option>
+          <option value="Entrega">Entrega</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="finalizar()">Finalizar no WhatsApp</button>
+    </div>
+  </aside>
+
+  <!-- ====== MODAL CHECKOUT / PIX ====== -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke-width="1"><path d="M14 8h20l8 10-18 22L6 18z"/><path d="M6 18h36M18 8l-4 10 10 22M30 8l4 10-10 22"/></svg></div>
+      <h3>Quase lá!</h3>
+      <p>Envie seu pedido pelo WhatsApp para confirmar os detalhes e combinar o pagamento.</p>
+      <button id="btnPagar" class="btn btn-primary" onclick="pagarInfinitePay()">Pagar agora — cartão ou PIX</button>
+      <a href="#" id="btnWhats" target="_blank" rel="noopener" class="btn btn-primary">Enviar pedido no WhatsApp</a>
+      <button class="btn btn-ghost" style="width:100%; border:none; color:var(--texto-claro);" onclick="fecharModal()">Voltar</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIGURAÇÃO — EDITE AQUI
+   ══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  nomeLoja:   "Pink Acessorium",
+  whatsapp:   "5513996766780",     // WhatsApp Business da loja: (13) 99676-6780
+  pixChave:   "seu-pix@email.com", // TROQUE pela sua chave PIX (email, telefone, CPF ou aleatória)
+  instagram:  "https://www.instagram.com/pink.acessorium/",
+  siteUrl:    "",                  // Quando publicar o site, cole o link aqui (ex: "https://pinkacessorium.netlify.app") para enviar a FOTO de cada peça no WhatsApp.
+  infiniteTag: "",                 // InfinitePay DESATIVADO por enquanto. Para reativar, cole sua tag SEM o "$" (ex: "pinkacessorium").
+  planilhaCsv: "https://docs.google.com/spreadsheets/d/1krg-oGoZkEyFQn6rWKSA4_y-7M4THk8v89ydCL0z71U/export?format=csv&gid=1610293580",  // Controle de estoque/preço pela planilha Google.
+};
+
+/* ══════════════════════════════════════════════════════════════
+   PRODUTOS — adicione/edite suas peças aqui
+   img: deixe "" para usar o ícone de gema, ou coloque o caminho/URL
+        de uma foto, ex: "fotos/brinco-perola.jpg"
+   ══════════════════════════════════════════════════════════════ */
+const PRODUTOS = [
+  { id:1,  cod:"PEN-01", nome:"Brinco Espiral Ondulado",   cat:"Brincos",  preco:119.90, de:0, tag:"", img:"fotos/07F1DFE8-8A80-4E5A-A3DA-29A0424BD04F.JPG" },
+  { id:2,  cod:"PEN-02", nome:"Brinco Elos Orgânicos",     cat:"Brincos",  preco:129.90, de:0, tag:"", img:"fotos/4BD60ACF-C7A4-4918-8A68-37AAF396FEF0.JPG" },
+  { id:3,  cod:"PEN-03", nome:"Brinco Cascata Ródio Branco",      cat:"Brincos",  preco:129.90, de:0, tag:"", img:"fotos/D908B602-25BF-4FD7-B340-F997AED796C7.JPG" },
+  { id:4,  cod:"ARG-01", nome:"Brinco Argola Dupla",       cat:"Brincos",    preco:129.90, de:0, tag:"", img:"fotos/7C03B404-3120-4B58-BE06-D019B380F1EE.JPG" },
+  { id:5,  cod:"ARG-02", nome:"Brinco Croissant",          cat:"Brincos",    preco:129.90, de:0, tag:"", img:"fotos/C1C5F66F-48B9-4377-9F17-460A8E2C36FA.JPG" },
+  { id:6,  cod:"ARG-03", nome:"Brinco Bolhas",             cat:"Brincos",    preco:139.90, de:0, tag:"", img:"fotos/B3EDA72F-A6EE-4EE0-82F2-4861D495B728.JPG" },
+  { id:7,  cod:"CRA-01", nome:"Brinco Redondo Cravejado",  cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/EDAA1787-4435-47B8-B43A-D74A8EFE8FA9.JPG" },
+  { id:8,  cod:"CRA-02", nome:"Brinco Gota Cravejada",     cat:"Brincos", preco:69.90,  de:0, tag:"", img:"fotos/EDAA1787-4435-47B8-B43A-D74A8EFE8FA9.JPG" },
+  { id:9,  cod:"CRA-03", nome:"Brinco Gota Cristais",      cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/88E84486-D932-489F-A2CF-0E896A9120BF.JPG" },
+  { id:10, cod:"CLA-01", nome:"Brinco Coração Duo",        cat:"Brincos",  preco:79.90,  de:0, tag:"", img:"fotos/53270462-73B9-4D16-A670-FB6F9C91E11A.JPG" },
+  { id:11, cod:"CLA-02", nome:"Brinco Botão Dourado",      cat:"Brincos",  preco:99.90,  de:0, tag:"", img:"fotos/AB084934-C2E6-4B6E-9B1D-AEE50E29717F.JPG" },
+
+  // Argolas com tamanhos (a cliente escolhe P / M / G) — o preço muda conforme o tamanho
+  { id:12, cod:"ARG-04", nome:"Argolinha Lisa Clássica",      cat:"Duplas de brincos", img:"fotos/98A39018-6AF1-4050-B65E-6CEA3D1F5E25.JPG", sizes:[{t:"P",preco:39.90},{t:"G",preco:49.90}] },
+  { id:13, cod:"ARG-05", nome:"Argolinha Martelada",          cat:"Duplas de brincos", img:"fotos/F218CF3B-7A24-4FEE-8617-127C27E1508D.JPG", sizes:[{t:"P",preco:39.90},{t:"G",preco:49.90}] },
+  { id:14, cod:"ARG-06", nome:"Argolinha Retangular",         cat:"Duplas de brincos", img:"fotos/11B82B8D-DC50-4EE6-BC6E-EFA584BA6B09.JPG", sizes:[{t:"P",preco:49.90},{t:"G",preco:59.90}] },
+  { id:16, cod:"ARG-08", nome:"Argolinha Duas Fileiras Cravejada",          cat:"Duplas de brincos", img:"fotos/16BA8235-466C-4109-AA02-1FE899ADF2CF.JPG", pos:"center 72%", sizes:[{t:"P",preco:39.90},{t:"G",preco:45.90}] },
+  { id:17, cod:"ARG-09", nome:"Argolinha Canelada Dourada",           cat:"Duplas de brincos", img:"fotos/34D11F02-F19E-467B-B53F-8D670AEC7623.JPG", sizes:[{t:"P",preco:49.90},{t:"G",preco:59.90}] },
+  { id:18, cod:"ARG-10", nome:"Argolinha Redonda Lisa",       cat:"Trios de brincos", img:"fotos/C10DA63D-0AB5-414A-A08C-B75E713166A0.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:19, cod:"ARG-11", nome:"Argolinha Grossa Lisa",        cat:"Trios de brincos", img:"fotos/E5AB34E5-025A-4C0F-8239-EFF89A86FFA4.JPG", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:20, cod:"ARG-12", nome:"Argolinha Fina Lisa",          cat:"Trios de brincos", img:"fotos/FF5476DC-8918-4D35-8B1F-329E7029C915.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:21, cod:"ARG-13", nome:"Argolinha Torcida",     cat:"Trios de brincos", img:"fotos/7A6DE739-0E83-4FC0-B0F7-EF625A74C69D.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:22, cod:"ARG-14", nome:"Argolinha Cravejada Grossa",   cat:"Trios de brincos", img:"fotos/80837531-812A-492E-BA1D-5296500CBCB9.JPG", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:23, cod:"ARG-15", nome:"Argolinha Cravejada Fina",     cat:"Trios de brincos", img:"fotos/CCA0F093-23D9-4E5F-9711-43A93EB3109C.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:24, cod:"ARG-16", nome:"Argolinha Coração Cravejado",        cat:"Trios de brincos", img:"fotos/A5C259C8-5E7B-4F21-B3F1-096BECE09D71.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:25, cod:"ARG-17", nome:"Argolinha Coração Liso",           cat:"Trios de brincos", img:"fotos/6AE32912-1F08-4478-92CF-A9A18ACFE0C5.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+
+  // Colares
+  { id:26, cod:"COL-01", nome:"Colar Cordão Baiano Fino Ródio Branco",    cat:"Colares", preco:99.90,  de:0, tag:"", img:"fotos/clean-5495.jpg" },
+  { id:27, cod:"COL-02", nome:"Colar Fio Ródio Branco",                  cat:"Colares", preco:69.90,  de:0, tag:"", img:"fotos/clean-5496.jpg" },
+  { id:28, cod:"COL-03", nome:"Colar Bicolor Coração Vazado Ródio Branco",cat:"Colares", preco:79.90,  de:0, tag:"", img:"fotos/col-03-new.jpg" },
+  { id:29, cod:"COL-04", nome:"Colar Com Uma Pérola Ouro",            cat:"Colares", preco:69.90,  de:0, tag:"", img:"fotos/clean-5501.jpg" },
+  { id:30, cod:"COL-05", nome:"Colar Riviera Fino Ródio Branco",          cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/clean-5502.jpg" },
+
+  // ===== Novos brincos (pasta fotosAdd) =====
+  { id:31, cod:"ARG-18", nome:"Argola Fecho Italiano",      cat:"Brincos", preco:69.90,  de:0, tag:"", img:"fotos/arg-18.jpg" },
+  { id:32, cod:"ARG-19", nome:"Argola Larga Trançada",       cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/arg-19.jpg" },
+  { id:33, cod:"ARG-20", nome:"Argola 3 Fios Grossa",      cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/arg-20.jpg" },
+  { id:34, cod:"ARG-21", nome:"Brinco EarHook Cravejado",        cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/arg-21.jpg" },
+  { id:35, cod:"BRP-01", nome:"Brinco Espiral Ródio Branco", cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-01.jpg" },
+  { id:36, cod:"BRP-02", nome:"Brinco Cacho de Bolhas Ródio Branco",cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-02.jpg" },
+  { id:37, cod:"BRP-03", nome:"Brinco Meia-Argola Larga Ródio Branco",cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/brp-03.jpg" },
+
+  // ===== Conjuntos =====
+  { id:38, cod:"CONJ-01", nome:"Conjunto Pérola Delicado",   cat:"Conjuntos", preco:79.90,  de:0, tag:"", img:"fotos/conj-05-cover2.jpg", imgs:["fotos/conj-05-cover2.jpg",{src:"fotos/conj-01.jpg",pos:"center 20%"}] },
+  { id:291, cod:"CONJ-06", nome:"Conjunto Bolinha Ouro",     cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-04-cover.jpg", imgs:["fotos/conj-04-cover.jpg","fotos/conj-04-cover2.jpg"] },
+  { id:39, cod:"CONJ-02", nome:"Conjunto Pérola",            cat:"Conjuntos", preco:99.90,  de:0, tag:"", img:"fotos/conj-02-cover.jpg", imgs:["fotos/conj-02-cover.jpg",{src:"fotos/conj-02.jpg",pos:"center 20%"}] },
+  { id:40, cod:"CONJ-03", nome:"Conjunto Coração",           cat:"Conjuntos", preco:119.90, de:0, tag:"", img:"fotos/conj-03-cover.jpg", imgs:["fotos/conj-03-cover.jpg",{src:"fotos/conj-03.jpg",pos:"center 20%"}] },
+  { id:41, cod:"CONJ-04", nome:"Conjunto Ponto de Pérola Ouro",      cat:"Conjuntos", preco:119.90, de:0, tag:"", img:"fotos/conj-01-cover.jpg", imgs:["fotos/conj-01-cover.jpg",{src:"fotos/conj-04.jpg",pos:"center 20%"}] },
+  { id:42, cod:"CONJ-05", nome:"Conjunto Ponto de Luz Ródio Branco",cat:"Conjuntos", preco:99.90,  de:0, tag:"", img:"fotos/conj-05-cover.jpg", imgs:["fotos/conj-05-cover.jpg",{src:"fotos/conj-05.jpg",pos:"center 20%"}] },
+  { id:292, cod:"CONJ-07", nome:"Conjunto Coração Cravejado Prata", cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-03-cover2.jpg", imgs:["fotos/conj-03-cover2.jpg","fotos/conj-07-cover2.jpg"] },
+  { id:302, cod:"CONJ-08", nome:"Conjunto Madre Pérola com Aro", cat:"Conjuntos", preco:199.90, de:0, tag:"", img:"fotos/conj-08.jpg", pos:"center 12%" },
+  { id:308, cod:"CONJ-09", nome:"Conjunto Redondo Orgânico Ouro", cat:"Conjuntos", preco:99.90, de:0, tag:"", img:"fotos/conj-09.jpg" },
+
+  // ===== Colares =====
+  { id:44, cod:"COL-06", nome:"Colar Coração Vazado Ouro",        cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-06.jpg" },
+  { id:45, cod:"COL-07", nome:"Colar Árvore da Vida Coração Ouro",cat:"Colares", preco:139.90, de:0, tag:"", img:"fotos/col-07.jpg" },
+  { id:46, cod:"COL-08", nome:"Colar Árvore da Vida Redondo Ouro",cat:"Colares", preco:139.90, de:0, tag:"", img:"fotos/col-08.jpg" },
+  { id:47, cod:"COL-09", nome:"Colar Espírito Santo Bicolor Ródio Branco",  cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-09.jpg" },
+  { id:48, cod:"COL-10", nome:"Colar Relicário Redondo Ouro",     cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-10.jpg" },
+  { id:224, cod:"COL-12", nome:"Chocker Riviera Baguette Ródio Branco",  cat:"Colares", preco:149.9, de:0, tag:"", img:"fotos/col-new-12.jpg" },
+  { id:225, cod:"COL-13", nome:"Colar Riviera Colorida Ouro",        cat:"Colares", preco:149.9, de:0, tag:"", img:"fotos/col-new-13.jpg" },
+  { id:227, cod:"COL-15", nome:"Chocker Elo Cartier Ródio Branco",       cat:"Colares", preco:79.9, de:0, tag:"", img:"fotos/col-new-15.jpg" },
+  { id:228, cod:"COL-16", nome:"Chocker Corações Entrelaçados Ouro",   cat:"Colares", preco:59.9, de:0, tag:"", img:"fotos/col-new-16.jpg" },
+  { id:229, cod:"COL-17", nome:"Chocker Fita M Ouro",           cat:"Colares", preco:129.9, de:0, tag:"", img:"fotos/col-new-17.jpg" },
+  { id:230, cod:"COL-18", nome:"Chocker Elos Ródio Branco",      cat:"Colares", preco:99.9, de:0, tag:"", img:"fotos/col-new-18.jpg" },
+  { id:231, cod:"COL-19", nome:"Chocker Bolinhas Ovais Ouro",           cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-19.jpg" },
+  { id:232, cod:"COL-20", nome:"Chocker Fita P Ouro",  cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-20.jpg" },
+  { id:234, cod:"COL-22", nome:"Chocker Fita P Ródio Branco",             cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-22.jpg" },
+  { id:235, cod:"COL-23", nome:"Chocker Cordão Baiano Fino Ouro",  cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-23.jpg" },
+  { id:244, cod:"COL-24", nome:"Colar Terço",                   cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-24.jpg" },
+  { id:247, cod:"COL-27", nome:"Colar com 2 Filhos",            cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-27.jpg" },
+  { id:248, cod:"COL-28", nome:"Colar Riviera 3 Pontas 3mm",    cat:"Colares", preco:439.90, de:0, tag:"", img:"fotos/col-28.jpg" },
+  { id:249, cod:"COL-29", nome:"Colar Riviera 3 Pontas 4mm",    cat:"Colares", preco:439.90, de:0, tag:"", img:"fotos/col-29.jpg" },
+  { id:250, cod:"COL-30", nome:"Colar Snake P Ouro",            cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-30.jpg" },
+  { id:251, cod:"COL-31", nome:"Colar Snake P Ródio Branco",    cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-31.jpg" },
+  { id:252, cod:"COL-32", nome:"Colar Coração Cravejado com Menino", cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-32.jpg" },
+  { id:254, cod:"COL-34", nome:"Colar Coração com Menina",      cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-34.jpg" },
+  { id:255, cod:"COL-35", nome:"Colar Coração com Menino",      cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-35.jpg" },
+  { id:256, cod:"COL-36", nome:"Colar com Duas Meninas",        cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-36.jpg" },
+  { id:293, cod:"COL-64", nome:"Colar Patuá Ródio Branco",      cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-64.jpg" },
+  { id:294, cod:"COL-65", nome:"Colar São Bento Pérola",        cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-65.jpg" },
+  { id:260, cod:"COL-39", nome:"Colar Solitário Zircônia Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-39.jpg" },
+  { id:261, cod:"COL-40", nome:"Colar Elos Longo Ouro",         cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-40.jpg" },
+  { id:262, cod:"COL-41", nome:"Colar Cobra Longo Ouro",        cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-41.jpg" },
+  { id:263, cod:"COL-42", nome:"Colar Bolinhas Achatadas Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-42.jpg" },
+  { id:264, cod:"COL-43", nome:"Colar Coração Liso Ouro",       cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-43.jpg" },
+  { id:265, cod:"COL-44", nome:"Colar Cadeado Fino Ouro",       cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-44.jpg" },
+  { id:266, cod:"COL-45", nome:"Colar Corações Achatados Prata Longo", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-45.jpg" },
+  { id:267, cod:"COL-46", nome:"Colar Corações Achatados Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-46.jpg" },
+  { id:268, cod:"COL-47", nome:"Colar Cruz Zircônia Retângulo Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-47.jpg" },
+  { id:269, cod:"COL-48", nome:"Colar Solitário Zircônia Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-48.jpg" },
+  { id:270, cod:"COL-49", nome:"Colar Raquete Beach Tennis Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-49.jpg" },
+  { id:271, cod:"COL-50", nome:"Colar Coração Liso Prata",      cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-50.jpg" },
+  { id:272, cod:"COL-51", nome:"Colar Cadeado Fino Longo Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-51.jpg" },
+  { id:273, cod:"COL-52", nome:"Colar Raquete Bola Beach Tennis Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-52.jpg" },
+  { id:274, cod:"COL-53", nome:"Colar Raquete Beach Tennis Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-53.jpg" },
+  { id:275, cod:"COL-54", nome:"Colar Bolinha Única Ouro",      cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-54.jpg" },
+  { id:276, cod:"COL-55", nome:"Colar Bolinhas Achatadas Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-55.jpg" },
+  { id:277, cod:"COL-56", nome:"Colar Bolinhas Ouro Longo",     cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-56.jpg" },
+  { id:287, cod:"COL-66", nome:"Colar Iniciais Duplas",         cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-66-1.jpg", imgs:["fotos/col-66-1.jpg","fotos/col-66-2.jpg","fotos/col-66-3.jpg"] },
+  { id:288, cod:"COL-67", nome:"Colar Menino Ouro",             cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-67.jpg" },
+  { id:289, cod:"COL-68", nome:"Colar Menina Zircônia Ouro",    cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-68.jpg" },
+  { id:290, cod:"COL-69", nome:"Colar Terço Pérola",            cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-69.jpg" },
+  { id:50, cod:"LET-01", nome:"Colar de Letra",              cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/let-01-1.jpg", imgs:["fotos/let-01-1.jpg","fotos/let-01.jpg"],
+    letras:[{l:"B",q:2},{l:"D",q:2},{l:"E",q:2},{l:"F",q:2},{l:"M",q:3},{l:"N",q:2},{l:"P",q:2},{l:"S",q:2},{l:"T",q:1},{l:"U",q:1},{l:"V",q:2},{l:"Z",q:1}] },
+
+  // ===== Chockers =====
+  { id:213, cod:"CHK-03", nome:"Chocker Pérolas",              cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-03.jpg" },
+  { id:214, cod:"CHK-04", nome:"Chocker Zircônias Cravejadas",  cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-04.jpg" },
+  { id:217, cod:"CHK-07", nome:"Chocker Pérolas Barrocas",      cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-07.jpg" },
+  { id:218, cod:"CHK-08", nome:"Chocker Bolinhas Douradas",     cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-08.jpg" },
+  { id:219, cod:"CHK-09", nome:"Chocker Elo Cartier",           cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-09.jpg" },
+  { id:221, cod:"CHK-11", nome:"Chocker Corações Cravejados",   cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-11.jpg" },
+  { id:295, cod:"COL-60", nome:"Chocker Elos Português PP Ouro", cat:"Chocker", preco:69.90, de:0, tag:"", img:"fotos/col-60.jpg" },
+
+
+  // ===== Novos brincos (lote 2) =====
+  { id:59, cod:"ORG-01", nome:"Brinco Orgânico Oval",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/org-01.jpg" },
+  { id:60, cod:"FLR-01", nome:"Brinco Flor com Pérola",      cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/flr-01.jpg" },
+  { id:61, cod:"BNO-01", nome:"Brinco Flor Nó Dourado",           cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/bno-01.jpg" },
+
+  // ===== Novos brincos (lote 3 — FotosAdd1) =====
+  { id:62, cod:"TRI-01", nome:"Brinco Triângulo Cravejado Prata", cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/tri-01.jpg" },
+  { id:63, cod:"ZIR-01", nome:"Brinco Duplo Solitário Virginia",       cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/zir-01.jpg" },
+  { id:65, cod:"NSR-01", nome:"Argolinha Nossa Senhora",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/nsr-01.jpg" },
+  { id:66, cod:"CRZ-01", nome:"Brinco Cristal Azul Prata",   cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/crz-01.jpg" },
+  { id:67, cod:"CRV-01", nome:"Brinco Cristal Vermelho Prata",cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/crv-01.jpg" },
+  { id:68, cod:"ARL-01", nome:"Brinco Argola Larga Lisa",    cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/arl-01.jpg" },
+  { id:69, cod:"EST-01", nome:"Brinco Earline com Estrela", cat:"Brincos", preco:89.9, de:0, tag:"", img:"fotos/est-01.jpg" },
+
+  // ===== Novos brincos (lote 4 — FotosAdd1) =====
+  { id:70, cod:"CAN-01", nome:"Brinco Tubo Canelado Médio",       cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/can-01.jpg" },
+  { id:71, cod:"CAN-02", nome:"Brinco Tubo Canelado Grosso",      cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/can-02.jpg" },
+  { id:72, cod:"PAV-01", nome:"Argola Click Cravejada Grossa",            cat:"Brincos", img:"fotos/pave-01.jpg", imgs:["fotos/pave-01.jpg","fotos/pave-02.jpg"], sizes:[{t:"M",preco:59.90},{t:"G",preco:69.90}] },
+
+  // ===== Novos brincos (lote 5 — FotosAdd1) =====
+  { id:73, cod:"ESC-01", nome:"Brinco Earcuff Cristais Prata", cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/esc-01.jpg" },
+  { id:296, cod:"ESC-02", nome:"Brinco Earcuff Coração",  cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/esc-02.jpg" },
+  { id:297, cod:"ENT-01", nome:"Brinco Entrelaçado",      cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/ent-01.jpg" },
+  { id:298, cod:"PDT-01", nome:"Brinco Pendente Ouro",    cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/pdt-01.jpg" },
+  { id:299, cod:"PDT-02", nome:"Brinco Pendente Ródio Branco", cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/pdt-02.jpg" },
+  { id:303, cod:"DUP-01", nome:"Brinco Duplo Argolinha Correntinha Strass",   cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/dup-01.jpg" },
+  { id:304, cod:"HAL-01", nome:"Brinco Botão Halo Cravejado",  cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/hal-01.jpg" },
+  { id:305, cod:"AGV-01", nome:"Brinco Argolinha Cravejada Prata", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/agv-01.jpg" },
+  { id:306, cod:"AGV-02", nome:"Brinco Argolinha Cravejada Dourada", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/agv-02.jpg" },
+  { id:307, cod:"DUP-02", nome:"Brinco Duplo Argolinha Correntinha Cristais", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/dup-02.jpg" },
+  { id:74, cod:"ODI-01", nome:"Brinco Orgânico Disco",       cat:"Brincos", preco:49.90,  de:0, tag:"", img:"fotos/odi-01.jpg" },
+  { id:75, cod:"HUG-01", nome:"Brinco Argola Pingentes",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/hug-01.jpg" },
+
+  // ===== Novos brincos (lote 6 — FotosAdd1) — todos Sob consulta (sem preço nas fotos) =====
+  { id:76, cod:"GOT-01", nome:"Brinco Gota Cravejada Dourado", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/got-d.jpg" },
+  { id:77, cod:"GOT-02", nome:"Brinco Gota Cravejada Prata",   cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/got-p.jpg" },
+  { id:78, cod:"TRC-01", nome:"Argola Trançada Dourada G",cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/trc-01.jpg" },
+  { id:79, cod:"COR-01", nome:"Brinco Coração Cravejado Dourado", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/cor-d.jpg" },
+  { id:80, cod:"COR-02", nome:"Brinco Coração Cravejado Prata", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/cor-p.jpg" },
+  { id:81, cod:"HUP-01", nome:"Argola Cravejada Quadrada Grossa",           cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/hup-01.jpg" },
+  { id:82, cod:"MRQ-01", nome:"Brinco Navete Cravejado",    cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/mar-01.jpg" },
+  { id:83, cod:"TRV-01", nome:"Brinco Trevo Cravejado",       cat:"Brincos", preco:89.9, de:0, tag:"", img:"fotos/trv-01.jpg" },
+  { id:84, cod:"BTF-01", nome:"Brinco Botão Flor",            cat:"Brincos", preco:79.9, de:0, tag:"", img:"fotos/btf-01.jpg" },
+  { id:85, cod:"GTL-01", nome:"Brinco Gota Lisa Dourada",     cat:"Brincos", preco:79.9, de:0, tag:"", img:"fotos/gtl-01.jpg" },
+  { id:86, cod:"SOL-01", nome:"Brinco Solitário Prata",       cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/sol-01.jpg" },
+  { id:87, cod:"BPP-01", nome:"Brinco Bola com Pérolas Prata",cat:"Brincos", preco:99.9, de:0, tag:"", img:"fotos/bpp-01.jpg" },
+
+  // ===== Pingentes (FotosAdd2) =====
+  { id:94, cod:"PIN-CRU", nome:"Pingente Crucifixo",            cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-cru.jpg" },
+  { id:99, cod:"PIN-ESR", nome:"Pingente Espírito Santo Redondo", cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-esr.jpg" },
+  { id:202, cod:"PIN-13", nome:"Pingente Coração Cravejado",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-01.jpg" },
+  { id:203, cod:"PIN-14", nome:"Pingente Espírito Santo Mini",       cat:"Pingentes", preco:39.90, de:0, tag:"", img:"fotos/pin-new-02.jpg" },
+  { id:204, cod:"PIN-15", nome:"Pingente Coração Espírito Santo",    cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-03.jpg" },
+  { id:205, cod:"PIN-16", nome:"Pingente Cruz Cravejada Redonda",    cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-04.jpg" },
+  { id:206, cod:"PIN-17", nome:"Pingente Espírito Santo Detalhado",  cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-05.jpg" },
+  { id:207, cod:"PIN-18", nome:"Pingente Medalha Pai Nosso",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-06.jpg" },
+  { id:208, cod:"PIN-19", nome:"Pingente Árvore da Vida Cravejada",  cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-07.jpg" },
+  { id:209, cod:"PIN-20", nome:"Pingente Mickey Cravejado",          cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-08.jpg" },
+  { id:210, cod:"PIN-21", nome:"Pingente Medalha Pai Nosso Ondulada",cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-09.jpg" },
+  { id:211, cod:"PIN-22", nome:"Pingente Coração Cravejado Mini",    cat:"Pingentes", preco:39.90, de:0, tag:"", img:"fotos/pin-new-10.jpg" },
+  { id:212, cod:"PIN-23", nome:"Pingente Estrela Cravejada",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-13.jpg" },
+
+  // ===== Brincos (lote FotosAdd2 — a maioria Sob consulta) =====
+  { id:100, cod:"FLD-01", nome:"Brinco Folha e Disco",          cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/fld-01.jpg" },
+  { id:101, cod:"ACP-01", nome:"Argola Cravejada Prata",        cat:"Brincos", img:"fotos/acp-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:102, cod:"ACD-01", nome:"Argola Canelada Fina Dourada",  cat:"Brincos", img:"fotos/acd-01.jpg", sizes:[{t:"M",preco:49.90},{t:"G",preco:59.90}] },
+  { id:103, cod:"SOL-02", nome:"Brinco Solitário Pequeno Prata",cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/sol-02.jpg" },
+  { id:104, cod:"SOL-03", nome:"Brinco Solitário 12mm Prata", cat:"Brincos", preco:99.9, de:0, tag:"", img:"fotos/sol-03.jpg" },
+  { id:105, cod:"SOL-04", nome:"Brinco Gota Zircônia Prata",      cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/sol-04.jpg" },
+  { id:106, cod:"NSA-01", nome:"Brinco Nossa Senhora Aparecida Dourado", cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/nsa-01.jpg" },
+  { id:107, cod:"NSA-02", nome:"Brinco Nossa Senhora Aparecida Azul",     cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/nsa-02.jpg" },
+  { id:109, cod:"ACP-02", nome:"Argola Canelada Prata",         cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/acp-02.jpg" },
+  { id:110, cod:"ABP-01", nome:"Argola Bolinhas Prata",         cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/abp-01.jpg" },
+  { id:111, cod:"ALD-01", nome:"Argola Retangular Fina Dourada",      cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/ald-01.jpg" },
+  { id:112, cod:"AGD-01", nome:"Argola Gota Zircônia Dourada",  cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/agd-01.jpg" },
+  { id:113, cod:"AGP-01", nome:"Brinco Bolinha Dourado",    cat:"Brincos", img:"fotos/agp-01.jpg", sizes:[{t:"PP",preco:29.90},{t:"P",preco:39.90}] },
+  { id:114, cod:"ACX-01", nome:"Brinco Argola com Cruz",        cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/acx-01.jpg" },
+
+  // ===== Trios de brincos (lote FotosAdd2) — todos Sob consulta =====
+  { id:115, cod:"TRB-01", nome:"Trio Ponto de Luz com Base Dourado",     cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-01.jpg" },
+  { id:116, cod:"TRB-02", nome:"Trio Ponto de Luz Prata",       cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-02.jpg" },
+  { id:117, cod:"TRB-03", nome:"Trio Ponto de Luz Dourado",cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-03.jpg" },
+  { id:118, cod:"TRB-04", nome:"Trio Gota Zircônia Dourado",             cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-04.jpg" },
+  { id:119, cod:"TRB-05", nome:"Trio Sortido Dourado",             cat:"Trios de brincos", preco:89.9, de:0, tag:"", img:"fotos/trio-05.jpg" },
+  { id:120, cod:"TRB-06", nome:"Trio Geométrico Prata",         cat:"Trios de brincos", preco:99.9, de:0, tag:"", img:"fotos/trio-06.jpg" },
+  { id:121, cod:"TRB-07", nome:"Trio Ponto de Luz Dourado Grande", cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-07.jpg" },
+  { id:122, cod:"TRB-08", nome:"Trio Geométrico Dourado",       cat:"Trios de brincos", preco:99.9, de:0, tag:"", img:"fotos/trio-08.jpg" },
+  { id:123, cod:"TRB-09", nome:"Trio Bolinha Dourado",          cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-09.jpg" },
+
+  // ===== Argolinhas / huggies (lote FotosAdd3) =====
+  { id:124, cod:"ARQ-01", nome:"Argolinha Triangular Dourada",       cat:"Trios de brincos", img:"fotos/arq-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:125, cod:"AGC-01", nome:"Argolinha Gota Cravejada Dourada", cat:"Trios de brincos", img:"fotos/agc-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:126, cod:"AGC-02", nome:"Argolinha Ondulada Prata",   cat:"Trios de brincos", img:"fotos/agc-02.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:127, cod:"AGL-01", nome:"Argolinha Gota Lisa Dourada",      cat:"Trios de brincos", img:"fotos/agl-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:129, cod:"ACR-01", nome:"Argolinha Croissant Dourada",      cat:"Duplas de brincos", img:"fotos/acr-01.jpg", sizes:[{t:"M",preco:49.90},{t:"G",preco:59.90}] },
+  { id:130, cod:"AOF-01", nome:"Argolinha em V Dourada",      cat:"Trios de brincos", img:"fotos/aof-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:300, cod:"ADL-01", nome:"Argolinha Delicada Ouro",     cat:"Trios de brincos", img:"fotos/adl-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:49.90},{t:"G",preco:59.90}] },
+  { id:133, cod:"ALA-01", nome:"Argolinha Lisa Abaulada Dourada", cat:"Brincos", img:"fotos/ala-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:134, cod:"AQF-01", nome:"Argolinha Quadrada Fina Dourada", cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/aqf-01.jpg" },
+  { id:135, cod:"AGP-02", nome:"Argolinha Gota Cravejada Dourada",     cat:"Brincos", img:"fotos/agp-02.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
+  { id:136, cod:"ALP-01", nome:"Argolinha Lisa Prata",           cat:"Brincos", img:"fotos/alp-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+  { id:137, cod:"SOL-05", nome:"Brinco Solitário 12mm Dourado",  cat:"Brincos", preco:99.90, de:0, tag:"", img:"fotos/sol-05.jpg" },
+  { id:138, cod:"ABD-01", nome:"Argolinha Bolinha Dourada",      cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/abd-01.jpg" },
+  { id:139, cod:"BOR-01", nome:"Brinco Borboleta Cravejada",     cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/bor-01.jpg" },
+  { id:140, cod:"SOL-06", nome:"Brinco Solitário Prata PP",    cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/sol-06.jpg" },
+  { id:141, cod:"SOL-07", nome:"Brinco Solitário Prata Mini",  cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/sol-07.jpg" },
+  { id:142, cod:"SOL-08", nome:"Brinco Solitário Prata Médio",   cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/sol-08.jpg" },
+  { id:143, cod:"SOL-09", nome:"Brinco Solitário Dourado Médio", cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/sol-09.jpg" },
+  { id:144, cod:"AAP-01", nome:"Argolinha Abaulada Prata",       cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/aap-01.jpg" },
+  { id:145, cod:"TRC-02", nome:"Argola Trançada Dourada M", cat:"Brincos", preco:59.90, de:0, tag:"", img:"fotos/trc-02.jpg" },
+
+  // ===== Escapulários (FotosAdd4) — todos Sob consulta (sem preço nas fotos) =====
+  { id:146, cod:"ESCP-01", nome:"Pulseira Medalinhas Ouro",   cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-01.jpg" },
+  { id:147, cod:"ESCP-02", nome:"Escapulário N. Senhora Redondo Ouro",           cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-02.jpg" },
+  { id:148, cod:"ESCP-03", nome:"Escapulário São Bento Redondo Veneziana Ouro", cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-03.jpg" },
+  { id:149, cod:"ESCP-04", nome:"Escapulário N. Senhora Mini Quadrado Elos Ródio Branco",            cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-04.jpg" },
+  { id:150, cod:"ESCP-05", nome:"Escapulário N. Sra. do Carmo Veneziana Ouro",  cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-05.jpg" },
+  { id:151, cod:"ESCP-06", nome:"Escapulário Veneziana Crucifixo Ródio Branco",                cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-06.jpg" },
+  { id:152, cod:"ESCP-07", nome:"Escapulário N. Senhora Mini Quadrado Veneziana Ródio Branco",       cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-07.jpg" },
+  { id:153, cod:"ESCP-08", nome:"Escapulário Coração e Espirito Santo Ouro - infantil, pequeno",  cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-08.jpg", imgs:["fotos/escp-08.jpg","fotos/escp-08-2.jpg","fotos/escp-08-3.jpg"] },
+  { id:154, cod:"ESCP-09", nome:"Escapulário Cartier São Jorge Ródio Branco",    cat:"Escapulários", preco:99.9, de:0, tag:"", img:"fotos/escp-09.jpg" },
+  { id:155, cod:"ESCP-10", nome:"Escapulário Sagrado Coração Ouro",           cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-10.jpg" },
+  { id:156, cod:"ESCP-11", nome:"Escapulário Cartier São Jorge Ouro",  cat:"Escapulários", preco:99.9, de:0, tag:"", img:"fotos/escp-11.jpg" },
+  { id:157, cod:"ESCP-12", nome:"Escapulário N. Senhora Quadrado Ródio Branco",    cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-12.jpg" },
+  { id:223, cod:"ESCP-13", nome:"Escapulário Sagrado Coração",           cat:"Escapulários", preco:0, de:0, tag:"", img:"fotos/escp-13.jpg", cores:[{c:"Pérola"},{c:"Dourado"}] },
+
+  // ===== Braceletes (FotosAdd4) — todos Sob consulta, alguns com carrossel =====
+  { id:158, cod:"BRA-01", nome:"Bracelete Nó Fino Ouro",                cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-01-2.jpg", imgs:["fotos/bra-01-2.jpg","fotos/bra-01-1.jpg"] },
+  { id:159, cod:"BRA-02", nome:"Bracelete Abaulado Grosso Ouro",       cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-02-1.jpg", imgs:["fotos/bra-02-1.jpg","fotos/bra-16-2.jpg"] },
+  { id:160, cod:"BRA-03", nome:"Bracelete Abaulado Fino Ouro",   cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-02-2.jpg", imgs:["fotos/bra-02-2.jpg","fotos/bra-02-3.jpg"] },
+  { id:161, cod:"BRA-04", nome:"Bracelete Fio Liso Fecho Jóia Ouro",          cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-04.jpg", imgs:["fotos/bra-04.jpg","fotos/bra-01-3.jpg"] },
+  { id:162, cod:"BRA-05", nome:"Bracelete Cordão Torcido Fino Ouro",    cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-05.jpg", imgs:["fotos/bra-05.jpg","fotos/bra-03.jpg"] },
+  { id:163, cod:"BRA-06", nome:"Bracelete Ponto de Luz Quadrado Ródio Branco",      cat:"Braceletes", preco:159.9, de:0, tag:"", img:"fotos/bra-06-2.jpg", imgs:["fotos/bra-06-2.jpg","fotos/bra-06-1.jpg"] },
+  { id:164, cod:"BRA-07", nome:"Bracelete Duplo Cravejado Delicado Ródio Branco",        cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-08-1.jpg", imgs:["fotos/bra-08-1.jpg","fotos/bra-13-2.jpg"] },
+  { id:165, cod:"BRA-08", nome:"Bracelete Cruzado Cravejado Ouro", cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-16-1.jpg", imgs:["fotos/bra-16-1.jpg","fotos/bra-08-2.jpg"] },
+  { id:175, cod:"BRA-18", nome:"Bracelete Gota Dupla Ouro", cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-15-1.jpg", imgs:["fotos/bra-15-1.jpg","fotos/bra-09-3.jpg"] },
+  { id:166, cod:"BRA-09", nome:"Bracelete Fino Bolinha Ouro",      cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-10-2.jpg", imgs:["fotos/bra-10-2.jpg","fotos/bra-10-1.jpg"] },
+  { id:176, cod:"BRA-19", nome:"Bracelete Coração Cravejado Ouro",         cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-09-2.jpg", imgs:["fotos/bra-09-2.jpg","fotos/bra-12-1.jpg"] },
+  { id:167, cod:"BRA-10", nome:"Bracelete São Bento Aberto Ouro",   cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-11-2.jpg", imgs:["fotos/bra-11-2.jpg","fotos/bra-11-1.jpg"] },
+  { id:168, cod:"BRA-11", nome:"Bracelete Chapa Fina Ouro",  cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-07.jpg", imgs:["fotos/bra-07.jpg","fotos/bra-15-2.jpg"] },
+  { id:179, cod:"PUL-16", nome:"Pulseira Riviera 3 Pontas 3mm Ródio Branco",   cat:"Pulseiras", preco:199.9, de:0, tag:"", img:"fotos/bra-14-1.jpg", imgs:["fotos/bra-14-1.jpg","fotos/bra-novo-2.jpg"] },
+  { id:346, cod:"PUL-17", nome:"Pulseira Escapulário São Bento", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-17-2.jpg", imgs:["fotos/pul-17-2.jpg","fotos/pul-17-1.jpg"] },
+  { id:180, cod:"BRA-21", nome:"Bracelete Ondulado Largo",    cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-21.jpg", imgs:["fotos/bra-21.jpg","fotos/bra-09-1.jpg"] },
+  { id:182, cod:"BRA-23", nome:"Bracelete Espiral Grosso",           cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-22.jpg", imgs:["fotos/bra-22.jpg","fotos/bra-17.jpg"] },
+  { id:183, cod:"BRA-24", nome:"Bracelete Martelado Grosso", cat:"Braceletes", preco:149.9, de:0, tag:"", img:"fotos/bra-10-3.jpg", imgs:["fotos/bra-10-3.jpg","fotos/bra-25.jpg"] },
+  { id:184, cod:"BRA-25", nome:"Bracelete Detalhes Risca",          cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-24.jpg", imgs:["fotos/bra-24.jpg","fotos/bra-23.jpg"] },
+  { id:199, cod:"BRA-26", nome:"Bracelete Liso Redondo",      cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-26-1.jpg", imgs:["fotos/bra-26-1.jpg","fotos/bra-26-2.jpg"] },
+  { id:236, cod:"BRA-27", nome:"Bracelete Duo Cravejado Rosé", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-27-2.jpg", imgs:["fotos/bra-27-2.jpg","fotos/bra-27-1.jpg"] },
+
+  // ===== Tornozeleiras (FotosAdd5) =====
+  { id:200, cod:"TOR-01", nome:"Tornozeleira Medalinhas Ouro",      cat:"Tornozeleiras", preco:59.9, de:0, tag:"", img:"fotos/tor-01-1.jpg" },
+  { id:201, cod:"TOR-02", nome:"Tornozeleira Pendentes Ouro",     cat:"Tornozeleiras", preco:59.9, de:0, tag:"", img:"fotos/tor-01-2.jpg" },
+
+  // ===== Pulseiras (FotosAdd5) =====
+  { id:185, cod:"PUL-01", nome:"Pulseira Medalinhas Ouro",      cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-07-1.jpg", imgs:["fotos/pul-07-1.jpg","fotos/pul-01-2.jpg"] },
+  { id:186, cod:"PUL-02", nome:"Pulseira Cartier Ouro",  cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-08-1.jpg", imgs:["fotos/pul-08-1.jpg","fotos/pul-02-1.jpg"] },
+  { id:187, cod:"PUL-03", nome:"Pulseira Snake Ouro",        cat:"Pulseiras", preco:69.9, de:0, tag:"", img:"fotos/pul-13-1.jpg", imgs:["fotos/pul-13-1.jpg","fotos/pul-02-2.jpg"] },
+  { id:188, cod:"PUL-04", nome:"Pulseira Uma Bolinha Ouro",  cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-08-2.jpg", imgs:["fotos/pul-08-2.jpg","fotos/pul-12-1.jpg"] },
+  { id:189, cod:"PUL-05", nome:"Pulseira Pérolas Redondas Ouro",      cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-11-2.jpg", imgs:["fotos/pul-11-2.jpg","fotos/pul-13-2.jpg"] },
+  { id:190, cod:"PUL-06", nome:"Pulseira Terço Pérolas Ouro",    cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-06-2.jpg", imgs:["fotos/pul-06-2.jpg","fotos/pul-06-1.jpg"] },
+  { id:191, cod:"PUL-07", nome:"Pulseira Pérolas Ovais Ouro",    cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-11-1.jpg", imgs:["fotos/pul-11-1.jpg","fotos/pul-12-2.jpg"] },
+  { id:192, cod:"PUL-08", nome:"Pulseira Tiffany Ouro",   cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-05-1.jpg", imgs:["fotos/pul-05-1.jpg","fotos/pul-10-1.jpg"] },
+  { id:193, cod:"PUL-09", nome:"Pulseira Bolinhas Ródio Branco",   cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-04-1.jpg", imgs:["fotos/pul-04-1.jpg","fotos/pul-07-2.jpg"] },
+  { id:194, cod:"PUL-10", nome:"Pulseira Riviera Fina Ródio Branco", cat:"Pulseiras", preco:69.9, de:0, tag:"", img:"fotos/pul-04-2.jpg", imgs:["fotos/pul-04-2.jpg","fotos/pul-05-2.jpg"] },
+  { id:196, cod:"PUL-12", nome:"Pulseira Pérolas Barrocas Ouro",       cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-03-2.jpg", imgs:["fotos/pul-03-2.jpg","fotos/pul-09-2.jpg"] },
+  { id:197, cod:"PUL-13", nome:"Pulseira Elos Gourmet Ouro",   cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-10-2.jpg", imgs:["fotos/pul-10-2.jpg","fotos/pul-09-1.jpg"] },
+  { id:198, cod:"PUL-14", nome:"Pulseira Cordão Baiano Fino",     cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-01-1.jpg", imgs:["fotos/pul-01-1.jpg","fotos/pul-03-1.jpg"] },
+  { id:237, cod:"PUL-15", nome:"Pulseira Riviera Navete Prata", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-15-1.jpg", imgs:["fotos/pul-15-1.jpg","fotos/pul-15-2.jpg"] },
+
+  // ===== Piercing fake (FotosAdd5) =====
+  { id:238, cod:"PIE-01", nome:"Piercing Cartilagem", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-01.jpg", cores:[{c:"Redondo"},{c:"Estrela"}] },
+  { id:239, cod:"PIE-02", nome:"Piercing Helix",       cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-02.jpg", cores:[{c:"Olho Grego"},{c:"Love"},{c:"Sol"}] },
+  { id:240, cod:"PIE-03", nome:"Piercing Fake 4 Fileiras de Zircônia Dourado", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-03.jpg" },
+  { id:241, cod:"PIE-04", nome:"Piercing Fake Bolinhas",  cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-04.jpg" },
+  { id:242, cod:"PIE-05", nome:"Piercing Fake 4 Listras",       cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-05.jpg" },
+  { id:243, cod:"PIE-06", nome:"Piercing Fake 4 Fileiras de Zircônia Prata",  cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-06.jpg" },
+  { id:301, cod:"PIE-07", nome:"Piercing Fake Duplo Zircônia", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-07.jpg" },
+
+  // ===== Anéis (FotosAdd7) =====
+  { id:309, cod:"ANE-01", nome:"Anel Duplo Gota Dourado",              cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-01.jpg" },
+  { id:310, cod:"ANE-02", nome:"Anel Chevalier Oval Dourado",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-02.jpg" },
+  { id:311, cod:"ANE-03", nome:"Anel Duplo Gota Dourado Grande",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-03.jpg" },
+  { id:312, cod:"ANE-04", nome:"Anel Medalha Trabalhada Dourado",      cat:"Anéis", img:"fotos/ane-04.jpg", sizes:[{t:"11",preco:0},{t:"13",preco:0}] },
+  { id:313, cod:"ANE-05", nome:"Anel Cruzado Cravejado Rosé",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-05.jpg" },
+  { id:314, cod:"ANE-06", nome:"Anel Trançado Fino Dourado",           cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-06.jpg" },
+  { id:315, cod:"ANE-07", nome:"Anel Ondulado Fino Dourado",           cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-07.jpg" },
+  { id:316, cod:"ANE-08", nome:"Anel Navete Cravejado Prata",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-08.jpg" },
+  { id:317, cod:"ANE-09", nome:"Anel Duplo Cravejado Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-09.jpg" },
+  { id:318, cod:"ANE-10", nome:"Anel Coração Vazado Prata",            cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-10.jpg" },
+  { id:319, cod:"ANE-11", nome:"Anel Chevalier Retangular Dourado",    cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-11.jpg" },
+  { id:320, cod:"ANE-12", nome:"Anel Duplo Cravejado Rosé",            cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-12.jpg" },
+  { id:321, cod:"ANE-13", nome:"Anel Statement Retangular Cravejado Dourado", cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-13.jpg" },
+  { id:322, cod:"ANE-14", nome:"Anel Meia Aliança Cravejada Prata",    cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-14.jpg" },
+  { id:323, cod:"ANE-15", nome:"Anel Corda Dourado",                  cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-15.jpg" },
+  { id:324, cod:"ANE-16", nome:"Anel Trabalhado Largo Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-16.jpg" },
+  { id:325, cod:"ANE-17", nome:"Anel Coração Chevalier Dourado",      cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-17.jpg" },
+  { id:326, cod:"ANE-18", nome:"Anel Nó Fino Dourado",                cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-18.jpg" },
+
+  // ===== Anéis (FotosAdd7 - lote 2) =====
+  { id:327, cod:"ANE-19", nome:"Anel Placa Retangular Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-19.jpg" },
+  { id:328, cod:"ANE-20", nome:"Anel Flor Cravejada Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-20.jpg" },
+  { id:329, cod:"ANE-21", nome:"Anel Meia Aliança Cravejada Dourado", cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-21.jpg" },
+  { id:330, cod:"ANE-22", nome:"Anel Torcido Grosso Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-22.jpg" },
+  { id:331, cod:"ANE-23", nome:"Anel Coração Auréola Dourado",        cat:"Anéis", img:"fotos/ane-23.jpg", sizes:[{t:"18",preco:0},{t:"22",preco:0}] },
+  { id:332, cod:"ANE-24", nome:"Anel Elo Cravejado Dourado",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-24.jpg" },
+  { id:333, cod:"ANE-25", nome:"Anel Solitário Fino Prata",           cat:"Anéis", img:"fotos/ane-25.jpg", sizes:[{t:"13",preco:0},{t:"19",preco:0}] },
+  { id:334, cod:"ANE-26", nome:"Anel Solitário Coração Cravejado Dourado", cat:"Anéis", img:"fotos/ane-26.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0}] },
+  { id:335, cod:"ANE-27", nome:"Anel Escamas Prata",                  cat:"Anéis", img:"fotos/ane-27.jpg", sizes:[{t:"15",preco:0},{t:"20",preco:0},{t:"22",preco:0}] },
+  { id:336, cod:"ANE-28", nome:"Anel Bambu Prata",                    cat:"Anéis", img:"fotos/ane-28.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0},{t:"19",preco:0}] },
+  { id:337, cod:"ANE-29", nome:"Anel Solitário Redondo Cravejado Dourado", cat:"Anéis", img:"fotos/ane-29.jpg", sizes:[{t:"18",preco:0},{t:"20",preco:0},{t:"22",preco:0}] },
+  { id:338, cod:"ANE-30", nome:"Anel Nó Fino Prata",                  cat:"Anéis", img:"fotos/ane-30.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0},{t:"20",preco:0},{t:"24",preco:0}] },
+  { id:339, cod:"ANE-31", nome:"Anel Solitário Fino Dourado",         cat:"Anéis", img:"fotos/ane-31.jpg", sizes:[{t:"15",preco:0},{t:"18",preco:0},{t:"20",preco:0}] },
+  { id:340, cod:"ANE-32", nome:"Anel Solitário Clássico Dourado",     cat:"Anéis", img:"fotos/ane-32.jpg", sizes:[{t:"14",preco:0},{t:"20",preco:0},{t:"22",preco:0},{t:"24",preco:0}] },
+  { id:341, cod:"ANE-33", nome:"Anel Corrente Cravejada Dourado",     cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-33.jpg" },
+  { id:342, cod:"ANE-34", nome:"Anel Bambu Dourado",                  cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-34.jpg" },
+  { id:343, cod:"ANE-35", nome:"Anel Barra Horizontal Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-35.jpg" },
+  { id:344, cod:"ANE-36", nome:"Anel Nó Assimétrico Dourado",         cat:"Anéis", img:"fotos/ane-36.jpg", sizes:[{t:"20",preco:0},{t:"22",preco:0}] },
+  { id:345, cod:"ANE-37", nome:"Anel Aliança Cravejada Prata",        cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-37.jpg" },
+];
+
+const CATEGORIAS = [
+  { nome:"Trios de brincos", desc:"Combo de três pares" },
+  { nome:"Duplas de brincos",desc:"Combo de dois pares" },
+  { nome:"Brincos",          desc:"Do stud ao statement" },
+  { nome:"Conjuntos",        desc:"Colar + brinco" },
+  { nome:"Anéis",            desc:"Brilho nas mãos" },
+  { nome:"Pulseiras",        desc:"Delicadeza no pulso" },
+  { nome:"Chocker",          desc:"Rente ao pescoço" },
+  { nome:"Colares",          desc:"Charme no colo" },
+  { nome:"Braceletes",       desc:"Presença no braço" },
+  { nome:"Infantil",         desc:"Para as pequenas" },
+  { nome:"Pingentes",        desc:"Seu detalhe favorito" },
+  { nome:"Escapulários",     desc:"Fé pertinho de você" },
+  { nome:"Piercing",         desc:"Sem precisar furar" },
+  { nome:"Tornozeleiras",    desc:"Charme no tornozelo" },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   Daqui pra baixo é a lógica — não precisa mexer
+   ══════════════════════════════════════════════════════════════ */
+
+// Ícone de gema usado como placeholder quando não há foto
+const GEM = '<svg class="gem" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M14 8h20l8 10-18 22L6 18z"/><path d="M6 18h36M18 8l-4 10 10 22M30 8l4 10-10 22"/></svg>';
+
+let carrinho = JSON.parse(localStorage.getItem('pinkCarrinho') || '[]');
+carrinho.forEach(i => { if(!i.key) i.key = String(i.id); }); // compatibilidade com carrinho antigo
+let filtroAtivo = 'Todos';
+let termoBusca = '';
+const PAGINA = 24;       // quantidade de peças mostradas por vez
+let visiveis = PAGINA;
+const selecionado = {};  // tamanho escolhido por produto: { id: índice }
+const letraSel = {};     // letra escolhida por produto: { id: índice }
+const corSel = {};       // cor escolhida por produto: { id: índice }
+
+function buscar(v){
+  termoBusca = v.trim().toLowerCase();
+  if(termoBusca && filtroAtivo!=='Todos'){ filtroAtivo = 'Todos'; renderFiltros(); }
+  visiveis = PAGINA;
+  renderProdutos();
+}
+
+// Rola até o campo de pesquisa da coleção e coloca o foco nele
+function irParaBusca(){
+  document.getElementById('produtos').scrollIntoView({ behavior:'smooth' });
+  setTimeout(() => $('buscaInput').focus(), 400);
+}
+
+function mostrarMais(){
+  visiveis += PAGINA;
+  renderProdutos();
+}
+
+const brl = n => n.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+const $ = id => document.getElementById(id);
+
+// ---- Render categorias ----
+function renderCategorias(){
+  $('categoriasGrid').innerHTML = CATEGORIAS.map(c => `
+    <div class="cat" onclick="filtrarPor('${c.nome}')">
+      <h3>${c.nome}</h3>
+    </div>`).join('');
+}
+
+// ---- Render filtros ----
+function renderFiltros(){
+  const cats = ['Todos', ...CATEGORIAS.map(c => c.nome)];
+  $('filtros').innerHTML = cats.map(c =>
+    `<button class="filtro ${c===filtroAtivo?'ativo':''}" onclick="filtrarPor('${c}')">${c}</button>`
+  ).join('');
+}
+
+function filtrarPor(cat){
+  filtroAtivo = cat;
+  visiveis = PAGINA;
+  renderFiltros();
+  renderProdutos();
+  document.getElementById('produtos').scrollIntoView({ behavior:'smooth' });
+}
+
+// ---- Render produtos ----
+function temTamanhos(p){ return Array.isArray(p.sizes) && p.sizes.length > 0; }
+function temLetras(p){ return Array.isArray(p.letras) && p.letras.length > 0; }
+function temCores(p){ return Array.isArray(p.cores) && p.cores.length > 0; }
+
+// Um produto/variação está "esgotado" só quando o estoque é controlado e chegou a zero.
+// estoque undefined = não controla (sempre disponível).
+function esgotado(p){
+  if(temTamanhos(p)) return p.sizes.every(s => s.estoque === 0);
+  if(temLetras(p))   return p.letras.every(L => L.q === 0);
+  if(temCores(p))    return p.cores.every(c => c.estoque === 0);
+  return p.estoque === 0;
+}
+
+/* ---- Estoque/preço via planilha Google (opcional) ---- */
+function parseCSV(txt){
+  const linhas = txt.replace(/\r/g,'').split('\n').filter(l => l.trim().length);
+  if(!linhas.length) return [];
+  const split = l => {
+    const out=[]; let cur='', q=false;
+    for(let i=0;i<l.length;i++){
+      const c=l[i];
+      if(q){ if(c==='"'){ if(l[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
+      else { if(c==='"') q=true; else if(c===','){ out.push(cur); cur=''; } else cur+=c; }
+    }
+    out.push(cur); return out;
+  };
+  let headIdx = linhas.findIndex(l => split(l).some(c => c.trim().toLowerCase() === 'codigo'));
+  if(headIdx === -1) headIdx = 0;   // fallback: se não achar "codigo", assume a 1ª linha como antes
+  const head = split(linhas[headIdx]).map(h => h.trim().toLowerCase());
+  return linhas.slice(headIdx+1).map(l => {
+    const cels = split(l), o = {};
+    head.forEach((h,i) => o[h] = (cels[i]||'').trim());
+    return o;
+  });
+}
+
+function aplicarPlanilha(rows){
+  const map = {};
+  rows.forEach(r => { if(r.codigo) map[r.codigo.trim().toUpperCase()] = r; });
+  const numOuNull = v => { if(v==null||v==='') return null; const n=parseFloat(String(v).replace(',','.')); return isNaN(n)?null:n; };
+  const estoqueDe = v => { if(v==null||String(v).trim()==='') return undefined; const n=parseInt(String(v).replace(/[^\d]/g,''),10); return isNaN(n)?undefined:n; };
+  const ativoDe   = v => { const s=String(v||'').trim().toLowerCase(); return !(s==='nao'||s==='não'||s==='n'||s==='0'||s==='false'||s==='inativo'); };
+  PRODUTOS.forEach(p => {
+    const base = map[p.cod.toUpperCase()];
+    if(base){
+      if(base.nome && base.nome.trim()) p.nome = base.nome.trim();
+      if(base.categoria && base.categoria.trim()){
+        const catPlanilha = base.categoria.trim();
+        const catOficial = CATEGORIAS.find(c => c.nome.toLowerCase() === catPlanilha.toLowerCase());
+        p.cat = catOficial ? catOficial.nome : catPlanilha;
+      }
+      const pr = numOuNull(base.preco); if(pr != null) p.preco = pr;
+      const es = estoqueDe(base.estoque); if(es !== undefined) p.estoque = es;
+      p.ativo = ativoDe(base.ativo);
+    }
+    if(temTamanhos(p)) p.sizes.forEach(s => {
+      const r = map[`${p.cod}-${s.t}`.toUpperCase()];
+      if(r){ const pr=numOuNull(r.preco); if(pr!=null) s.preco=pr; const es=estoqueDe(r.estoque); if(es!==undefined) s.estoque=es; }
+    });
+    if(temLetras(p)) p.letras.forEach(L => {
+      const r = map[`${p.cod}-${L.l}`.toUpperCase()];
+      if(r){ const es=estoqueDe(r.estoque); if(es!==undefined) L.q=es; }
+    });
+    if(temCores(p)) p.cores.forEach(c => {
+      const r = map[`${p.cod}-${c.c}`.toUpperCase()];
+      if(r){ const es=estoqueDe(r.estoque); if(es!==undefined) c.estoque=es; }
+    });
+  });
+}
+
+async function carregarPlanilha(){
+  if(!CONFIG.planilhaCsv) return;
+  try{
+    const resp = await fetch(CONFIG.planilhaCsv, { cache:'no-store' });
+    if(!resp.ok) return;
+    aplicarPlanilha(parseCSV(await resp.text()));
+    renderProdutos();
+  }catch(e){ /* silencioso: mantém os dados do código como reserva */ }
+}
+
+function renderProdutos(){
+  const base = filtroAtivo==='Todos' ? PRODUTOS : PRODUTOS.filter(p => p.cat===filtroAtivo);
+  const buscados = !termoBusca ? base : base.filter(p =>
+    p.nome.toLowerCase().includes(termoBusca) || (p.cod||'').toLowerCase().includes(termoBusca)
+  );
+  const ativos = buscados.filter(p => p.ativo !== false);   // esconde produtos marcados como inativos na planilha
+  const ordemCat = CATEGORIAS.map(c => c.nome);
+  const lista = [...ativos].sort((a,b) => {
+    const ea = esgotado(a), eb = esgotado(b);
+    if(ea !== eb) return ea - eb;   // esgotados sempre no final de tudo
+    if(filtroAtivo==='Todos'){
+      const ca = ordemCat.indexOf(a.cat), cb = ordemCat.indexOf(b.cat);
+      if(ca !== cb) return ca - cb;
+    }
+    return 0;
+  });
+  if(!lista.length){ $('produtosGrid').innerHTML = `<p class="sem-produtos">${termoBusca ? 'Nenhuma peça encontrada para "'+$('buscaInput').value+'".' : 'Novas peças chegando em breve nesta categoria.'}</p>`; return; }
+  const visivelLista = lista.slice(0, visiveis);
+  $('produtosGrid').innerHTML = visivelLista.map(p => {
+    const fora = esgotado(p);
+    const semPreco = !p.preco && !temTamanhos(p) && !temLetras(p) && !temCores(p);   // selinho "Sob consulta" só quando o preço é zero
+    let corpo;
+    if(temTamanhos(p)){
+      const idx = selecionado[p.id] ?? 0;
+      const pills = p.sizes.map((s,i) =>
+        `<button class="tam ${i===idx?'ativo':''}" ${s.estoque===0?'disabled':''} onclick="selecTam(${p.id},${i})">${s.t}</button>`
+      ).join('');
+      corpo = `
+        <div class="tam-label">Escolha o tamanho</div>
+        <div class="tamanhos" data-p="${p.id}">${pills}</div>
+        <div class="preco" id="preco-${p.id}">${brl(p.sizes[idx].preco)}</div>`;
+    } else if(temLetras(p)){
+      const idx = letraSel[p.id] ?? 0;
+      const pills = p.letras.map((L,i) =>
+        `<button class="tam ${i===idx?'ativo':''}" ${L.q===0?'disabled':''} onclick="selecLetra(${p.id},${i})">${L.l}</button>`
+      ).join('');
+      corpo = `
+        <div class="tam-label">Escolha a letra</div>
+        <div class="tamanhos letras" data-p="${p.id}">${pills}</div>
+        ${p.preco ? `<div class="preco">${brl(p.preco)}</div>` : `<div class="preco">Sob consulta</div>`}`;
+    } else if(temCores(p)){
+      const idx = corSel[p.id] ?? 0;
+      const pills = p.cores.map((c,i) =>
+        `<button class="tam ${i===idx?'ativo':''}" ${c.estoque===0?'disabled':''} onclick="selecCor(${p.id},${i})">${c.c}</button>`
+      ).join('');
+      corpo = `
+        <div class="tam-label">Escolha uma opção</div>
+        <div class="tamanhos cores" data-p="${p.id}">${pills}</div>
+        ${p.preco ? `<div class="preco">${brl(p.preco)}</div>` : `<div class="preco">Sob consulta</div>`}`;
+    } else {
+      corpo = p.preco ? `<div class="preco">${brl(p.preco)}${p.de ? `<small>${brl(p.de)}</small>` : ''}</div>` : `<div class="preco">Sob consulta</div>`;
+    }
+    const botao = fora
+      ? `<button class="btn add esg" disabled>Esgotado</button>`
+      : `<button class="btn btn-primary add" onclick="adicionar(${p.id})">Adicionar</button>`;
+    return `
+    <article class="card${fora?' card-esg':''}">
+      <div class="foto">
+        ${p.tag ? `<span class="tag">${p.tag}</span>` : ''}
+        ${fora ? `<span class="tag tag-esg">Esgotado</span>` : ''}
+        ${semPreco && !fora ? `<span class="tag tag-consulta">Sob consulta</span>` : ''}
+        ${Array.isArray(p.imgs) && p.imgs.length > 1
+          ? `<div class="carousel" data-p="${p.id}" data-idx="0" data-n="${p.imgs.length}">
+               <div class="car-track">${p.imgs.map(im => {
+                 const src = typeof im === 'string' ? im : im.src;
+                 const pos = typeof im === 'string' ? '' : im.pos;
+                 return `<img src="${src}" alt="${p.nome}" loading="lazy"${pos ? ` style="object-position:${pos}"` : ''}>`;
+               }).join('')}</div>
+               <button class="car-nav car-prev" type="button" onclick="carMove(event,${p.id},-1)" aria-label="Foto anterior">‹</button>
+               <button class="car-nav car-next" type="button" onclick="carMove(event,${p.id},1)" aria-label="Próxima foto">›</button>
+               <div class="car-dots">${p.imgs.map((_, i) => `<span class="car-dot${i === 0 ? ' ativo' : ''}"></span>`).join('')}</div>
+             </div>`
+          : (p.img ? `<img src="${p.img}" alt="${p.nome}" loading="lazy"${p.pos ? ` style="object-position:${p.pos}"` : ''}>` : GEM)}
+      </div>
+      <div class="info">
+        <span class="cat-label">${p.cat}${p.cod ? ` · ${p.cod}` : ''}</span>
+        <h3>${p.nome}</h3>
+        ${corpo}
+        ${botao}
+      </div>
+    </article>`;
+  }).join('') + (visiveis < lista.length
+    ? `<div class="mostrar-mais-wrap"><button class="btn btn-ghost mostrar-mais" onclick="mostrarMais()">Mostrar mais</button></div>`
+    : '');
+}
+
+// Troca o tamanho escolhido de um produto (atualiza preço e destaque, sem recarregar a grade)
+function selecTam(id, idx){
+  selecionado[id] = idx;
+  const p = PRODUTOS.find(x => x.id===id);
+  const precoEl = $('preco-'+id);
+  if(precoEl) precoEl.textContent = brl(p.sizes[idx].preco);
+  const cont = document.querySelector(`.tamanhos[data-p="${id}"]`);
+  if(cont) [...cont.children].forEach((b,i) => b.classList.toggle('ativo', i===idx));
+}
+
+// Troca a letra escolhida de um produto (atualiza estoque e destaque)
+function selecLetra(id, idx){
+  letraSel[id] = idx;
+  const p = PRODUTOS.find(x => x.id===id);
+  const est = $('estoque-'+id);
+  if(est) est.textContent = p.letras[idx].q===0 ? 'Esgotado' : p.letras[idx].q + ' em estoque';
+  const cont = document.querySelector(`.letras[data-p="${id}"]`);
+  if(cont) [...cont.children].forEach((b,i) => b.classList.toggle('ativo', i===idx));
+}
+
+// Troca a cor escolhida de um produto (atualiza destaque, sem recarregar a grade)
+function selecCor(id, idx){
+  corSel[id] = idx;
+  const cont = document.querySelector(`.cores[data-p="${id}"]`);
+  if(cont) [...cont.children].forEach((b,i) => b.classList.toggle('ativo', i===idx));
+}
+
+// Navega o carrossel de fotos de um produto
+function carMove(e, id, dir){
+  if(e) e.stopPropagation();
+  const car = document.querySelector(`.carousel[data-p="${id}"]`);
+  if(!car) return;
+  const n = +car.dataset.n;
+  const idx = ((+car.dataset.idx + dir) % n + n) % n;
+  car.dataset.idx = idx;
+  car.querySelector('.car-track').style.transform = `translateX(-${idx*100}%)`;
+  car.querySelectorAll('.car-dot').forEach((d,i) => d.classList.toggle('ativo', i===idx));
+}
+
+// (O feed do Instagram agora é o widget Behold, embutido direto no HTML da seção.)
+
+// ---- Carrinho ----
+function salvar(){ localStorage.setItem('pinkCarrinho', JSON.stringify(carrinho)); }
+
+function adicionar(id){
+  const p = PRODUTOS.find(x => x.id===id);
+  if(esgotado(p)){ toast('Peça esgotada'); return; }
+  let key, nome, preco, tamanho = '';
+  if(temTamanhos(p)){
+    const idx = selecionado[id] ?? 0;
+    tamanho = p.sizes[idx].t;
+    preco = p.sizes[idx].preco;
+    key = `${id}-${idx}`;
+    nome = `${p.nome} (${tamanho})`;
+  } else if(temLetras(p)){
+    const idx = letraSel[id] ?? 0;
+    tamanho = p.letras[idx].l;
+    preco = p.preco;
+    key = `${id}-L${tamanho}`;
+    nome = `${p.nome} "${tamanho}"`;
+  } else if(temCores(p)){
+    const idx = corSel[id] ?? 0;
+    tamanho = p.cores[idx].c;
+    preco = p.preco;
+    key = `${id}-C${tamanho}`;
+    nome = `${p.nome} (${tamanho})`;
+  } else {
+    key = String(id);
+    nome = p.nome;
+    preco = p.preco;
+  }
+  const item = carrinho.find(i => i.key===key);
+  if(item){ item.qtd++; }
+  else{ carrinho.push({ key, id, cod:p.cod, nome, preco, tamanho, img:p.img, pos:p.pos, qtd:1 }); }
+  salvar(); atualizarCarrinho();
+  toast(`${nome} adicionado`);
+}
+
+function mudarQtd(key, delta){
+  const item = carrinho.find(i => i.key===key);
+  if(!item) return;
+  item.qtd += delta;
+  if(item.qtd <= 0) carrinho = carrinho.filter(i => i.key!==key);
+  salvar(); atualizarCarrinho();
+}
+
+function remover(key){ carrinho = carrinho.filter(i => i.key!==key); salvar(); atualizarCarrinho(); }
+
+function subtotal(){ return carrinho.reduce((s,i) => s + i.preco*i.qtd, 0); }
+
+function atualizarCarrinho(){
+  const qtdTotal = carrinho.reduce((s,i) => s + i.qtd, 0);
+  const badge = $('cartCount');
+  badge.textContent = qtdTotal;
+  badge.style.display = qtdTotal>0 ? 'flex' : 'none';
+
+  const body = $('drawerBody'), foot = $('drawerFoot');
+  if(carrinho.length===0){
+    body.innerHTML = `<div class="vazio"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>Sua sacola está vazia.<br>Que tal escolher uma peça linda?</div>`;
+    foot.style.display = 'none';
+    return;
+  }
+  body.innerHTML = carrinho.map(i => `
+    <div class="ci">
+      <div class="thumb">${i.img ? `<img src="${i.img}" alt="${i.nome}"${i.pos ? ` style="object-position:${i.pos}"` : ''}>` : GEM}</div>
+      <div class="ci-info">
+        <h4>${i.nome}</h4>
+        ${i.cod ? `<div class="ci-tam">Cód. ${i.cod}</div>` : ''}
+        <div class="p">${brl(i.preco)}</div>
+        <div class="qtd">
+          <button onclick="mudarQtd('${i.key}',-1)">−</button>
+          <span>${i.qtd}</span>
+          <button onclick="mudarQtd('${i.key}',1)">+</button>
+        </div>
+      </div>
+      <button class="remover" onclick="remover('${i.key}')">remover</button>
+    </div>`).join('');
+
+  $('total').textContent = brl(subtotal());
+  foot.style.display = 'block';
+}
+
+function abrirCarrinho(){ $('overlay').classList.add('aberto'); $('drawer').classList.add('aberto'); }
+function fecharCarrinho(){ $('overlay').classList.remove('aberto'); $('drawer').classList.remove('aberto'); }
+
+// ---- Checkout ----
+function mensagemPedido(){
+  const nome = $('nomeInput').value.trim();
+  const entrega = $('entregaSelect').value;
+  const pagamento = $('pagamentoSelect').value;
+  let msg = `Olá, ${CONFIG.nomeLoja}! Quero fazer um pedido:\n\n`;
+  carrinho.forEach(i => {
+    msg += `• ${i.cod ? `[${i.cod}] ` : ''}${i.qtd}x ${i.nome} — ${brl(i.preco*i.qtd)}\n`;
+    if(CONFIG.siteUrl && i.img) msg += `  Foto: ${CONFIG.siteUrl.replace(/\/+$/,'')}/${i.img}\n`;
+  });
+  msg += `\n*Subtotal: ${brl(subtotal())}*`;
+  msg += `\n\nMeu nome é: ${nome}\nForma de entrega: ${entrega}\nForma de pagamento: ${pagamento}`;
+  return msg;
+}
+
+function finalizar(){
+  if(carrinho.length===0) return;
+  const nome = $('nomeInput').value.trim();
+  if(!nome){
+    toast('Preenche seu nome pra finalizar o pedido!');
+    return;
+  }
+  $('btnWhats').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(mensagemPedido())}`;
+  // Mostra o botão de pagamento online só se a InfiniteTag estiver configurada
+  $('btnPagar').style.display = CONFIG.infiniteTag ? 'flex' : 'none';
+  fecharCarrinho();
+  $('modal').classList.add('aberto');
+}
+
+// Monta o link do checkout da InfinitePay a partir do carrinho e redireciona
+function pagarInfinitePay(){
+  if(!CONFIG.infiniteTag || carrinho.length===0) return;
+  const items = carrinho.map(i => ({
+    name: i.nome,
+    price: Math.round(i.preco * 100), // InfinitePay usa centavos
+    quantity: i.qtd
+  }));
+  const nsu = 'PINK' + Date.now();
+  const url = `https://checkout.infinitepay.io/${CONFIG.infiniteTag}`
+            + `?items=${encodeURIComponent(JSON.stringify(items))}`
+            + `&order_nsu=${nsu}`;
+  window.location.href = url;
+}
+
+function fecharModal(){ $('modal').classList.remove('aberto'); }
+
+// ---- Toast ----
+let toastTimer;
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+// ---- Init ----
+$('logoTexto').innerHTML = `${CONFIG.nomeLoja}<span>Semijoias</span>`;
+$('footerWhats').href = `https://wa.me/${CONFIG.whatsapp}`;
+$('btnVoucher').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent('Olá! Quero saber mais sobre o Gift Voucher da '+CONFIG.nomeLoja+'.')}`;
+$('ano').textContent = new Date().getFullYear();
+document.getElementById('modal').addEventListener('click', e => { if(e.target.id==='modal') fecharModal(); });
+
+renderCategorias();
+renderFiltros();
+renderProdutos();
+atualizarCarrinho();
+$('nomeInput').value = localStorage.getItem('pinkNome') || '';
+if(localStorage.getItem('pinkEntrega')) $('entregaSelect').value = localStorage.getItem('pinkEntrega');
+if(localStorage.getItem('pinkPagamento')) $('pagamentoSelect').value = localStorage.getItem('pinkPagamento');
+carregarPlanilha();   // se CONFIG.planilhaCsv estiver preenchido, atualiza preços/estoques pela planilha
+</script>
+</body>
+</html>
