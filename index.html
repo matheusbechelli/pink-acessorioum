@@ -308,6 +308,17 @@
     background:var(--rosa-bg); color:var(--texto); font-family:var(--sans); font-size:.92rem; outline:none;
   }
   .checkout-box input:focus, .checkout-box select:focus{ border-color:var(--rosa-forte); }
+  .presente-box{ margin-top:0; margin-bottom:1rem; }
+  .presente-toggle{
+    display:flex; align-items:center; gap:.7rem; cursor:pointer; padding:.75rem .9rem;
+    border:1px solid var(--rosa-medio); border-radius:12px; background:var(--rosa-bg);
+  }
+  .presente-toggle input{ width:auto; accent-color:var(--rosa-forte); }
+  .presente-icon{ width:26px; height:26px; flex-shrink:0; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--rosa-suave); }
+  .presente-icon svg{ width:18px; height:18px; stroke:var(--rosa-escuro); }
+  .presente-icon img{ width:100%; height:100%; object-fit:cover; }
+  .presente-toggle span:last-child{ font-size:.85rem; color:var(--texto); line-height:1.3; }
+  .presente-toggle strong{ color:var(--rosa-forte); }
 
   /* ---------- Modal PIX / checkout ---------- */
   .modal{ position:fixed; inset:0; background:rgba(74,47,61,.5); backdrop-filter:blur(3px); z-index:110; display:none; align-items:center; justify-content:center; padding:1rem; }
@@ -566,6 +577,15 @@
     </div>
     <div class="drawer-body" id="drawerBody"></div>
     <div class="drawer-foot" id="drawerFoot" style="display:none;">
+      <div class="checkout-box presente-box">
+        <label class="presente-toggle" for="presenteCheck">
+          <input type="checkbox" id="presenteCheck" onchange="togglePresente()">
+          <span class="presente-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18h28l-2 22H12L10 18z"/><path d="M6 18h36M17 18c0-6 3-10 7-10s7 4 7 10M17 18c0-4 3-6 7-6s7 2 7 6"/></svg></span>
+          <span>É pra presente? <strong>+ R$ 3,00</strong> (sacolinha personalizada)</span>
+        </label>
+      </div>
+      <div class="total-row"><span>Subtotal</span><span id="subtotalValor">R$ 0,00</span></div>
+      <div class="total-row" id="presenteRow" style="display:none;"><span>Sacolinha p/ presente</span><span id="presenteValor">+ R$ 3,00</span></div>
       <div class="total-row grande"><span>Total</span><span id="total">R$ 0,00</span></div>
       <div class="checkout-box">
         <label for="nomeInput">Seu nome</label>
@@ -1299,6 +1319,11 @@ function remover(key){ carrinho = carrinho.filter(i => i.key!==key); salvar(); a
 
 function subtotal(){ return carrinho.reduce((s,i) => s + i.preco*i.qtd, 0); }
 
+const TAXA_SACOLINHA = 3.00;
+function presenteAtivo(){ return $('presenteCheck').checked; }
+function totalCarrinho(){ return subtotal() + (presenteAtivo() ? TAXA_SACOLINHA : 0); }
+function togglePresente(){ localStorage.setItem('pinkPresente', presenteAtivo() ? '1' : '0'); atualizarCarrinho(); }
+
 function atualizarCarrinho(){
   const qtdTotal = carrinho.reduce((s,i) => s + i.qtd, 0);
   const badge = $('cartCount');
@@ -1327,7 +1352,9 @@ function atualizarCarrinho(){
       <button class="remover" onclick="remover('${i.key}')">remover</button>
     </div>`).join('');
 
-  $('total').textContent = brl(subtotal());
+  $('subtotalValor').textContent = brl(subtotal());
+  $('presenteRow').style.display = presenteAtivo() ? 'flex' : 'none';
+  $('total').textContent = brl(totalCarrinho());
   foot.style.display = 'block';
 }
 
@@ -1345,7 +1372,12 @@ function mensagemPedido(){
     if(CONFIG.siteUrl && i.img) msg += `  Foto: ${CONFIG.siteUrl.replace(/\/+$/,'')}/${i.img}\n`;
   });
   msg += `\n*Subtotal: ${brl(subtotal())}*`;
+  if(presenteAtivo()){
+    msg += `\nSacolinha p/ presente: ${brl(TAXA_SACOLINHA)}`;
+    msg += `\n*Total: ${brl(totalCarrinho())}*`;
+  }
   msg += `\n\nMeu nome é: ${nome}\nForma de entrega: ${entrega}\nForma de pagamento: ${pagamento}`;
+  if(presenteAtivo()) msg += `\nÉ pra presente: Sim (sacolinha personalizada)`;
   return msg;
 }
 
@@ -1371,6 +1403,9 @@ function pagarInfinitePay(){
     price: Math.round(i.preco * 100), // InfinitePay usa centavos
     quantity: i.qtd
   }));
+  if(presenteAtivo()){
+    items.push({ name: 'Sacolinha p/ presente', price: Math.round(TAXA_SACOLINHA * 100), quantity: 1 });
+  }
   const nsu = 'PINK' + Date.now();
   const url = `https://checkout.infinitepay.io/${CONFIG.infiniteTag}`
             + `?items=${encodeURIComponent(JSON.stringify(items))}`
@@ -1403,6 +1438,8 @@ atualizarCarrinho();
 $('nomeInput').value = localStorage.getItem('pinkNome') || '';
 if(localStorage.getItem('pinkEntrega')) $('entregaSelect').value = localStorage.getItem('pinkEntrega');
 if(localStorage.getItem('pinkPagamento')) $('pagamentoSelect').value = localStorage.getItem('pinkPagamento');
+$('presenteCheck').checked = localStorage.getItem('pinkPresente')==='1';
+atualizarCarrinho();
 carregarPlanilha();   // se CONFIG.planilhaCsv estiver preenchido, atualiza preços/estoques pela planilha
 </script>
 </body>
