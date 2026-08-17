@@ -309,16 +309,14 @@
   }
   .checkout-box input:focus, .checkout-box select:focus{ border-color:var(--rosa-forte); }
   .presente-box{ margin-top:0; margin-bottom:1rem; }
-  .presente-toggle{
-    display:flex; align-items:center; gap:.7rem; cursor:pointer; padding:.75rem .9rem;
-    border:1px solid var(--rosa-medio); border-radius:12px; background:var(--rosa-bg);
-  }
-  .presente-toggle input{ width:auto; accent-color:var(--rosa-forte); }
-  .presente-icon{ width:26px; height:26px; flex-shrink:0; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--rosa-suave); }
-  .presente-icon svg{ width:18px; height:18px; stroke:var(--rosa-escuro); }
-  .presente-icon img{ width:100%; height:100%; object-fit:cover; }
-  .presente-toggle span:last-child{ font-size:.85rem; color:var(--texto); line-height:1.3; }
-  .presente-toggle strong{ color:var(--rosa-forte); }
+  .presente-toggle-label{ display:block; font-size:.78rem; color:var(--texto-claro); margin-bottom:.5rem; }
+  .sacolinha-opcoes{ display:flex; gap:.6rem; }
+  .sacolinha-opcao{ flex:1; display:flex; flex-direction:column; align-items:center; gap:.35rem; padding:.5rem; border:1.5px solid var(--rosa-medio); border-radius:12px; cursor:pointer; transition:border-color .15s, background .15s; text-align:center; }
+  .sacolinha-opcao img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; }
+  .sacolinha-opcao .sac-nome{ font-size:.78rem; color:var(--texto); font-weight:600; }
+  .sacolinha-opcao .sac-preco{ font-size:.75rem; color:var(--texto-claro); }
+  .sacolinha-opcao.ativo{ border-color:var(--rosa-forte); background:var(--rosa-suave); }
+  .sacolinha-opcao.ativo .sac-preco{ color:var(--rosa-forte); font-weight:600; }
 
   /* ---------- Modal PIX / checkout ---------- */
   .modal{ position:fixed; inset:0; background:rgba(74,47,61,.5); backdrop-filter:blur(3px); z-index:110; display:none; align-items:center; justify-content:center; padding:1rem; }
@@ -578,14 +576,11 @@
     <div class="drawer-body" id="drawerBody"></div>
     <div class="drawer-foot" id="drawerFoot" style="display:none;">
       <div class="checkout-box presente-box">
-        <label class="presente-toggle" for="presenteCheck">
-          <input type="checkbox" id="presenteCheck" onchange="togglePresente()">
-          <span class="presente-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18h28l-2 22H12L10 18z"/><path d="M6 18h36M17 18c0-6 3-10 7-10s7 4 7 10M17 18c0-4 3-6 7-6s7 2 7 6"/></svg></span>
-          <span>É pra presente? <strong>+ R$ 3,00</strong> (sacolinha personalizada)</span>
-        </label>
+        <label class="presente-toggle-label">Escolha a sacolinha</label>
+        <div class="sacolinha-opcoes" id="sacolinhaOpcoes"></div>
       </div>
       <div class="total-row"><span>Subtotal</span><span id="subtotalValor">R$ 0,00</span></div>
-      <div class="total-row" id="presenteRow" style="display:none;"><span>Sacolinha p/ presente</span><span id="presenteValor">+ R$ 3,00</span></div>
+      <div class="total-row" id="presenteRow"><span id="presenteLabel">Sacolinha p/ presente</span><span id="presenteValor">+ R$ 3,00</span></div>
       <div class="total-row grande"><span>Total</span><span id="total">R$ 0,00</span></div>
       <div class="checkout-box">
         <label for="nomeInput">Seu nome</label>
@@ -868,6 +863,17 @@ const PRODUTOS = [
   { id:143, cod:"SOL-09", nome:"Brinco Solitário Dourado Médio", cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/sol-09.jpg" },
   { id:144, cod:"AAP-01", nome:"Argolinha Abaulada Prata",       cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/aap-01.jpg" },
   { id:145, cod:"TRC-02", nome:"Argola Trançada Dourada M", cat:"Brincos", preco:59.90, de:0, tag:"", img:"fotos/trc-02.jpg" },
+  { id:352, cod:"EST-02", nome:"Brinco Estrelinha Dourada",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/est-02.jpg" },
+  { id:353, cod:"EST-03", nome:"Brinco Estrelinha Zircônia Prata", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/est-03.jpg" },
+  { id:354, cod:"PER-01", nome:"Brinco Ponto de Pérola",           cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/per-01.jpg" },
+  { id:355, cod:"OVL-01", nome:"Brinco Zircônia Oval Prata",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/ovl-01.jpg" },
+  { id:356, cod:"BLD-01", nome:"Brinco Bolinha Lisa Dourada",      cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/bld-01.jpg" },
+  { id:357, cod:"SOL-10", nome:"Brinco Solitário Zircônia Verde Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/sol-10.jpg" },
+  { id:358, cod:"CRO-01", nome:"Brinco Coroa Cravejada Prata",     cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cro-01.jpg" },
+
+  // ===== Infantil (FotosAdd7) =====
+  { id:359, cod:"INF-01", nome:"Colar Infantil Pérolas Douradas", cat:"Infantil", preco:0, de:0, tag:"", img:"fotos/inf-01.jpg" },
+  { id:360, cod:"INF-02", nome:"Colar Infantil Estrelinhas Cravejadas Ouro", cat:"Infantil", preco:0, de:0, tag:"", img:"fotos/inf-02.jpg" },
 
   // ===== Escapulários (FotosAdd4) — todos Sob consulta (sem preço nas fotos) =====
   { id:146, cod:"ESCP-01", nome:"Pulseira Medalinhas Ouro",   cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-01.jpg" },
@@ -1315,10 +1321,22 @@ function remover(key){ carrinho = carrinho.filter(i => i.key!==key); salvar(); a
 
 function subtotal(){ return carrinho.reduce((s,i) => s + i.preco*i.qtd, 0); }
 
-const TAXA_SACOLINHA = 3.00;
-function presenteAtivo(){ return $('presenteCheck').checked; }
-function totalCarrinho(){ return subtotal() + (presenteAtivo() ? TAXA_SACOLINHA : 0); }
-function togglePresente(){ localStorage.setItem('pinkPresente', presenteAtivo() ? '1' : '0'); atualizarCarrinho(); }
+const SACOLINHAS = {
+  bege:   { nome: 'Sacolinha bege',   preco: 0,    img: 'fotos/sacolinha-bege.jpg' },
+  branca: { nome: 'Sacolinha branca', preco: 3.00, img: 'fotos/sacolinha-branca.jpg' }
+};
+function sacolinhaEscolhida(){ return SACOLINHAS[localStorage.getItem('pinkSacolinha')] ? localStorage.getItem('pinkSacolinha') : 'bege'; }
+function taxaSacolinha(){ return SACOLINHAS[sacolinhaEscolhida()].preco; }
+function totalCarrinho(){ return subtotal() + taxaSacolinha(); }
+function escolherSacolinha(tipo){ localStorage.setItem('pinkSacolinha', tipo); atualizarCarrinho(); }
+function renderSacolinhaOpcoes(){
+  $('sacolinhaOpcoes').innerHTML = Object.entries(SACOLINHAS).map(([tipo, s]) => `
+    <div class="sacolinha-opcao${sacolinhaEscolhida()===tipo ? ' ativo' : ''}" onclick="escolherSacolinha('${tipo}')">
+      <img src="${s.img}" alt="${s.nome}">
+      <span class="sac-nome">${s.nome}</span>
+      <span class="sac-preco">${s.preco>0 ? '+ '+brl(s.preco) : 'Grátis'}</span>
+    </div>`).join('');
+}
 
 function atualizarCarrinho(){
   const qtdTotal = carrinho.reduce((s,i) => s + i.qtd, 0);
@@ -1349,7 +1367,9 @@ function atualizarCarrinho(){
     </div>`).join('');
 
   $('subtotalValor').textContent = brl(subtotal());
-  $('presenteRow').style.display = presenteAtivo() ? 'flex' : 'none';
+  renderSacolinhaOpcoes();
+  $('presenteLabel').textContent = SACOLINHAS[sacolinhaEscolhida()].nome;
+  $('presenteValor').textContent = taxaSacolinha()>0 ? `+ ${brl(taxaSacolinha())}` : 'Grátis';
   $('total').textContent = brl(totalCarrinho());
   foot.style.display = 'block';
 }
@@ -1368,12 +1388,9 @@ function mensagemPedido(){
     if(CONFIG.siteUrl && i.img) msg += `  Foto: ${CONFIG.siteUrl.replace(/\/+$/,'')}/${i.img}\n`;
   });
   msg += `\n*Subtotal: ${brl(subtotal())}*`;
-  if(presenteAtivo()){
-    msg += `\nSacolinha p/ presente: ${brl(TAXA_SACOLINHA)}`;
-    msg += `\n*Total: ${brl(totalCarrinho())}*`;
-  }
+  msg += `\n${SACOLINHAS[sacolinhaEscolhida()].nome}: ${taxaSacolinha()>0 ? brl(taxaSacolinha()) : 'Grátis'}`;
+  msg += `\n*Total: ${brl(totalCarrinho())}*`;
   msg += `\n\nMeu nome é: ${nome}\nForma de entrega: ${entrega}\nForma de pagamento: ${pagamento}`;
-  if(presenteAtivo()) msg += `\nÉ pra presente: Sim (sacolinha personalizada)`;
   return msg;
 }
 
@@ -1399,8 +1416,8 @@ function pagarInfinitePay(){
     price: Math.round(i.preco * 100), // InfinitePay usa centavos
     quantity: i.qtd
   }));
-  if(presenteAtivo()){
-    items.push({ name: 'Sacolinha p/ presente', price: Math.round(TAXA_SACOLINHA * 100), quantity: 1 });
+  if(taxaSacolinha()>0){
+    items.push({ name: SACOLINHAS[sacolinhaEscolhida()].nome, price: Math.round(taxaSacolinha() * 100), quantity: 1 });
   }
   const nsu = 'PINK' + Date.now();
   const url = `https://checkout.infinitepay.io/${CONFIG.infiniteTag}`
@@ -1434,8 +1451,6 @@ atualizarCarrinho();
 $('nomeInput').value = localStorage.getItem('pinkNome') || '';
 if(localStorage.getItem('pinkEntrega')) $('entregaSelect').value = localStorage.getItem('pinkEntrega');
 if(localStorage.getItem('pinkPagamento')) $('pagamentoSelect').value = localStorage.getItem('pinkPagamento');
-$('presenteCheck').checked = localStorage.getItem('pinkPresente')==='1';
-atualizarCarrinho();
 carregarPlanilha();   // se CONFIG.planilhaCsv estiver preenchido, atualiza preços/estoques pela planilha
 </script>
 </body>
