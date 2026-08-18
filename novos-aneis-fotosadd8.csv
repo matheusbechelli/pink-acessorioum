@@ -1,3 +1,5 @@
 cod,nome,categoria,preco,estoque,ativo
-ANE-39,Anel Pavê Largo Dourado,Anéis,,1,1
-ANE-40,Anel Pavê Largo Prata,Anéis,,1,1
+ANE-39-Fino,Anel Pavê Largo Dourado Fino,Anéis,,1,1
+ANE-39-Grosso,Anel Pavê Largo Dourado Grosso,Anéis,,1,1
+ANE-40-Fino,Anel Pavê Largo Prata Fino,Anéis,,1,1
+ANE-40-Grosso,Anel Pavê Largo Prata Grosso,Anéis,,1,1
