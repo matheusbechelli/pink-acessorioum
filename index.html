@@ -582,6 +582,7 @@
       </div>
       <div class="total-row"><span>Subtotal</span><span id="subtotalValor">R$ 0,00</span></div>
       <div class="total-row" id="presenteRow"><span id="presenteLabel">Sacolinha p/ presente</span><span id="presenteValor">+ R$ 3,00</span></div>
+      <div class="total-row" id="cartaoRow" style="display:none;"><span>Cartão de mensagem</span><span id="cartaoValor">+ R$ 1,00</span></div>
       <div class="total-row grande"><span>Total</span><span id="total">R$ 0,00</span></div>
       <div class="checkout-box">
         <label for="nomeInput">Seu nome</label>
@@ -680,9 +681,11 @@ const PRODUTOS = [
   { id:402, cod:"ARG-23", data:"2026-10-02", nome:"Argola Ondulada Dourada",        cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/arg-23.jpg" },
   { id:403, cod:"ARG-24", data:"2026-10-02", nome:"Argolinha Abaulada Dourada",     cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/arg-24.jpg" },
   { id:415, cod:"ARG-25", data:"2026-10-13", nome:"Argola Fluida Menor Ouro",       cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/arg-25.jpg" },
+  { id:419, cod:"ARG-26", data:"2026-10-16", nome:"Argolinha Bolinhas Ouro",        cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/arg-26.jpg", imgs:["fotos/arg-26.jpg","fotos/arg-26-2.jpg"] },
   { id:35, cod:"BRP-01", nome:"Brinco Espiral Ródio Branco", cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-01.jpg" },
   { id:36, cod:"BRP-02", nome:"Brinco Cacho de Bolhas Ródio Branco",cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-02.jpg" },
   { id:37, cod:"BRP-03", nome:"Brinco Meia-Argola Larga Ródio Branco",cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/brp-03.jpg" },
+  { id:422, cod:"BRP-04", data:"2026-10-16", nome:"Brinco de Pressão Pérola Cravejada", cat:"Brincos", preco:59.90, de:0, tag:"", img:"fotos/brp-04.jpg", imgs:["fotos/brp-04.jpg","fotos/brp-04-2.jpg"] },
 
   // ===== Conjuntos =====
   { id:38, cod:"CONJ-01", nome:"Conjunto Pérola Delicado",   cat:"Conjuntos", preco:79.90,  de:0, tag:"", img:"fotos/conj-05-cover2.jpg", imgs:["fotos/conj-05-cover2.jpg",{src:"fotos/conj-01.jpg",pos:"center 20%"}] },
@@ -754,10 +757,10 @@ const PRODUTOS = [
   { id:374, cod:"COL-74", nome:"Colar Medalha Zircônia Prata",  cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-74.jpg" , catsExtra:["Religiosos"] },
   { id:375, cod:"COL-75", nome:"Colar Corrente Espinha de Peixe Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-75.jpg" },
   { id:407, cod:"COL-76", data:"2026-10-02", nome:"Colar Medalha Santo Corrente Bolinha Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-76.jpg" , catsExtra:["Religiosos"] },
-  { id:408, cod:"COL-77", data:"2026-10-02", nome:"Colar Corrente Arroz Dourado",          cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-77.jpg" },
+  { id:408, cod:"COL-77", data:"2026-10-02", nome:"Colar Corrente Arroz Dourado",          cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-77.jpg" , catsExtra:["Chocker"] },
   { id:409, cod:"COL-78", data:"2026-10-02", nome:"Colar Medalha Nossa Senhora Prata",     cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-78.jpg" , catsExtra:["Religiosos"] },
   { id:410, cod:"COL-79", data:"2026-10-02", nome:"Colar Medalha Espírito Santo Pérolas Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-79.jpg" , catsExtra:["Religiosos"] },
-  { id:411, cod:"COL-80", data:"2026-10-02", nome:"Choker Arame Liso Dourado",            cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-80.jpg" },
+  { id:411, cod:"COL-80", data:"2026-10-02", nome:"Choker Arame Liso Dourado",            cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-80.jpg" , catsExtra:["Chocker"] },
   { id:50, cod:"LET-01", nome:"Colar de Letra",              cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/let-01-1.jpg", imgs:["fotos/let-01-1.jpg","fotos/let-01.jpg"],
     letras:[{l:"B",q:2},{l:"D",q:2},{l:"E",q:2},{l:"F",q:2},{l:"M",q:3},{l:"N",q:2},{l:"P",q:2},{l:"S",q:2},{l:"T",q:1},{l:"U",q:1},{l:"V",q:2},{l:"Z",q:1}] , catsExtra:["Colares de Letra"] },
   { id:369, cod:"LUM-01", nome:"Colar LUME",                 cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/lum-01.jpg", pos:"center 80%", imgs:[{src:"fotos/lum-01.jpg",pos:"center 80%"},"fotos/lum-01-2.jpg","fotos/lum-01-3.jpg"],
@@ -765,6 +768,7 @@ const PRODUTOS = [
   { id:412, cod:"COL-81", data:"2026-10-05", nome:"Colar Cursive Bicolor",      cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-81.jpg", imgs:["fotos/col-81.jpg","fotos/col-81-2.jpg","fotos/col-81-3.jpg"],
     letras:[{l:"A",q:1},{l:"B",q:1},{l:"C",q:1},{l:"D",q:1},{l:"E",q:1},{l:"F",q:1},{l:"G",q:1},{l:"H",q:1},{l:"J",q:1},{l:"K",q:1},{l:"L",q:1},{l:"M",q:1},{l:"R",q:1},{l:"T",q:1}] , catsExtra:["Colares de Letra"] },
   { id:414, cod:"COL-82", data:"2026-10-13", nome:"Colar Dupla Medalha Nossa Senhora Bicolor", cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-82.jpg" , catsExtra:["Religiosos"] },
+  { id:421, cod:"COL-83", data:"2026-10-16", nome:"Colar Bipartido 45cm + Extensor Ouro", cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-83.jpg", imgs:["fotos/col-83.jpg","fotos/col-83-2.jpg"] },
 
   // ===== Chockers =====
   { id:213, cod:"CHK-03", nome:"Chocker Pérolas",              cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-03.jpg" },
@@ -773,6 +777,7 @@ const PRODUTOS = [
   { id:218, cod:"CHK-08", nome:"Chocker Bolinhas Douradas",     cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-08.jpg" },
   { id:219, cod:"CHK-09", nome:"Chocker Elo Cartier",           cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-09.jpg" },
   { id:221, cod:"CHK-11", nome:"Chocker Corações Cravejados",   cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-11.jpg" },
+  { id:418, cod:"CHK-12", data:"2026-10-16", nome:"Chocker Pérolas Ovais Ouro", cat:"Chocker", preco:79.90, de:0, tag:"", img:"fotos/chk-12.jpg", imgs:["fotos/chk-12.jpg","fotos/chk-12-2.jpg"] },
   { id:295, cod:"COL-60", nome:"Chocker Elos Português PP Ouro", cat:"Chocker", preco:69.90, de:0, tag:"", img:"fotos/col-60.jpg" },
 
 
@@ -795,6 +800,7 @@ const PRODUTOS = [
   { id:70, cod:"CAN-01", nome:"Brinco Tubo Canelado Médio",       cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/can-01.jpg" },
   { id:71, cod:"CAN-02", nome:"Brinco Tubo Canelado Grosso",      cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/can-02.jpg" },
   { id:72, cod:"PAV-01", nome:"Argola Click Cravejada Grossa",            cat:"Brincos", img:"fotos/pave-01.jpg", imgs:["fotos/pave-01.jpg","fotos/pave-02.jpg"], sizes:[{t:"M",preco:59.90},{t:"G",preco:69.90}] },
+  { id:420, cod:"PAV-02", data:"2026-10-16", nome:"Argolinha Click Fina Cravejada Ródio Branco", cat:"Brincos", img:"fotos/pav-02.jpg", imgs:["fotos/pav-02.jpg","fotos/pav-02-2.jpg"], sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90}] },
 
   // ===== Novos brincos (lote 5 — FotosAdd1) =====
   { id:73, cod:"ESC-01", nome:"Brinco Earcuff Cristais Prata", cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/esc-01.jpg" },
@@ -947,7 +953,6 @@ const PRODUTOS = [
   { id:168, cod:"BRA-11", nome:"Bracelete Chapa Fina Ouro",  cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-07.jpg", imgs:["fotos/bra-07.jpg","fotos/bra-15-2.jpg"] },
   { id:179, cod:"PUL-16", nome:"Pulseira Riviera 3 Pontas 3mm Ródio Branco",   cat:"Pulseiras", preco:199.9, de:0, tag:"", img:"fotos/bra-14-1.jpg", imgs:["fotos/bra-14-1.jpg","fotos/bra-novo-2.jpg"] },
   { id:346, cod:"PUL-17", nome:"Pulseira Escapulário São Bento", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-17-2.jpg", imgs:["fotos/pul-17-2.jpg","fotos/pul-17-1.jpg"] , catsExtra:["Religiosos"] },
-  { id:378, cod:"PUL-18", data:"2026-10-02", nome:"Bracelete Rígido Medalha São Bento Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-18.jpg", imgs:["fotos/pul-18.jpg","fotos/pul-18-2.jpg"] , catsExtra:["Religiosos"] },
   { id:379, cod:"PUL-19", data:"2026-10-02", nome:"Pulseira Elos Ovais Lisos Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-19.jpg", imgs:["fotos/pul-19.jpg","fotos/pul-19-2.jpg"] },
   { id:380, cod:"PUL-20", data:"2026-10-02", nome:"Pulseira Pérolas Barrocas com Zircônia Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-20.jpg", imgs:["fotos/pul-20.jpg","fotos/pul-20-2.jpg"] },
   { id:381, cod:"PUL-21", data:"2026-10-02", nome:"Pulseira Medalha Santo e Zircônia Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-21.jpg", imgs:["fotos/pul-21.jpg","fotos/pul-21-2.jpg"] , catsExtra:["Religiosos"] },
@@ -961,6 +966,7 @@ const PRODUTOS = [
   { id:370, cod:"BRA-28", nome:"Bracelete Placa Verde Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-28-1.jpg", imgs:["fotos/bra-28-1.jpg","fotos/bra-28-2.jpg"] },
   { id:371, cod:"BRA-29", nome:"Bracelete Torcido Ondulado Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-29-1.jpg", imgs:["fotos/bra-29-1.jpg","fotos/bra-29-2.jpg"] },
   { id:372, cod:"BRA-30", nome:"Bracelete Elos Grossos Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-30-1.jpg", imgs:["fotos/bra-30-1.jpg","fotos/bra-30-2.jpg"] },
+  { id:378, cod:"BRA-31", data:"2026-10-02", nome:"Bracelete Rígido Medalha São Bento Ouro", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-31.jpg", imgs:["fotos/bra-31.jpg","fotos/bra-31-2.jpg"] , catsExtra:["Religiosos"] },
 
   // ===== Tornozeleiras (FotosAdd5) =====
   { id:200, cod:"TOR-01", nome:"Tornozeleira Medalinhas Ouro",      cat:"Tornozeleiras", preco:59.9, de:0, tag:"", img:"fotos/tor-01-1.jpg" },
@@ -991,6 +997,7 @@ const PRODUTOS = [
   { id:243, cod:"PIE-06", nome:"Piercing Fake 4 Fileiras de Zircônia Prata",  cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-06.jpg" },
   { id:301, cod:"PIE-07", nome:"Piercing Fake Duplo Zircônia", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-07.jpg" },
   { id:406, cod:"PIE-08", data:"2026-10-02", nome:"Piercing Fake Pedra Quadrada Dourado", cat:"Piercing", preco:0, de:0, tag:"", img:"fotos/pierc-08.jpg" },
+  { id:423, cod:"PIE-09", data:"2026-10-16", nome:"Piercing de Click para Cartilagem (Hélix)", cat:"Piercing", preco:39.90, de:0, tag:"", img:"fotos/pierc-09.jpg" },
 
   // ===== Anéis (FotosAdd7) =====
   { id:309, cod:"ANE-01", nome:"Anel Duplo Gota Dourado",              cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-01.jpg" },
@@ -1416,17 +1423,26 @@ const SACOLINHAS = {
   bege:   { nome: 'Sacolinha bege',   preco: 0,    img: 'fotos/sacolinha-bege.jpg' },
   branca: { nome: 'Sacolinha branca', preco: 3.00, img: 'fotos/sacolinha-branca.jpg' }
 };
+const CARTAO_MENSAGEM = { nome: 'Cartão de mensagem', preco: 1.00, img: 'fotos/cartao-mensagem.jpg' };
 function sacolinhaEscolhida(){ return SACOLINHAS[localStorage.getItem('pinkSacolinha')] ? localStorage.getItem('pinkSacolinha') : 'bege'; }
 function taxaSacolinha(){ return SACOLINHAS[sacolinhaEscolhida()].preco; }
-function totalCarrinho(){ return subtotal() + taxaSacolinha(); }
+function cartaoEscolhido(){ return localStorage.getItem('pinkCartaoMensagem') === '1'; }
+function taxaCartao(){ return cartaoEscolhido() ? CARTAO_MENSAGEM.preco : 0; }
+function totalCarrinho(){ return subtotal() + taxaSacolinha() + taxaCartao(); }
 function escolherSacolinha(tipo){ localStorage.setItem('pinkSacolinha', tipo); atualizarCarrinho(); }
+function toggleCartaoMensagem(){ localStorage.setItem('pinkCartaoMensagem', cartaoEscolhido() ? '0' : '1'); atualizarCarrinho(); }
 function renderSacolinhaOpcoes(){
   $('sacolinhaOpcoes').innerHTML = Object.entries(SACOLINHAS).map(([tipo, s]) => `
     <div class="sacolinha-opcao${sacolinhaEscolhida()===tipo ? ' ativo' : ''}" onclick="escolherSacolinha('${tipo}')">
       <img src="${s.img}" alt="${s.nome}">
       <span class="sac-nome">${s.nome}</span>
       <span class="sac-preco">${s.preco>0 ? '+ '+brl(s.preco) : 'Grátis'}</span>
-    </div>`).join('');
+    </div>`).join('') + `
+    <div class="sacolinha-opcao${cartaoEscolhido() ? ' ativo' : ''}" onclick="toggleCartaoMensagem()">
+      <img src="${CARTAO_MENSAGEM.img}" alt="${CARTAO_MENSAGEM.nome}">
+      <span class="sac-nome">${CARTAO_MENSAGEM.nome}</span>
+      <span class="sac-preco">+ ${brl(CARTAO_MENSAGEM.preco)}</span>
+    </div>`;
 }
 
 function atualizarCarrinho(){
@@ -1461,6 +1477,8 @@ function atualizarCarrinho(){
   renderSacolinhaOpcoes();
   $('presenteLabel').textContent = SACOLINHAS[sacolinhaEscolhida()].nome;
   $('presenteValor').textContent = taxaSacolinha()>0 ? `+ ${brl(taxaSacolinha())}` : 'Grátis';
+  $('cartaoRow').style.display = cartaoEscolhido() ? 'flex' : 'none';
+  if(cartaoEscolhido()) $('cartaoValor').textContent = `+ ${brl(CARTAO_MENSAGEM.preco)}`;
   $('total').textContent = brl(totalCarrinho());
   foot.style.display = 'block';
 }
@@ -1480,6 +1498,7 @@ function mensagemPedido(){
   });
   msg += `\n*Subtotal: ${brl(subtotal())}*`;
   msg += `\n${SACOLINHAS[sacolinhaEscolhida()].nome}: ${taxaSacolinha()>0 ? brl(taxaSacolinha()) : 'Grátis'}`;
+  if(cartaoEscolhido()) msg += `\n${CARTAO_MENSAGEM.nome}: ${brl(CARTAO_MENSAGEM.preco)}`;
   msg += `\n*Total: ${brl(totalCarrinho())}*`;
   msg += `\n\nMeu nome é: ${nome}\nForma de entrega: ${entrega}\nForma de pagamento: ${pagamento}`;
   return msg;
@@ -1509,6 +1528,9 @@ function pagarInfinitePay(){
   }));
   if(taxaSacolinha()>0){
     items.push({ name: SACOLINHAS[sacolinhaEscolhida()].nome, price: Math.round(taxaSacolinha() * 100), quantity: 1 });
+  }
+  if(cartaoEscolhido()){
+    items.push({ name: CARTAO_MENSAGEM.nome, price: Math.round(CARTAO_MENSAGEM.preco * 100), quantity: 1 });
   }
   const nsu = 'PINK' + Date.now();
   const url = `https://checkout.infinitepay.io/${CONFIG.infiniteTag}`
