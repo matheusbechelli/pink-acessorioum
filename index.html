@@ -623,6 +623,7 @@
 
   <div class="toast" id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ══════════════════════════════════════════════════════════════
    CONFIGURAÇÃO — EDITE AQUI
@@ -634,424 +635,31 @@ const CONFIG = {
   instagram:  "https://www.instagram.com/pink.acessorium/",
   siteUrl:    "",                  // Quando publicar o site, cole o link aqui (ex: "https://pinkacessorium.netlify.app") para enviar a FOTO de cada peça no WhatsApp.
   infiniteTag: "",                 // InfinitePay DESATIVADO por enquanto. Para reativar, cole sua tag SEM o "$" (ex: "pinkacessorium").
-  planilhaCsv: "https://docs.google.com/spreadsheets/d/1krg-oGoZkEyFQn6rWKSA4_y-7M4THk8v89ydCL0z71U/export?format=csv&gid=1610293580",  // Controle de estoque/preço pela planilha Google.
+  supabaseUrl:     "https://aoukjtleqjrswabfgqbi.supabase.co",
+  supabaseAnonKey: "sb_publishable_yfJL6ucIjd6j9sH3Dms46A_a_PTTEDD",
 };
 
 /* ══════════════════════════════════════════════════════════════
-   PRODUTOS — adicione/edite suas peças aqui
-   img: deixe "" para usar o ícone de gema, ou coloque o caminho/URL
-        de uma foto, ex: "fotos/brinco-perola.jpg"
+   PRODUTOS — carregados do Supabase (painel admin.html).
+   Edite/adicione peças pelo painel, não aqui.
    ══════════════════════════════════════════════════════════════ */
-const PRODUTOS = [
-  { id:1,  cod:"PEN-01", nome:"Brinco Espiral Ondulado",   cat:"Brincos",  preco:119.90, de:0, tag:"", img:"fotos/07F1DFE8-8A80-4E5A-A3DA-29A0424BD04F.JPG" },
-  { id:3,  cod:"PEN-03", nome:"Brinco Cascata Ródio Branco",      cat:"Brincos",  preco:129.90, de:0, tag:"", img:"fotos/D908B602-25BF-4FD7-B340-F997AED796C7.JPG" },
-  { id:4,  cod:"ARG-01", nome:"Brinco Argola Dupla",       cat:"Brincos",    preco:129.90, de:0, tag:"", img:"fotos/7C03B404-3120-4B58-BE06-D019B380F1EE.JPG" },
-  { id:9,  cod:"CRA-03", nome:"Brinco Gota Cristais",      cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/88E84486-D932-489F-A2CF-0E896A9120BF.JPG" },
-  { id:11, cod:"CLA-02", nome:"Brinco Botão Dourado",      cat:"Brincos",  preco:99.90,  de:0, tag:"", img:"fotos/AB084934-C2E6-4B6E-9B1D-AEE50E29717F.JPG" },
-  { id:404, cod:"CLA-03", data:"2026-10-02", nome:"Brinco Botão Chapa Lisa Dourado",  cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cla-03.jpg" },
-  { id:405, cod:"CLA-04", data:"2026-10-02", nome:"Brinco Botão Abaulado Dourado",    cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cla-04.jpg" },
+let PRODUTOS = [];
+let produtosCarregados = false;
+const sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
 
-  // Argolas com tamanhos (a cliente escolhe P / M / G) — o preço muda conforme o tamanho
-  { id:12, cod:"ARG-04", nome:"Argolinha Lisa Clássica",      cat:"Duplas de brincos", img:"fotos/98A39018-6AF1-4050-B65E-6CEA3D1F5E25.JPG", sizes:[{t:"P",preco:39.90},{t:"G",preco:49.90}] },
-  { id:13, cod:"ARG-05", nome:"Argolinha Martelada",          cat:"Duplas de brincos", img:"fotos/F218CF3B-7A24-4FEE-8617-127C27E1508D.JPG", sizes:[{t:"P",preco:39.90},{t:"G",preco:49.90}] },
-  { id:14, cod:"ARG-06", nome:"Argolinha Retangular",         cat:"Duplas de brincos", img:"fotos/11B82B8D-DC50-4EE6-BC6E-EFA584BA6B09.JPG", sizes:[{t:"P",preco:49.90},{t:"G",preco:59.90}] },
-  { id:16, cod:"ARG-08", nome:"Argolinha Duas Fileiras Cravejada",          cat:"Duplas de brincos", img:"fotos/16BA8235-466C-4109-AA02-1FE899ADF2CF.JPG", pos:"center 72%", sizes:[{t:"P",preco:39.90},{t:"G",preco:45.90}] },
-  { id:17, cod:"ARG-09", nome:"Argolinha Canelada Dourada",           cat:"Duplas de brincos", img:"fotos/34D11F02-F19E-467B-B53F-8D670AEC7623.JPG", sizes:[{t:"P",preco:49.90},{t:"G",preco:59.90}] },
-  { id:18, cod:"ARG-10", nome:"Argolinha Redonda Lisa",       cat:"Trios de brincos", img:"fotos/C10DA63D-0AB5-414A-A08C-B75E713166A0.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:19, cod:"ARG-11", nome:"Argolinha Grossa Lisa",        cat:"Trios de brincos", img:"fotos/E5AB34E5-025A-4C0F-8239-EFF89A86FFA4.JPG", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:20, cod:"ARG-12", nome:"Argolinha Fina Lisa",          cat:"Trios de brincos", img:"fotos/FF5476DC-8918-4D35-8B1F-329E7029C915.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:21, cod:"ARG-13", nome:"Argolinha Torcida",     cat:"Trios de brincos", img:"fotos/7A6DE739-0E83-4FC0-B0F7-EF625A74C69D.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:22, cod:"ARG-14", nome:"Argolinha Cravejada Grossa",   cat:"Trios de brincos", img:"fotos/80837531-812A-492E-BA1D-5296500CBCB9.JPG", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:23, cod:"ARG-15", nome:"Argolinha Cravejada Fina",     cat:"Trios de brincos", img:"fotos/CCA0F093-23D9-4E5F-9711-43A93EB3109C.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:24, cod:"ARG-16", nome:"Argolinha Coração Cravejado",        cat:"Trios de brincos", img:"fotos/A5C259C8-5E7B-4F21-B3F1-096BECE09D71.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:25, cod:"ARG-17", nome:"Argolinha Coração Liso",           cat:"Trios de brincos", img:"fotos/6AE32912-1F08-4478-92CF-A9A18ACFE0C5.JPG", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
+async function carregarProdutos(){
+  const { data, error } = await sb.from('produtos').select('*');
+  if(error){ console.error('Erro ao carregar produtos do Supabase:', error); produtosCarregados = true; return; }
+  PRODUTOS = data.map(r => ({
+    id: r.id, cod: r.cod, nome: r.nome, cat: r.cat,
+    preco: Number(r.preco) || 0, de: Number(r.de) || 0, tag: r.tag || '',
+    img: r.img, imgs: r.imgs, pos: r.pos,
+    sizes: r.sizes, letras: r.letras, cores: r.cores,
+    catsExtra: r.cats_extra, estoque: r.estoque, ativo: r.ativo, data: r.data,
+  }));
+  produtosCarregados = true;
+}
 
-  // Colares
-  { id:26, cod:"COL-01", nome:"Colar Cordão Baiano Fino Ródio Branco",    cat:"Colares", preco:99.90,  de:0, tag:"", img:"fotos/clean-5495.jpg" },
-  { id:27, cod:"COL-02", nome:"Colar Fio Ródio Branco",                  cat:"Colares", preco:69.90,  de:0, tag:"", img:"fotos/clean-5496.jpg" },
-  { id:28, cod:"COL-03", nome:"Colar Bicolor Coração Vazado Ródio Branco",cat:"Colares", preco:79.90,  de:0, tag:"", img:"fotos/col-03-new.jpg" },
-  { id:29, cod:"COL-04", nome:"Colar Com Uma Pérola Ouro",            cat:"Colares", preco:69.90,  de:0, tag:"", img:"fotos/clean-5501.jpg" },
-  { id:30, cod:"COL-05", nome:"Colar Riviera Fino Ródio Branco",          cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/clean-5502.jpg" },
-
-  // ===== Novos brincos (pasta fotosAdd) =====
-  { id:31, cod:"ARG-18", nome:"Argola Fecho Italiano",      cat:"Brincos", preco:69.90,  de:0, tag:"", img:"fotos/arg-18.jpg" },
-  { id:33, cod:"ARG-20", nome:"Argola 3 Fios Grossa",      cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/arg-20.jpg" },
-  { id:34, cod:"ARG-21", nome:"Brinco EarHook Cravejado",        cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/arg-21.jpg" },
-  { id:401, cod:"ARG-22", data:"2026-10-02", nome:"Argola Lisa Fina Dourada",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/arg-22.jpg" },
-  { id:402, cod:"ARG-23", data:"2026-10-02", nome:"Argola Ondulada Dourada",        cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/arg-23.jpg" },
-  { id:403, cod:"ARG-24", data:"2026-10-02", nome:"Argolinha Abaulada Dourada",     cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/arg-24.jpg" },
-  { id:415, cod:"ARG-25", data:"2026-10-13", nome:"Argola Fluida Menor Ouro",       cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/arg-25.jpg" },
-  { id:419, cod:"ARG-26", data:"2026-10-16", nome:"Argolinha Bolinhas Ouro",        cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/arg-26.jpg", imgs:["fotos/arg-26.jpg","fotos/arg-26-2.jpg"] },
-  { id:35, cod:"BRP-01", nome:"Brinco Espiral Ródio Branco", cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-01.jpg" },
-  { id:36, cod:"BRP-02", nome:"Brinco Cacho de Bolhas Ródio Branco",cat:"Brincos", preco:99.90,  de:0, tag:"", img:"fotos/brp-02.jpg" },
-  { id:37, cod:"BRP-03", nome:"Brinco Meia-Argola Larga Ródio Branco",cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/brp-03.jpg" },
-  { id:422, cod:"BRP-04", data:"2026-10-16", nome:"Brinco de Pressão Pérola Cravejada", cat:"Brincos", preco:59.90, de:0, tag:"", img:"fotos/brp-04.jpg", imgs:["fotos/brp-04.jpg","fotos/brp-04-2.jpg"] },
-
-  // ===== Conjuntos =====
-  { id:38, cod:"CONJ-01", nome:"Conjunto Pérola Delicado",   cat:"Conjuntos", preco:79.90,  de:0, tag:"", img:"fotos/conj-05-cover2.jpg", imgs:["fotos/conj-05-cover2.jpg",{src:"fotos/conj-01.jpg",pos:"center 20%"}] },
-  { id:291, cod:"CONJ-06", nome:"Conjunto Bolinha Ouro",     cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-04-cover.jpg", imgs:["fotos/conj-04-cover.jpg","fotos/conj-04-cover2.jpg"] },
-  { id:39, cod:"CONJ-02", nome:"Conjunto Pérola",            cat:"Conjuntos", preco:99.90,  de:0, tag:"", img:"fotos/conj-02-cover.jpg", imgs:["fotos/conj-02-cover.jpg",{src:"fotos/conj-02.jpg",pos:"center 20%"}] },
-  { id:40, cod:"CONJ-03", nome:"Conjunto Coração",           cat:"Conjuntos", preco:119.90, de:0, tag:"", img:"fotos/conj-03-cover.jpg", imgs:["fotos/conj-03-cover.jpg",{src:"fotos/conj-03.jpg",pos:"center 20%"}] },
-  { id:41, cod:"CONJ-04", nome:"Conjunto Ponto de Pérola Ouro",      cat:"Conjuntos", preco:119.90, de:0, tag:"", img:"fotos/conj-01-cover.jpg", imgs:["fotos/conj-01-cover.jpg",{src:"fotos/conj-04.jpg",pos:"center 20%"}] },
-  { id:42, cod:"CONJ-05", nome:"Conjunto Ponto de Luz Ródio Branco",cat:"Conjuntos", preco:99.90,  de:0, tag:"", img:"fotos/conj-05-cover.jpg", imgs:["fotos/conj-05-cover.jpg",{src:"fotos/conj-05.jpg",pos:"center 20%"}] },
-  { id:292, cod:"CONJ-07", nome:"Conjunto Coração Cravejado Prata", cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-03-cover2.jpg", imgs:["fotos/conj-03-cover2.jpg","fotos/conj-07-cover2.jpg"] },
-  { id:302, cod:"CONJ-08", nome:"Conjunto Madre Pérola com Aro", cat:"Conjuntos", preco:199.90, de:0, tag:"", img:"fotos/conj-08.jpg", pos:"center 12%" },
-  { id:308, cod:"CONJ-09", nome:"Conjunto Redondo Orgânico Ouro", cat:"Conjuntos", preco:99.90, de:0, tag:"", img:"fotos/conj-09.jpg" },
-  { id:376, cod:"CONJ-10", nome:"Conjunto Corrente Achatada Dourado", cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-10.jpg" },
-  { id:377, cod:"CONJ-11", nome:"Conjunto Coração Riviera Dourado", cat:"Conjuntos", preco:0, de:0, tag:"", img:"fotos/conj-11.jpg", pos:"center 15%" },
-
-  // ===== Colares =====
-  { id:44, cod:"COL-06", nome:"Colar Coração Vazado Ouro",        cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-06.jpg" },
-  { id:45, cod:"COL-07", nome:"Colar Árvore da Vida Coração Ouro",cat:"Colares", preco:139.90, de:0, tag:"", img:"fotos/col-07.jpg" },
-  { id:46, cod:"COL-08", nome:"Colar Árvore da Vida Redondo Ouro",cat:"Colares", preco:139.90, de:0, tag:"", img:"fotos/col-08.jpg" },
-  { id:47, cod:"COL-09", nome:"Colar Espírito Santo Bicolor Ródio Branco",  cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-09.jpg" , catsExtra:["Religiosos"] },
-  { id:48, cod:"COL-10", nome:"Colar Relicário Redondo Ouro",     cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-10.jpg" },
-  { id:224, cod:"COL-12", nome:"Chocker Riviera Baguette Ródio Branco",  cat:"Colares", preco:149.9, de:0, tag:"", img:"fotos/col-new-12.jpg" },
-  { id:225, cod:"COL-13", nome:"Colar Riviera Colorida Ouro",        cat:"Colares", preco:149.9, de:0, tag:"", img:"fotos/col-new-13.jpg" },
-  { id:227, cod:"COL-15", nome:"Chocker Elo Cartier Ródio Branco",       cat:"Colares", preco:79.9, de:0, tag:"", img:"fotos/col-new-15.jpg" },
-  { id:228, cod:"COL-16", nome:"Chocker Corações Entrelaçados Ouro",   cat:"Colares", preco:59.9, de:0, tag:"", img:"fotos/col-new-16.jpg" },
-  { id:229, cod:"COL-17", nome:"Chocker Fita M Ouro",           cat:"Colares", preco:129.9, de:0, tag:"", img:"fotos/col-new-17.jpg" },
-  { id:230, cod:"COL-18", nome:"Chocker Elos Ródio Branco",      cat:"Colares", preco:99.9, de:0, tag:"", img:"fotos/col-new-18.jpg" },
-  { id:231, cod:"COL-19", nome:"Chocker Bolinhas Ovais Ouro",           cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-19.jpg" },
-  { id:232, cod:"COL-20", nome:"Chocker Fita P Ouro",  cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-20.jpg" },
-  { id:234, cod:"COL-22", nome:"Chocker Fita P Ródio Branco",             cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-22.jpg" },
-  { id:235, cod:"COL-23", nome:"Chocker Cordão Baiano Fino Ouro",  cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-new-23.jpg" },
-  { id:244, cod:"COL-24", nome:"Colar Terço",                   cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-24.jpg" , catsExtra:["Religiosos"] },
-  { id:247, cod:"COL-27", nome:"Colar com 2 Filhos",            cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-27.jpg" },
-  { id:248, cod:"COL-28", nome:"Colar Riviera 3 Pontas 3mm",    cat:"Colares", preco:439.90, de:0, tag:"", img:"fotos/col-28.jpg" },
-  { id:249, cod:"COL-29", nome:"Colar Riviera 3 Pontas 4mm",    cat:"Colares", preco:439.90, de:0, tag:"", img:"fotos/col-29.jpg" },
-  { id:250, cod:"COL-30", nome:"Colar Snake P Ouro",            cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-30.jpg" },
-  { id:251, cod:"COL-31", nome:"Colar Snake P Ródio Branco",    cat:"Colares", preco:129.90, de:0, tag:"", img:"fotos/col-31.jpg" },
-  { id:252, cod:"COL-32", nome:"Colar Coração Cravejado com Menino", cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-32.jpg" },
-  { id:254, cod:"COL-34", nome:"Colar Coração com Menina",      cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-34.jpg" },
-  { id:255, cod:"COL-35", nome:"Colar Coração com Menino",      cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-35.jpg" },
-  { id:256, cod:"COL-36", nome:"Colar com Duas Meninas",        cat:"Colares", preco:119.90, de:0, tag:"", img:"fotos/col-36.jpg" },
-  { id:293, cod:"COL-64", nome:"Colar Patuá Ródio Branco",      cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-64.jpg" , catsExtra:["Religiosos"] },
-  { id:294, cod:"COL-65", nome:"Colar São Bento Pérola",        cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-65.jpg" , catsExtra:["Religiosos"] },
-  { id:260, cod:"COL-39", nome:"Colar Solitário Zircônia Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-39.jpg" },
-  { id:261, cod:"COL-40", nome:"Colar Elos Longo Ouro",         cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-40.jpg" },
-  { id:262, cod:"COL-41", nome:"Colar Cobra Longo Ouro",        cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-41.jpg" },
-  { id:263, cod:"COL-42", nome:"Colar Bolinhas Achatadas Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-42.jpg" },
-  { id:264, cod:"COL-43", nome:"Colar Coração Liso Ouro",       cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-43.jpg" },
-  { id:265, cod:"COL-44", nome:"Colar Cadeado Fino Ouro",       cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-44.jpg" },
-  { id:266, cod:"COL-45", nome:"Colar Corações Achatados Prata Longo", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-45.jpg" },
-  { id:267, cod:"COL-46", nome:"Colar Corações Achatados Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-46.jpg" },
-  { id:268, cod:"COL-47", nome:"Colar Cruz Zircônia Retângulo Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-47.jpg" , catsExtra:["Religiosos"] },
-  { id:269, cod:"COL-48", nome:"Colar Solitário Zircônia Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-48.jpg" },
-  { id:270, cod:"COL-49", nome:"Colar Raquete Beach Tennis Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-49.jpg" },
-  { id:271, cod:"COL-50", nome:"Colar Coração Liso Prata",      cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-50.jpg" },
-  { id:272, cod:"COL-51", nome:"Colar Cadeado Fino Longo Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-51.jpg" },
-  { id:273, cod:"COL-52", nome:"Colar Raquete Bola Beach Tennis Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-52.jpg" },
-  { id:274, cod:"COL-53", nome:"Colar Raquete Beach Tennis Ouro", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-53.jpg" },
-  { id:275, cod:"COL-54", nome:"Colar Bolinha Única Ouro",      cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-54.jpg" },
-  { id:276, cod:"COL-55", nome:"Colar Bolinhas Achatadas Prata", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-55.jpg" },
-  { id:277, cod:"COL-56", nome:"Colar Bolinhas Ouro Longo",     cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-56.jpg" },
-  { id:287, cod:"COL-66", nome:"Colar Iniciais Duplas",         cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-66-1.jpg", imgs:["fotos/col-66-1.jpg","fotos/col-66-2.jpg","fotos/col-66-3.jpg"] , catsExtra:["Colares de Letra"] },
-  { id:288, cod:"COL-67", nome:"Colar Menino Ouro",             cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-67.jpg" },
-  { id:289, cod:"COL-68", nome:"Colar Menina Zircônia Ouro",    cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-68.jpg" },
-  { id:290, cod:"COL-69", nome:"Colar Terço Pérola",            cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-69.jpg" , catsExtra:["Religiosos"] },
-  { id:347, cod:"COL-70", nome:"Colar Gravata Pérolas Coração", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-70.jpg" },
-  { id:348, cod:"COL-71", nome:"Colar Medalha São Bento Ouro",  cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-71-1.jpg", imgs:["fotos/col-71-1.jpg"] , catsExtra:["Religiosos"] },
-  { id:349, cod:"COL-72", nome:"Colar Moedinhas Duplas Ouro",   cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-72.jpg" , catsExtra:["Religiosos"] },
-  { id:373, cod:"COL-73", nome:"Colar Medalha Zircônia Ouro",   cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-73.jpg" , catsExtra:["Religiosos"] },
-  { id:374, cod:"COL-74", nome:"Colar Medalha Zircônia Prata",  cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-74.jpg" , catsExtra:["Religiosos"] },
-  { id:375, cod:"COL-75", nome:"Colar Corrente Espinha de Peixe Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-75.jpg" },
-  { id:407, cod:"COL-76", data:"2026-10-02", nome:"Colar Medalha Santo Corrente Bolinha Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-76.jpg" , catsExtra:["Religiosos"] },
-  { id:408, cod:"COL-77", data:"2026-10-02", nome:"Colar Corrente Arroz Dourado",          cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-77.jpg" , catsExtra:["Chocker"] },
-  { id:409, cod:"COL-78", data:"2026-10-02", nome:"Colar Medalha Nossa Senhora Prata",     cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-78.jpg" , catsExtra:["Religiosos"] },
-  { id:410, cod:"COL-79", data:"2026-10-02", nome:"Colar Medalha Espírito Santo Pérolas Dourado", cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-79.jpg" , catsExtra:["Religiosos"] },
-  { id:411, cod:"COL-80", data:"2026-10-02", nome:"Choker Arame Liso Dourado",            cat:"Colares", preco:0, de:0, tag:"", img:"fotos/col-80.jpg" , catsExtra:["Chocker"] },
-  { id:50, cod:"LET-01", nome:"Colar de Letra",              cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/let-01-1.jpg", imgs:["fotos/let-01-1.jpg","fotos/let-01.jpg"],
-    letras:[{l:"B",q:2},{l:"D",q:2},{l:"E",q:2},{l:"F",q:2},{l:"M",q:3},{l:"N",q:2},{l:"P",q:2},{l:"S",q:2},{l:"T",q:1},{l:"U",q:1},{l:"V",q:2},{l:"Z",q:1}] , catsExtra:["Colares de Letra"] },
-  { id:369, cod:"LUM-01", nome:"Colar LUME",                 cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/lum-01.jpg", pos:"center 80%", imgs:[{src:"fotos/lum-01.jpg",pos:"center 80%"},"fotos/lum-01-2.jpg","fotos/lum-01-3.jpg"],
-    letras:[{l:"A",q:1},{l:"B",q:1},{l:"C",q:1},{l:"D",q:1},{l:"E",q:1},{l:"F",q:1},{l:"G",q:1},{l:"H",q:1},{l:"I",q:1},{l:"J",q:1},{l:"K",q:1},{l:"L",q:1},{l:"M",q:1},{l:"N",q:1},{l:"P",q:1},{l:"R",q:1},{l:"S",q:1},{l:"T",q:1},{l:"V",q:1},{l:"Y",q:1}] , catsExtra:["Colares de Letra"] },
-  { id:412, cod:"COL-81", data:"2026-10-05", nome:"Colar Cursive Bicolor",      cat:"Colares", preco:99.90, de:0, tag:"", img:"fotos/col-81.jpg", imgs:["fotos/col-81.jpg","fotos/col-81-2.jpg","fotos/col-81-3.jpg"],
-    letras:[{l:"A",q:1},{l:"B",q:1},{l:"C",q:1},{l:"D",q:1},{l:"E",q:1},{l:"F",q:1},{l:"G",q:1},{l:"H",q:1},{l:"J",q:1},{l:"K",q:1},{l:"L",q:1},{l:"M",q:1},{l:"R",q:1},{l:"T",q:1}] , catsExtra:["Colares de Letra"] },
-  { id:414, cod:"COL-82", data:"2026-10-13", nome:"Colar Dupla Medalha Nossa Senhora Bicolor", cat:"Colares", preco:89.9, de:0, tag:"", img:"fotos/col-82.jpg" , catsExtra:["Religiosos"] },
-  { id:421, cod:"COL-83", data:"2026-10-16", nome:"Colar Bipartido 45cm + Extensor Ouro", cat:"Colares", preco:79.90, de:0, tag:"", img:"fotos/col-83.jpg", imgs:["fotos/col-83.jpg","fotos/col-83-2.jpg"] },
-
-  // ===== Chockers =====
-  { id:213, cod:"CHK-03", nome:"Chocker Pérolas",              cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-03.jpg" },
-  { id:214, cod:"CHK-04", nome:"Chocker Zircônias Cravejadas",  cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-04.jpg" },
-  { id:217, cod:"CHK-07", nome:"Chocker Pérolas Barrocas",      cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-07.jpg" },
-  { id:218, cod:"CHK-08", nome:"Chocker Bolinhas Douradas",     cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-08.jpg" },
-  { id:219, cod:"CHK-09", nome:"Chocker Elo Cartier",           cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-09.jpg" },
-  { id:221, cod:"CHK-11", nome:"Chocker Corações Cravejados",   cat:"Chocker", preco:89.90, de:0, tag:"", img:"fotos/chk-11.jpg" },
-  { id:418, cod:"CHK-12", data:"2026-10-16", nome:"Chocker Pérolas Ovais Ouro", cat:"Chocker", preco:79.90, de:0, tag:"", img:"fotos/chk-12.jpg", imgs:["fotos/chk-12.jpg","fotos/chk-12-2.jpg"] },
-  { id:295, cod:"COL-60", nome:"Chocker Elos Português PP Ouro", cat:"Chocker", preco:69.90, de:0, tag:"", img:"fotos/col-60.jpg" },
-
-
-  // ===== Novos brincos (lote 2) =====
-  { id:59, cod:"ORG-01", nome:"Brinco Orgânico Oval",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/org-01.jpg" },
-  { id:398, cod:"ORG-02", data:"2026-10-02", nome:"Brinco Orgânico Cravejado Prata",   cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/org-02.jpg" },
-  { id:399, cod:"ORG-03", data:"2026-10-02", nome:"Brinco Orgânico Cravejado Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/org-03.jpg" },
-  { id:60, cod:"FLR-01", nome:"Brinco Flor com Pérola",      cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/flr-01.jpg" },
-  { id:61, cod:"BNO-01", nome:"Brinco Flor Nó Dourado",           cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/bno-01.jpg" },
-
-  // ===== Novos brincos (lote 3 — FotosAdd1) =====
-  { id:63, cod:"ZIR-01", nome:"Brinco Duplo Solitário Virginia",       cat:"Brincos", preco:79.90,  de:0, tag:"", img:"fotos/zir-01.jpg" },
-  { id:65, cod:"NSR-01", nome:"Argolinha Nossa Senhora",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/nsr-01.jpg" , catsExtra:["Religiosos"] },
-  { id:66, cod:"CRZ-01", nome:"Brinco Cristal Azul Prata",   cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/crz-01.jpg" },
-  { id:67, cod:"CRV-01", nome:"Brinco Cristal Vermelho Prata",cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/crv-01.jpg" },
-  { id:68, cod:"ARL-01", nome:"Brinco Argola Larga Lisa",    cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/arl-01.jpg" },
-  { id:69, cod:"EST-01", nome:"Brinco Earline com Estrela", cat:"Brincos", preco:89.9, de:0, tag:"", img:"fotos/est-01.jpg" },
-
-  // ===== Novos brincos (lote 4 — FotosAdd1) =====
-  { id:70, cod:"CAN-01", nome:"Brinco Tubo Canelado Médio",       cat:"Brincos", preco:89.90,  de:0, tag:"", img:"fotos/can-01.jpg" },
-  { id:71, cod:"CAN-02", nome:"Brinco Tubo Canelado Grosso",      cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/can-02.jpg" },
-  { id:72, cod:"PAV-01", nome:"Argola Click Cravejada Grossa",            cat:"Brincos", img:"fotos/pave-01.jpg", imgs:["fotos/pave-01.jpg","fotos/pave-02.jpg"], sizes:[{t:"M",preco:59.90},{t:"G",preco:69.90}] },
-  { id:420, cod:"PAV-02", data:"2026-10-16", nome:"Argolinha Click Fina Cravejada Ródio Branco", cat:"Brincos", img:"fotos/pav-02.jpg", imgs:["fotos/pav-02.jpg","fotos/pav-02-2.jpg"], sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90}] },
-
-  // ===== Novos brincos (lote 5 — FotosAdd1) =====
-  { id:73, cod:"ESC-01", nome:"Brinco Earcuff Cristais Prata", cat:"Brincos", preco:119.90, de:0, tag:"", img:"fotos/esc-01.jpg" },
-  { id:296, cod:"ESC-02", nome:"Brinco Earcuff Coração",  cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/esc-02.jpg" },
-  { id:297, cod:"ENT-01", nome:"Brinco Entrelaçado",      cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/ent-01.jpg" },
-  { id:298, cod:"PDT-01", nome:"Brinco Pendente Ouro",    cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/pdt-01.jpg" },
-  { id:299, cod:"PDT-02", nome:"Brinco Pendente Ródio Branco", cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/pdt-02.jpg" },
-  { id:303, cod:"DUP-01", nome:"Brinco Duplo Argolinha Correntinha Strass",   cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/dup-01.jpg" },
-  { id:304, cod:"HAL-01", nome:"Brinco Botão Halo Cravejado",  cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/hal-01.jpg" },
-  { id:394, cod:"HAL-02", data:"2026-10-02", nome:"Brinco Gota Halo Cravejado Prata", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/hal-02.jpg" },
-  { id:395, cod:"HAL-03", data:"2026-10-02", nome:"Brinco Gota Halo Cravejado Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/hal-03.jpg" },
-  { id:305, cod:"AGV-01", nome:"Brinco Argolinha Cravejada Prata", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/agv-01.jpg" },
-  { id:306, cod:"AGV-02", nome:"Brinco Argolinha Cravejada Dourada", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/agv-02.jpg" },
-  { id:307, cod:"DUP-02", nome:"Brinco Duplo Argolinha Correntinha Cristais", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/dup-02.jpg" },
-  { id:350, cod:"DUP-03", nome:"Brinco Duplo Argolinha Correntinha Bolinhas", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/dup-03.jpg" },
-  { id:74, cod:"ODI-01", nome:"Brinco Orgânico Disco",       cat:"Brincos", preco:49.90,  de:0, tag:"", img:"fotos/odi-01.jpg" },
-  { id:75, cod:"HUG-01", nome:"Brinco Argola Pingentes",        cat:"Brincos", preco:59.90,  de:0, tag:"", img:"fotos/hug-01.jpg" },
-
-  // ===== Novos brincos (lote 6 — FotosAdd1) — todos Sob consulta (sem preço nas fotos) =====
-  { id:76, cod:"GOT-01", nome:"Brinco Gota Cravejada Dourado", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/got-d.jpg" },
-  { id:77, cod:"GOT-02", nome:"Brinco Gota Cravejada Prata",   cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/got-p.jpg" },
-  { id:78, cod:"TRC-01", nome:"Argola Trançada Dourada G",cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/trc-01.jpg" },
-  { id:79, cod:"COR-01", nome:"Brinco Coração Cravejado Dourado", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/cor-d.jpg" },
-  { id:80, cod:"COR-02", nome:"Brinco Coração Cravejado Prata", cat:"Brincos", preco:59.9, de:0, tag:"", img:"fotos/cor-p.jpg" },
-  { id:81, cod:"HUP-01", nome:"Argola Cravejada Quadrada Grossa",           cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/hup-01.jpg" },
-  { id:83, cod:"TRV-01", nome:"Brinco Trevo Cravejado",       cat:"Brincos", preco:89.9, de:0, tag:"", img:"fotos/trv-01.jpg" },
-  { id:84, cod:"BTF-01", nome:"Brinco Botão Flor",            cat:"Brincos", preco:79.9, de:0, tag:"", img:"fotos/btf-01.jpg" },
-  { id:85, cod:"GTL-01", nome:"Brinco Gota Lisa Dourada",     cat:"Brincos", preco:79.9, de:0, tag:"", img:"fotos/gtl-01.jpg" },
-  { id:86, cod:"SOL-01", nome:"Brinco Solitário Prata",       cat:"Brincos", preco:69.9, de:0, tag:"", img:"fotos/sol-01.jpg" },
-
-  // ===== Pingentes (FotosAdd2) =====
-  { id:94, cod:"PIN-CRU", nome:"Pingente Crucifixo",            cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-cru.jpg" , catsExtra:["Religiosos"] },
-  { id:99, cod:"PIN-ESR", nome:"Pingente Espírito Santo Redondo", cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-esr.jpg" , catsExtra:["Religiosos"] },
-  { id:202, cod:"PIN-13", nome:"Pingente Coração Cravejado",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-01.jpg" },
-  { id:203, cod:"PIN-14", nome:"Pingente Espírito Santo Mini",       cat:"Pingentes", preco:39.90, de:0, tag:"", img:"fotos/pin-new-02.jpg" , catsExtra:["Religiosos"] },
-  { id:204, cod:"PIN-15", nome:"Pingente Coração Espírito Santo",    cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-03.jpg" , catsExtra:["Religiosos"] },
-  { id:205, cod:"PIN-16", nome:"Pingente Cruz Cravejada Redonda",    cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-04.jpg" , catsExtra:["Religiosos"] },
-  { id:206, cod:"PIN-17", nome:"Pingente Espírito Santo Detalhado",  cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-05.jpg" , catsExtra:["Religiosos"] },
-  { id:207, cod:"PIN-18", nome:"Pingente Medalha Pai Nosso",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-06.jpg" , catsExtra:["Religiosos"] },
-  { id:208, cod:"PIN-19", nome:"Pingente Árvore da Vida Cravejada",  cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-07.jpg" },
-  { id:209, cod:"PIN-20", nome:"Pingente Mickey Cravejado",          cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-08.jpg" },
-  { id:210, cod:"PIN-21", nome:"Pingente Medalha Pai Nosso Ondulada",cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-09.jpg" , catsExtra:["Religiosos"] },
-  { id:211, cod:"PIN-22", nome:"Pingente Coração Cravejado Mini",    cat:"Pingentes", preco:39.90, de:0, tag:"", img:"fotos/pin-new-10.jpg" },
-  { id:212, cod:"PIN-23", nome:"Pingente Estrela Cravejada",         cat:"Pingentes", preco:49.90, de:0, tag:"", img:"fotos/pin-new-13.jpg" },
-  { id:383, cod:"PIN-24", data:"2026-10-02", nome:"Pingente Gota Cravejada Ouro",       cat:"Pingentes", preco:0, de:0, tag:"", img:"fotos/pin-24.jpg" },
-  { id:384, cod:"PIN-25", data:"2026-10-02", nome:"Pingente Oval Cravejado Ouro",       cat:"Pingentes", preco:0, de:0, tag:"", img:"fotos/pin-25.jpg" },
-  { id:385, cod:"PIN-26", data:"2026-10-02", nome:"Pingente Trio Cruz Coração Olho Grego Ouro", cat:"Pingentes", preco:0, de:0, tag:"", img:"fotos/pin-26.jpg" , catsExtra:["Religiosos"] },
-  { id:386, cod:"PIN-27", data:"2026-10-02", nome:"Pingente Smiley Cravejado",          cat:"Pingentes", img:"fotos/pin-27.jpg", sizes:[{t:"Ouro",preco:0},{t:"Ródio Branco",preco:0}] },
-  { id:387, cod:"PIN-28", data:"2026-10-02", nome:"Pingente Medalha São Bento",         cat:"Pingentes", img:"fotos/pin-28.jpg", sizes:[{t:"Ouro",preco:0},{t:"Ródio Branco",preco:0}] , catsExtra:["Religiosos"] },
-
-  // ===== Brincos (lote FotosAdd2 — a maioria Sob consulta) =====
-  { id:100, cod:"FLD-01", nome:"Brinco Folha e Disco",          cat:"Brincos", preco:79.90, de:0, tag:"", img:"fotos/fld-01.jpg" },
-  { id:101, cod:"ACP-01", nome:"Argola Cravejada Prata",        cat:"Brincos", img:"fotos/acp-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:102, cod:"ACD-01", nome:"Argola Canelada Fina Dourada",  cat:"Brincos", img:"fotos/acd-01.jpg", sizes:[{t:"M",preco:49.90},{t:"G",preco:59.90}] },
-  { id:103, cod:"SOL-02", nome:"Brinco Solitário Pequeno Prata",cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/sol-02.jpg" },
-  { id:104, cod:"SOL-03", nome:"Brinco Solitário 12mm Prata", cat:"Brincos", preco:99.9, de:0, tag:"", img:"fotos/sol-03.jpg" },
-  { id:105, cod:"SOL-04", nome:"Brinco Gota Zircônia Prata",      cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/sol-04.jpg" },
-  { id:106, cod:"NSA-01", nome:"Brinco Nossa Senhora Aparecida Dourado", cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/nsa-01.jpg" , catsExtra:["Religiosos"] },
-  { id:107, cod:"NSA-02", nome:"Brinco Nossa Senhora Aparecida Azul",     cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/nsa-02.jpg" , catsExtra:["Religiosos"] },
-  { id:109, cod:"ACP-02", nome:"Argola Canelada Prata",         cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/acp-02.jpg" },
-  { id:110, cod:"ABP-01", nome:"Argola Bolinhas Prata",         cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/abp-01.jpg" },
-  { id:111, cod:"ALD-01", nome:"Argola Retangular Fina Dourada",      cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/ald-01.jpg" },
-  { id:112, cod:"AGD-01", nome:"Argola Gota Zircônia Dourada",  cat:"Brincos", preco:39.9, de:0, tag:"", img:"fotos/agd-01.jpg" },
-  { id:113, cod:"AGP-01", nome:"Brinco Bolinha Dourado",    cat:"Brincos", img:"fotos/agp-01.jpg", sizes:[{t:"PP",preco:29.90},{t:"P",preco:39.90}] },
-  { id:114, cod:"ACX-01", nome:"Brinco Argola com Cruz",        cat:"Brincos", preco:49.9, de:0, tag:"", img:"fotos/acx-01.jpg" , catsExtra:["Religiosos"] },
-
-  // ===== Trios de brincos (lote FotosAdd2) — todos Sob consulta =====
-  { id:115, cod:"TRB-01", nome:"Trio Ponto de Luz com Base Dourado",     cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-01.jpg" },
-  { id:116, cod:"TRB-02", nome:"Trio Ponto de Luz Prata",       cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-02.jpg" },
-  { id:117, cod:"TRB-03", nome:"Trio Ponto de Luz Dourado",cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-03.jpg" },
-  { id:118, cod:"TRB-04", nome:"Trio Gota Zircônia Dourado",             cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-04.jpg" },
-  { id:119, cod:"TRB-05", nome:"Trio Sortido Dourado",             cat:"Trios de brincos", preco:89.9, de:0, tag:"", img:"fotos/trio-05.jpg" },
-  { id:120, cod:"TRB-06", nome:"Trio Geométrico Prata",         cat:"Trios de brincos", preco:99.9, de:0, tag:"", img:"fotos/trio-06.jpg" },
-  { id:121, cod:"TRB-07", nome:"Trio Ponto de Luz Dourado Grande", cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-07.jpg" },
-  { id:122, cod:"TRB-08", nome:"Trio Geométrico Dourado",       cat:"Trios de brincos", preco:99.9, de:0, tag:"", img:"fotos/trio-08.jpg" },
-  { id:123, cod:"TRB-09", nome:"Trio Bolinha Dourado",          cat:"Trios de brincos", preco:79.9, de:0, tag:"", img:"fotos/trio-09.jpg" },
-
-  // ===== Argolinhas / huggies (lote FotosAdd3) =====
-  { id:124, cod:"ARQ-01", nome:"Argolinha Triangular Dourada",       cat:"Trios de brincos", img:"fotos/arq-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:125, cod:"AGC-01", nome:"Argolinha Gota Cravejada Dourada", cat:"Trios de brincos", img:"fotos/agc-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:126, cod:"AGC-02", nome:"Argolinha Ondulada Prata",   cat:"Trios de brincos", img:"fotos/agc-02.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:127, cod:"AGL-01", nome:"Argolinha Gota Lisa Dourada",      cat:"Trios de brincos", img:"fotos/agl-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:129, cod:"ACR-01", nome:"Argolinha Croissant Dourada",      cat:"Duplas de brincos", img:"fotos/acr-01.jpg", sizes:[{t:"M",preco:49.90},{t:"G",preco:59.90}] },
-  { id:130, cod:"AOF-01", nome:"Argolinha em V Dourada",      cat:"Trios de brincos", img:"fotos/aof-01.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:300, cod:"ADL-01", nome:"Argolinha Delicada Ouro",     cat:"Trios de brincos", img:"fotos/adl-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:49.90},{t:"G",preco:59.90}] },
-  { id:133, cod:"ALA-01", nome:"Argolinha Lisa Abaulada Dourada", cat:"Brincos", img:"fotos/ala-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:134, cod:"AQF-01", nome:"Argolinha Quadrada Fina Dourada", cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/aqf-01.jpg" },
-  { id:135, cod:"AGP-02", nome:"Argolinha Gota Cravejada Dourada",     cat:"Brincos", img:"fotos/agp-02.jpg", sizes:[{t:"P",preco:49.90},{t:"M",preco:55.90},{t:"G",preco:59.90}] },
-  { id:136, cod:"ALP-01", nome:"Argolinha Lisa Prata",           cat:"Brincos", img:"fotos/alp-01.jpg", sizes:[{t:"P",preco:39.90},{t:"M",preco:45.90},{t:"G",preco:49.90}] },
-  { id:137, cod:"SOL-05", nome:"Brinco Solitário 12mm Dourado",  cat:"Brincos", preco:99.90, de:0, tag:"", img:"fotos/sol-05.jpg" },
-  { id:138, cod:"ABD-01", nome:"Argolinha Bolinha Dourada",      cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/abd-01.jpg" },
-  { id:139, cod:"BOR-01", nome:"Brinco Borboleta Cravejada",     cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/bor-01.jpg" },
-  { id:140, cod:"SOL-06", nome:"Brinco Solitário Prata PP",    cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/sol-06.jpg" },
-  { id:141, cod:"SOL-07", nome:"Brinco Solitário Prata Mini",  cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/sol-07.jpg" },
-  { id:142, cod:"SOL-08", nome:"Brinco Solitário Prata Médio",   cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/sol-08.jpg" },
-  { id:143, cod:"SOL-09", nome:"Brinco Solitário Dourado Médio", cat:"Brincos", preco:49.90, de:0, tag:"", img:"fotos/sol-09.jpg" },
-  { id:144, cod:"AAP-01", nome:"Argolinha Abaulada Prata",       cat:"Brincos", preco:39.90, de:0, tag:"", img:"fotos/aap-01.jpg" },
-  { id:145, cod:"TRC-02", nome:"Argola Trançada Dourada M", cat:"Brincos", preco:59.90, de:0, tag:"", img:"fotos/trc-02.jpg" },
-  { id:352, cod:"EST-02", nome:"Brinco Estrelinha Dourada",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/est-02.jpg" },
-  { id:353, cod:"EST-03", nome:"Brinco Estrelinha Zircônia Prata", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/est-03.jpg" },
-  { id:354, cod:"PER-01", nome:"Brinco Ponto de Pérola",           cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/per-01.jpg" },
-  { id:355, cod:"OVL-01", nome:"Brinco Zircônia Oval Prata",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/ovl-01.jpg" },
-  { id:356, cod:"BLD-01", nome:"Brinco Bolinha Lisa Dourada",      cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/bld-01.jpg" },
-  { id:357, cod:"SOL-10", nome:"Brinco Solitário Zircônia Verde Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/sol-10.jpg" },
-  { id:396, cod:"SOL-11", data:"2026-10-02", nome:"Brinco Solitário Mini Prata",   cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/sol-11.jpg" },
-  { id:397, cod:"SOL-12", data:"2026-10-02", nome:"Brinco Solitário Mini Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/sol-12.jpg" },
-  { id:358, cod:"CRO-01", nome:"Brinco Coroa Cravejada Prata",     cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cro-01.jpg" },
-  { id:363, cod:"PRL-01", nome:"Brinco Argola Pérola Barroca Dourado",       cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/prl-01.jpg" },
-  { id:400, cod:"PRL-02", data:"2026-10-02", nome:"Brinco Argola Cacho de Pérolas Dourado",     cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/prl-02.jpg" },
-  { id:416, cod:"PRL-03", data:"2026-10-13", nome:"Brinco Pérola Cravejado Ouro",     cat:"Brincos", preco:79.9, de:0, tag:"", img:"fotos/prl-03.jpg" },
-  { id:364, cod:"GOT-03", nome:"Brinco Argola Gota Cravejada Pequena Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/got-03.jpg" },
-  { id:365, cod:"GOT-04", nome:"Brinco Argolinha Cravejada Mini Dourado",    cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/got-04.jpg" },
-  { id:366, cod:"GOT-05", nome:"Brinco Argola Gota Cravejada Grande Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/got-05.jpg" },
-  { id:367, cod:"COR-03", nome:"Brinco Argola Coração Vazado Cravejado Dourado", cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cor-03.jpg" },
-  { id:368, cod:"CAD-01", nome:"Brinco Argola Cadeado Cravejado Dourado",    cat:"Brincos", preco:0, de:0, tag:"", img:"fotos/cad-01.jpg" },
-
-  // ===== Infantil (FotosAdd7) =====
-  { id:359, cod:"INF-01", nome:"Colar Infantil Pérolas Douradas", cat:"Infantil", preco:0, de:0, tag:"", img:"fotos/inf-01.jpg" },
-  { id:360, cod:"INF-02", nome:"Colar Infantil Estrelinhas Cravejadas Ouro", cat:"Infantil", preco:0, de:0, tag:"", img:"fotos/inf-02.jpg" },
-
-  // ===== Escapulários (FotosAdd4) — todos Sob consulta (sem preço nas fotos) =====
-  { id:146, cod:"ESCP-01", nome:"Pulseira Medalinhas Ouro",   cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-01.jpg" , catsExtra:["Religiosos"] },
-  { id:147, cod:"ESCP-02", nome:"Escapulário N. Senhora Redondo Ouro",           cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-02.jpg" , catsExtra:["Religiosos"] },
-  { id:148, cod:"ESCP-03", nome:"Escapulário São Bento Redondo Veneziana Ouro", cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-03.jpg" , catsExtra:["Religiosos"] },
-  { id:149, cod:"ESCP-04", nome:"Escapulário N. Senhora Mini Quadrado Elos Ródio Branco",            cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-04.jpg" , catsExtra:["Religiosos"] },
-  { id:150, cod:"ESCP-05", nome:"Escapulário N. Sra. do Carmo Veneziana Ouro",  cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-05.jpg" , catsExtra:["Religiosos"] },
-  { id:151, cod:"ESCP-06", nome:"Escapulário Veneziana Crucifixo Ródio Branco",                cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-06.jpg" , catsExtra:["Religiosos"] },
-  { id:152, cod:"ESCP-07", nome:"Escapulário N. Senhora Mini Quadrado Veneziana Ródio Branco",       cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-07.jpg" , catsExtra:["Religiosos"] },
-  { id:153, cod:"ESCP-08", nome:"Escapulário Coração e Espirito Santo Ouro - infantil, pequeno",  cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-08.jpg", imgs:["fotos/escp-08.jpg","fotos/escp-08-2.jpg","fotos/escp-08-3.jpg"] , catsExtra:["Religiosos"] },
-  { id:154, cod:"ESCP-09", nome:"Escapulário Cartier São Jorge Ródio Branco",    cat:"Escapulários", preco:99.9, de:0, tag:"", img:"fotos/escp-09.jpg" , catsExtra:["Religiosos"] },
-  { id:155, cod:"ESCP-10", nome:"Escapulário Sagrado Coração Ouro",           cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-10.jpg" , catsExtra:["Religiosos"] },
-  { id:156, cod:"ESCP-11", nome:"Escapulário Cartier São Jorge Ouro",  cat:"Escapulários", preco:99.9, de:0, tag:"", img:"fotos/escp-11.jpg" , catsExtra:["Religiosos"] },
-  { id:157, cod:"ESCP-12", nome:"Escapulário N. Senhora Quadrado Ródio Branco",    cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-12.jpg" , catsExtra:["Religiosos"] },
-  { id:223, cod:"ESCP-13", nome:"Escapulário Sagrado Coração",           cat:"Escapulários", preco:0, de:0, tag:"", img:"fotos/escp-13.jpg", cores:[{c:"Pérola"},{c:"Dourado"}] , catsExtra:["Religiosos"] },
-  { id:413, cod:"ESCP-14", data:"2026-10-13", nome:"Escapulário Nossa Senhora do Carmo e Sagrado Coração de Jesus Ouro", cat:"Escapulários", preco:79.9, de:0, tag:"", img:"fotos/escp-14-3.jpg", imgs:["fotos/escp-14-3.jpg","fotos/escp-14.jpg","fotos/escp-14-2.jpg"] , catsExtra:["Religiosos"] },
-
-  // ===== Braceletes (FotosAdd4) — todos Sob consulta, alguns com carrossel =====
-  { id:158, cod:"BRA-01", nome:"Bracelete Nó Fino Ouro",                cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-01-2.jpg", imgs:["fotos/bra-01-2.jpg","fotos/bra-01-1.jpg"] },
-  { id:159, cod:"BRA-02", nome:"Bracelete Abaulado Grosso Ouro",       cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-02-1.jpg", imgs:["fotos/bra-02-1.jpg","fotos/bra-16-2.jpg"] },
-  { id:160, cod:"BRA-03", nome:"Bracelete Abaulado Fino Ouro",   cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-02-2.jpg", imgs:["fotos/bra-02-2.jpg","fotos/bra-02-3.jpg"] },
-  { id:161, cod:"BRA-04", nome:"Bracelete Fio Liso Fecho Jóia Ouro",          cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-04.jpg", imgs:["fotos/bra-04.jpg","fotos/bra-01-3.jpg"] },
-  { id:162, cod:"BRA-05", nome:"Bracelete Cordão Torcido Fino Ouro",    cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-05.jpg", imgs:["fotos/bra-05.jpg","fotos/bra-03.jpg"] },
-  { id:163, cod:"BRA-06", nome:"Bracelete Ponto de Luz Quadrado Ródio Branco",      cat:"Braceletes", preco:159.9, de:0, tag:"", img:"fotos/bra-06-2.jpg", imgs:["fotos/bra-06-2.jpg","fotos/bra-06-1.jpg"] },
-  { id:164, cod:"BRA-07", nome:"Bracelete Duplo Cravejado Delicado Ródio Branco",        cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-08-1.jpg", imgs:["fotos/bra-08-1.jpg","fotos/bra-13-2.jpg"] },
-  { id:165, cod:"BRA-08", nome:"Bracelete Cruzado Cravejado Ouro", cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-16-1.jpg", imgs:["fotos/bra-16-1.jpg","fotos/bra-08-2.jpg"] },
-  { id:175, cod:"BRA-18", nome:"Bracelete Gota Dupla Ouro", cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-15-1.jpg", imgs:["fotos/bra-15-1.jpg","fotos/bra-09-3.jpg"] },
-  { id:166, cod:"BRA-09", nome:"Bracelete Fino Bolinha Ouro",      cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-10-2.jpg", imgs:["fotos/bra-10-2.jpg","fotos/bra-10-1.jpg"] },
-  { id:176, cod:"BRA-19", nome:"Bracelete Coração Cravejado Ouro",         cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-09-2.jpg", imgs:["fotos/bra-09-2.jpg","fotos/bra-12-1.jpg"] },
-  { id:167, cod:"BRA-10", nome:"Bracelete São Bento Aberto Ouro",   cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-11-2.jpg", imgs:["fotos/bra-11-2.jpg","fotos/bra-11-1.jpg"] , catsExtra:["Religiosos"] },
-  { id:168, cod:"BRA-11", nome:"Bracelete Chapa Fina Ouro",  cat:"Braceletes", preco:79.9, de:0, tag:"", img:"fotos/bra-07.jpg", imgs:["fotos/bra-07.jpg","fotos/bra-15-2.jpg"] },
-  { id:179, cod:"PUL-16", nome:"Pulseira Riviera 3 Pontas 3mm Ródio Branco",   cat:"Pulseiras", preco:199.9, de:0, tag:"", img:"fotos/bra-14-1.jpg", imgs:["fotos/bra-14-1.jpg","fotos/bra-novo-2.jpg"] },
-  { id:346, cod:"PUL-17", nome:"Pulseira Escapulário São Bento", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-17-2.jpg", imgs:["fotos/pul-17-2.jpg","fotos/pul-17-1.jpg"] , catsExtra:["Religiosos"] },
-  { id:379, cod:"PUL-19", data:"2026-10-02", nome:"Pulseira Elos Ovais Lisos Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-19.jpg", imgs:["fotos/pul-19.jpg","fotos/pul-19-2.jpg"] },
-  { id:380, cod:"PUL-20", data:"2026-10-02", nome:"Pulseira Pérolas Barrocas com Zircônia Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-20.jpg", imgs:["fotos/pul-20.jpg","fotos/pul-20-2.jpg"] },
-  { id:381, cod:"PUL-21", data:"2026-10-02", nome:"Pulseira Medalha Santo e Zircônia Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-21.jpg", imgs:["fotos/pul-21.jpg","fotos/pul-21-2.jpg"] , catsExtra:["Religiosos"] },
-  { id:382, cod:"PUL-22", data:"2026-10-02", nome:"Pulseira Medalha Santo e Cruz Ouro", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-22.jpg", imgs:["fotos/pul-22.jpg","fotos/pul-22-2.jpg"] , catsExtra:["Religiosos"] },
-  { id:180, cod:"BRA-21", nome:"Bracelete Ondulado Largo",    cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-21.jpg", imgs:["fotos/bra-21.jpg","fotos/bra-09-1.jpg"] },
-  { id:182, cod:"BRA-23", nome:"Bracelete Espiral Grosso",           cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-22.jpg", imgs:["fotos/bra-22.jpg","fotos/bra-17.jpg"] },
-  { id:183, cod:"BRA-24", nome:"Bracelete Martelado Grosso", cat:"Braceletes", preco:149.9, de:0, tag:"", img:"fotos/bra-10-3.jpg", imgs:["fotos/bra-10-3.jpg","fotos/bra-25.jpg"] },
-  { id:184, cod:"BRA-25", nome:"Bracelete Detalhes Risca",          cat:"Braceletes", preco:139.9, de:0, tag:"", img:"fotos/bra-24.jpg", imgs:["fotos/bra-24.jpg","fotos/bra-23.jpg"] },
-  { id:199, cod:"BRA-26", nome:"Bracelete Liso Redondo",      cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-26-1.jpg", imgs:["fotos/bra-26-1.jpg","fotos/bra-26-2.jpg"] },
-  { id:236, cod:"BRA-27", nome:"Bracelete Duo Cravejado Rosé", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-27-2.jpg", imgs:["fotos/bra-27-2.jpg","fotos/bra-27-1.jpg"] },
-  { id:370, cod:"BRA-28", nome:"Bracelete Placa Verde Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-28-1.jpg", imgs:["fotos/bra-28-1.jpg","fotos/bra-28-2.jpg"] },
-  { id:371, cod:"BRA-29", nome:"Bracelete Torcido Ondulado Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-29-1.jpg", imgs:["fotos/bra-29-1.jpg","fotos/bra-29-2.jpg"] },
-  { id:372, cod:"BRA-30", nome:"Bracelete Elos Grossos Dourado", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-30-1.jpg", imgs:["fotos/bra-30-1.jpg","fotos/bra-30-2.jpg"] },
-  { id:378, cod:"BRA-31", data:"2026-10-02", nome:"Bracelete Rígido Medalha São Bento Ouro", cat:"Braceletes", preco:0, de:0, tag:"", img:"fotos/bra-31.jpg", imgs:["fotos/bra-31.jpg","fotos/bra-31-2.jpg"] , catsExtra:["Religiosos"] },
-
-  // ===== Tornozeleiras (FotosAdd5) =====
-  { id:200, cod:"TOR-01", nome:"Tornozeleira Medalinhas Ouro",      cat:"Tornozeleiras", preco:59.9, de:0, tag:"", img:"fotos/tor-01-1.jpg" },
-  { id:201, cod:"TOR-02", nome:"Tornozeleira Pendentes Ouro",     cat:"Tornozeleiras", preco:59.9, de:0, tag:"", img:"fotos/tor-01-2.jpg" },
-
-  // ===== Pulseiras (FotosAdd5) =====
-  { id:185, cod:"PUL-01", nome:"Pulseira Medalinhas Ouro",      cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-07-1.jpg", imgs:["fotos/pul-07-1.jpg","fotos/pul-01-2.jpg"] },
-  { id:186, cod:"PUL-02", nome:"Pulseira Cartier Ouro",  cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-08-1.jpg", imgs:["fotos/pul-08-1.jpg","fotos/pul-02-1.jpg"] },
-  { id:187, cod:"PUL-03", nome:"Pulseira Snake Ouro",        cat:"Pulseiras", preco:69.9, de:0, tag:"", img:"fotos/pul-13-1.jpg", imgs:["fotos/pul-13-1.jpg","fotos/pul-02-2.jpg"] },
-  { id:188, cod:"PUL-04", nome:"Pulseira Uma Bolinha Ouro",  cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-08-2.jpg", imgs:["fotos/pul-08-2.jpg","fotos/pul-12-1.jpg"] },
-  { id:189, cod:"PUL-05", nome:"Pulseira Pérolas Redondas Ouro",      cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-11-2.jpg", imgs:["fotos/pul-11-2.jpg","fotos/pul-13-2.jpg"] },
-  { id:190, cod:"PUL-06", nome:"Pulseira Terço Pérolas Ouro",    cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-06-2.jpg", imgs:["fotos/pul-06-2.jpg","fotos/pul-06-1.jpg"] , catsExtra:["Religiosos"] },
-  { id:191, cod:"PUL-07", nome:"Pulseira Pérolas Ovais Ouro",    cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-11-1.jpg", imgs:["fotos/pul-11-1.jpg","fotos/pul-12-2.jpg"] },
-  { id:192, cod:"PUL-08", nome:"Pulseira Tiffany Ouro",   cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-05-1.jpg", imgs:["fotos/pul-05-1.jpg","fotos/pul-10-1.jpg"] },
-  { id:193, cod:"PUL-09", nome:"Pulseira Bolinhas Ródio Branco",   cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-04-1.jpg", imgs:["fotos/pul-04-1.jpg","fotos/pul-07-2.jpg"] },
-  { id:194, cod:"PUL-10", nome:"Pulseira Riviera Fina Ródio Branco", cat:"Pulseiras", preco:69.9, de:0, tag:"", img:"fotos/pul-04-2.jpg", imgs:["fotos/pul-04-2.jpg","fotos/pul-05-2.jpg"] },
-  { id:196, cod:"PUL-12", nome:"Pulseira Pérolas Barrocas Ouro",       cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-03-2.jpg", imgs:["fotos/pul-03-2.jpg","fotos/pul-09-2.jpg"] },
-  { id:197, cod:"PUL-13", nome:"Pulseira Elos Gourmet Ouro",   cat:"Pulseiras", preco:49.9, de:0, tag:"", img:"fotos/pul-10-2.jpg", imgs:["fotos/pul-10-2.jpg","fotos/pul-09-1.jpg"] },
-  { id:198, cod:"PUL-14", nome:"Pulseira Cordão Baiano Fino",     cat:"Pulseiras", preco:59.9, de:0, tag:"", img:"fotos/pul-01-1.jpg", imgs:["fotos/pul-01-1.jpg","fotos/pul-03-1.jpg"] },
-  { id:237, cod:"PUL-15", nome:"Pulseira Riviera Navete Prata", cat:"Pulseiras", preco:0, de:0, tag:"", img:"fotos/pul-15-1.jpg", imgs:["fotos/pul-15-1.jpg","fotos/pul-15-2.jpg"] },
-
-  // ===== Piercing fake (FotosAdd5) =====
-  { id:238, cod:"PIE-01", nome:"Piercing Cartilagem", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-01.jpg", cores:[{c:"Redondo"},{c:"Estrela"}] },
-  { id:239, cod:"PIE-02", nome:"Piercing Helix",       cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-02.jpg", cores:[{c:"Olho Grego"},{c:"Love"},{c:"Sol"}] },
-  { id:240, cod:"PIE-03", nome:"Piercing Fake 4 Fileiras de Zircônia Dourado", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-03.jpg" },
-  { id:241, cod:"PIE-04", nome:"Piercing Fake Bolinhas",  cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-04.jpg" },
-  { id:242, cod:"PIE-05", nome:"Piercing Fake 4 Listras",       cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-05.jpg" },
-  { id:243, cod:"PIE-06", nome:"Piercing Fake 4 Fileiras de Zircônia Prata",  cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-06.jpg" },
-  { id:301, cod:"PIE-07", nome:"Piercing Fake Duplo Zircônia", cat:"Piercing", preco:49.90, de:0, tag:"", img:"fotos/pierc-07.jpg" },
-  { id:406, cod:"PIE-08", data:"2026-10-02", nome:"Piercing Fake Pedra Quadrada Dourado", cat:"Piercing", preco:0, de:0, tag:"", img:"fotos/pierc-08.jpg" },
-  { id:423, cod:"PIE-09", data:"2026-10-16", nome:"Piercing de Click para Cartilagem (Hélix)", cat:"Piercing", preco:39.90, de:0, tag:"", img:"fotos/pierc-09.jpg" },
-
-  // ===== Anéis (FotosAdd7) =====
-  { id:309, cod:"ANE-01", nome:"Anel Duplo Gota Dourado",              cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-01.jpg" },
-  { id:310, cod:"ANE-02", nome:"Anel Chevalier Oval Dourado",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-02.jpg" },
-  { id:311, cod:"ANE-03", nome:"Anel Duplo Gota Dourado Grande",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-03.jpg" },
-  { id:312, cod:"ANE-04", nome:"Anel Medalha Trabalhada Dourado",      cat:"Anéis", img:"fotos/ane-04.jpg", sizes:[{t:"11",preco:0},{t:"13",preco:0}] , catsExtra:["Religiosos"] },
-  { id:313, cod:"ANE-05", nome:"Anel Cruzado Cravejado Rosé",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-05.jpg" },
-  { id:314, cod:"ANE-06", nome:"Anel Trançado Fino Dourado",           cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-06.jpg" },
-  { id:315, cod:"ANE-07", nome:"Anel Ondulado Fino Dourado",           cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-07.jpg" },
-  { id:316, cod:"ANE-08", nome:"Anel Navete Cravejado Prata",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-08.jpg" },
-  { id:317, cod:"ANE-09", nome:"Anel Duplo Cravejado Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-09.jpg" },
-  { id:318, cod:"ANE-10", nome:"Anel Coração Vazado Prata",            cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-10.jpg" },
-  { id:319, cod:"ANE-11", nome:"Anel Chevalier Retangular Dourado",    cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-11.jpg" },
-  { id:320, cod:"ANE-12", nome:"Anel Duplo Cravejado Rosé",            cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-12.jpg" },
-  { id:321, cod:"ANE-13", nome:"Anel Statement Retangular Cravejado Dourado", cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-13.jpg" },
-  { id:322, cod:"ANE-14", nome:"Anel Meia Aliança Cravejada Prata",    cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-14.jpg" },
-  { id:323, cod:"ANE-15", nome:"Anel Corda Dourado",                  cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-15.jpg" },
-  { id:324, cod:"ANE-16", nome:"Anel Trabalhado Largo Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-16.jpg" },
-  { id:325, cod:"ANE-17", nome:"Anel Coração Chevalier Dourado",      cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-17.jpg" },
-  { id:326, cod:"ANE-18", nome:"Anel Nó Fino Dourado",                cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-18.jpg" },
-
-  // ===== Anéis (FotosAdd7 - lote 2) =====
-  { id:327, cod:"ANE-19", nome:"Anel Placa Retangular Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-19.jpg" },
-  { id:328, cod:"ANE-20", nome:"Anel Flor Cravejada Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-20.jpg" },
-  { id:329, cod:"ANE-21", nome:"Anel Meia Aliança Cravejada Dourado", cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-21.jpg" },
-  { id:330, cod:"ANE-22", nome:"Anel Torcido Grosso Dourado",         cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-22.jpg" },
-  { id:331, cod:"ANE-23", nome:"Anel Coração Auréola Dourado",        cat:"Anéis", img:"fotos/ane-23.jpg", sizes:[{t:"18",preco:0},{t:"22",preco:0}] },
-  { id:332, cod:"ANE-24", nome:"Anel Elo Cravejado Dourado",          cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-24.jpg" },
-  { id:333, cod:"ANE-25", nome:"Anel Solitário Fino Prata",           cat:"Anéis", img:"fotos/ane-25.jpg", sizes:[{t:"13",preco:0},{t:"19",preco:0}] },
-  { id:334, cod:"ANE-26", nome:"Anel Solitário Coração Cravejado Dourado", cat:"Anéis", img:"fotos/ane-26.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0}] },
-  { id:335, cod:"ANE-27", nome:"Anel Escamas Prata",                  cat:"Anéis", img:"fotos/ane-27.jpg", sizes:[{t:"15",preco:0},{t:"20",preco:0},{t:"22",preco:0}] },
-  { id:336, cod:"ANE-28", nome:"Anel Bambu Prata",                    cat:"Anéis", img:"fotos/ane-28.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0},{t:"19",preco:0}] },
-  { id:337, cod:"ANE-29", nome:"Anel Solitário Redondo Cravejado Dourado", cat:"Anéis", img:"fotos/ane-29.jpg", sizes:[{t:"18",preco:0},{t:"20",preco:0},{t:"22",preco:0}] },
-  { id:338, cod:"ANE-30", nome:"Anel Nó Fino Prata",                  cat:"Anéis", img:"fotos/ane-30.jpg", sizes:[{t:"16",preco:0},{t:"18",preco:0},{t:"20",preco:0},{t:"24",preco:0}] },
-  { id:339, cod:"ANE-31", nome:"Anel Solitário Fino Dourado",         cat:"Anéis", img:"fotos/ane-31.jpg", sizes:[{t:"15",preco:0},{t:"18",preco:0},{t:"20",preco:0}] },
-  { id:340, cod:"ANE-32", nome:"Anel Solitário Clássico Dourado",     cat:"Anéis", img:"fotos/ane-32.jpg", sizes:[{t:"14",preco:0},{t:"20",preco:0},{t:"22",preco:0},{t:"24",preco:0}] },
-  { id:341, cod:"ANE-33", nome:"Anel Corrente Cravejada Dourado",     cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-33.jpg" },
-  { id:342, cod:"ANE-34", nome:"Anel Bambu Dourado",                  cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-34.jpg" },
-  { id:343, cod:"ANE-35", nome:"Anel Barra Horizontal Dourado",       cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-35.jpg" },
-  { id:344, cod:"ANE-36", nome:"Anel Nó Assimétrico Dourado",         cat:"Anéis", img:"fotos/ane-36.jpg", sizes:[{t:"20",preco:0},{t:"22",preco:0}] },
-  { id:345, cod:"ANE-37", nome:"Anel Aliança Cravejada Prata",        cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-37.jpg" },
-  { id:388, cod:"ANE-41", data:"2026-10-02", nome:"Anel Meia Aliança Cravejada Dourado", cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-41.jpg" },
-  { id:389, cod:"ANE-42", data:"2026-10-02", nome:"Anel Meia Aliança Cravejada Prata",   cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-42.jpg" },
-  { id:390, cod:"ANE-43", data:"2026-10-02", nome:"Anel Duplo Gota Cravejada Dourado",   cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-43.jpg" },
-  { id:391, cod:"ANE-44", data:"2026-10-02", nome:"Anel Solitário Prata",                cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-44.jpg" },
-  { id:392, cod:"ANE-45", data:"2026-10-02", nome:"Anel Solitário Dourado",              cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-45.jpg" },
-  { id:393, cod:"ANE-46", data:"2026-10-02", nome:"Anel Florzinha Cravejada Dourado",    cat:"Anéis", preco:0, de:0, tag:"", img:"fotos/ane-46.jpg" },
-  { id:417, cod:"ANE-47", data:"2026-10-13", nome:"Anel Regulagem Gota Zircônia",    cat:"Anéis", preco:69.9, de:0, tag:"", img:"fotos/ane-47.jpg", cores:[{c:"Prata"},{c:"Dourado"}] },
-  { id:351, cod:"ANE-38", nome:"Anel Cravejado Redondo Dourado",      cat:"Anéis", img:"fotos/ane-38.jpg", sizes:[{t:"18",preco:0},{t:"22",preco:0}] },
-  { id:361, cod:"ANE-39", nome:"Anel Pavê Largo Dourado",             cat:"Anéis", img:"fotos/ane-39.jpg", imgs:["fotos/ane-39.jpg","fotos/ane-39-2.jpg"],
-    sizes:[{t:"Fino",preco:0},{t:"Grosso",preco:0}] },
-  { id:362, cod:"ANE-40", nome:"Anel Pavê Largo Prata",               cat:"Anéis", img:"fotos/ane-40.jpg", imgs:["fotos/ane-40.jpg","fotos/ane-40-2.jpg"],
-    sizes:[{t:"Fino",preco:0},{t:"Grosso",preco:0}] },
-];
 
 const CATEGORIAS = [
   { nome:"Novidades",        desc:"Acabou de chegar" },
@@ -1174,74 +782,8 @@ function esgotado(p){
   return p.estoque === 0;
 }
 
-/* ---- Estoque/preço via planilha Google (opcional) ---- */
-function parseCSV(txt){
-  const linhas = txt.replace(/\r/g,'').split('\n').filter(l => l.trim().length);
-  if(!linhas.length) return [];
-  const split = l => {
-    const out=[]; let cur='', q=false;
-    for(let i=0;i<l.length;i++){
-      const c=l[i];
-      if(q){ if(c==='"'){ if(l[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
-      else { if(c==='"') q=true; else if(c===','){ out.push(cur); cur=''; } else cur+=c; }
-    }
-    out.push(cur); return out;
-  };
-  let headIdx = linhas.findIndex(l => split(l).some(c => c.trim().toLowerCase() === 'codigo'));
-  if(headIdx === -1) headIdx = 0;   // fallback: se não achar "codigo", assume a 1ª linha como antes
-  const head = split(linhas[headIdx]).map(h => h.trim().toLowerCase());
-  return linhas.slice(headIdx+1).map(l => {
-    const cels = split(l), o = {};
-    head.forEach((h,i) => o[h] = (cels[i]||'').trim());
-    return o;
-  });
-}
-
-function aplicarPlanilha(rows){
-  const map = {};
-  rows.forEach(r => { if(r.codigo) map[r.codigo.trim().toUpperCase()] = r; });
-  const numOuNull = v => { if(v==null||v==='') return null; const n=parseFloat(String(v).replace(',','.')); return isNaN(n)?null:n; };
-  const estoqueDe = v => { if(v==null||String(v).trim()==='') return undefined; const n=parseInt(String(v).replace(/[^\d]/g,''),10); return isNaN(n)?undefined:n; };
-  const ativoDe   = v => { const s=String(v||'').trim().toLowerCase(); return !(s==='nao'||s==='não'||s==='n'||s==='0'||s==='false'||s==='inativo'); };
-  PRODUTOS.forEach(p => {
-    const base = map[p.cod.toUpperCase()];
-    if(base){
-      if(base.nome && base.nome.trim()) p.nome = base.nome.trim();
-      if(base.categoria && base.categoria.trim()){
-        const catPlanilha = base.categoria.trim();
-        const catOficial = CATEGORIAS.find(c => c.nome.toLowerCase() === catPlanilha.toLowerCase());
-        p.cat = catOficial ? catOficial.nome : catPlanilha;
-      }
-      const pr = numOuNull(base.preco); if(pr != null) p.preco = pr;
-      const es = estoqueDe(base.estoque); if(es !== undefined) p.estoque = es;
-      p.ativo = ativoDe(base.ativo);
-    }
-    if(temTamanhos(p)) p.sizes.forEach(s => {
-      const r = map[`${p.cod}-${s.t}`.toUpperCase()];
-      if(r){ const pr=numOuNull(r.preco); if(pr!=null) s.preco=pr; const es=estoqueDe(r.estoque); if(es!==undefined) s.estoque=es; }
-    });
-    if(temLetras(p)) p.letras.forEach(L => {
-      const r = map[`${p.cod}-${L.l}`.toUpperCase()];
-      if(r){ const es=estoqueDe(r.estoque); if(es!==undefined) L.q=es; }
-    });
-    if(temCores(p)) p.cores.forEach(c => {
-      const r = map[`${p.cod}-${c.c}`.toUpperCase()];
-      if(r){ const es=estoqueDe(r.estoque); if(es!==undefined) c.estoque=es; }
-    });
-  });
-}
-
-async function carregarPlanilha(){
-  if(!CONFIG.planilhaCsv) return;
-  try{
-    const resp = await fetch(CONFIG.planilhaCsv, { cache:'no-store' });
-    if(!resp.ok) return;
-    aplicarPlanilha(parseCSV(await resp.text()));
-    renderProdutos();
-  }catch(e){ /* silencioso: mantém os dados do código como reserva */ }
-}
-
 function renderProdutos(){
+  if(!produtosCarregados){ $('produtosGrid').innerHTML = '<p class="sem-produtos">Carregando catálogo...</p>'; return; }
   const base = filtroAtivo==='Todos' ? PRODUTOS
     : filtroAtivo==='Novidades' ? PRODUTOS.filter(ehNovidade)
     : PRODUTOS.filter(p => p.cat===filtroAtivo || (p.catsExtra && p.catsExtra.includes(filtroAtivo)));
@@ -1558,12 +1100,11 @@ $('ano').textContent = new Date().getFullYear();
 document.getElementById('modal').addEventListener('click', e => { if(e.target.id==='modal') fecharModal(); });
 
 renderCategorias();
-aplicarCategoriaDaUrl(!!location.hash);
 atualizarCarrinho();
 $('nomeInput').value = localStorage.getItem('pinkNome') || '';
 if(localStorage.getItem('pinkEntrega')) $('entregaSelect').value = localStorage.getItem('pinkEntrega');
 if(localStorage.getItem('pinkPagamento')) $('pagamentoSelect').value = localStorage.getItem('pinkPagamento');
-carregarPlanilha();   // se CONFIG.planilhaCsv estiver preenchido, atualiza preços/estoques pela planilha
+carregarProdutos().then(() => aplicarCategoriaDaUrl(!!location.hash));   // carrega o catálogo do Supabase e então aplica a categoria da URL
 </script>
 </body>
 </html>
