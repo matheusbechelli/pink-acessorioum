@@ -84,10 +84,26 @@
   th, td{ padding:10px 12px; text-align:left; border-bottom:1px solid var(--rosa-suave); font-size:14px; }
   th{ background:var(--rosa-suave); font-weight:500; color:var(--texto-claro); font-size:12px; text-transform:uppercase; letter-spacing:.05em; }
   tr:last-child td{ border-bottom:none; }
-  td.col-foto img{ width:46px; height:46px; object-fit:cover; border-radius:8px; display:block; background:var(--rosa-suave); }
+  td.col-foto{ width:96px; }
+  td.col-foto img{ width:88px; height:88px; object-fit:cover; border-radius:10px; display:block; background:var(--rosa-suave); }
   td.col-acoes{ white-space:nowrap; display:flex; gap:6px; }
   .pill-inativo{ background:#f3e4e4; color:var(--verm); padding:2px 8px; border-radius:999px; font-size:11px; }
   .pill-ativo{ background:#e4f3ea; color:var(--verde); padding:2px 8px; border-radius:999px; font-size:11px; }
+
+  .stat-estoque{
+    background:var(--rosa-escuro); color:#fff; padding:8px 16px; border-radius:999px;
+    font-size:13px; font-weight:500; white-space:nowrap; box-shadow:var(--sombra-sm);
+  }
+  .stat-estoque b{ font-family:var(--serif); font-size:15px; font-weight:600; }
+
+  input.estoque-inline{
+    width:70px; padding:6px 8px; border:1px solid var(--rosa-medio); border-radius:8px;
+    background:var(--rosa-bg); color:var(--texto); text-align:center;
+    font-family:var(--serif); font-size:20px; font-weight:600;
+  }
+  input.estoque-inline:focus{ outline:2px solid var(--rosa); }
+  input.estoque-zero{ border-color:var(--verm); color:var(--verm); background:#fdeceb; }
+  input.estoque-baixo{ border-color:#c8882a; color:#c8882a; background:#fdf3e4; }
 
   /* ---- Modal de formulário ---- */
   #modalForm{
@@ -110,6 +126,24 @@
   .acoes-form{ display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
   .check-linha{ display:flex; align-items:center; gap:8px; }
   .check-linha input{ width:auto; }
+
+  .tags-input{
+    display:flex; flex-wrap:wrap; gap:6px; align-items:center;
+    padding:8px 10px; border:1px solid var(--rosa-medio); border-radius:10px; background:var(--rosa-bg);
+  }
+  .tags-input:focus-within{ outline:2px solid var(--rosa); }
+  .tag-chip{
+    display:inline-flex; align-items:center; gap:6px; background:var(--rosa-medio); color:var(--texto);
+    padding:4px 6px 4px 12px; border-radius:999px; font-size:13px; white-space:nowrap;
+  }
+  .tag-chip button{
+    border:none; background:transparent; color:var(--texto); cursor:pointer; font-size:16px;
+    line-height:1; padding:2px 6px; border-radius:50%;
+  }
+  .tag-chip button:hover{ background:var(--rosa); color:#fff; }
+  .tags-input input{
+    flex:1; min-width:120px; border:none; background:transparent; padding:4px; outline:none;
+  }
 </style>
 </head>
 <body>
@@ -139,6 +173,7 @@
   <header class="topo">
     <h1>Produtos</h1>
     <div style="display:flex; align-items:center; gap:12px;">
+      <span class="stat-estoque" id="valorEstoqueTotal">Valor em estoque: <b>R$ 0,00</b></span>
       <span id="emailLogado" style="font-size:13px; color:var(--texto-claro);"></span>
       <button class="btn btn-ghost btn-sm" id="btnSair">Sair</button>
     </div>
@@ -154,7 +189,7 @@
   <table>
     <thead>
       <tr>
-        <th></th><th>Código</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Status</th><th></th>
+        <th></th><th>Código</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Status</th><th></th>
       </tr>
     </thead>
     <tbody id="corpoTabela"></tbody>
@@ -197,6 +232,14 @@
           <label for="fTag">Selo (tag)</label>
           <input type="text" id="fTag" placeholder="Ex: Novo, Promoção...">
         </div>
+        <div class="campo full">
+          <label for="fOpcaoInput">Opções da peça (cor/acabamento, opcional)</label>
+          <div class="tags-input" id="opcoesWrap">
+            <input type="text" id="fOpcaoInput" placeholder="Ex: Ouro — digite e aperte Enter">
+          </div>
+          <div class="ajuda">Use quando a peça tiver mais de uma opção de cor/acabamento pra escolher (ex: Ouro, Ródio, Rosé). Digite uma opção e aperte Enter; pode adicionar quantas quiser.</div>
+        </div>
+
         <div class="campo full check-linha">
           <input type="checkbox" id="fAtivo" checked>
           <label for="fAtivo" style="margin:0;">Produto ativo (aparece no site)</label>
@@ -216,10 +259,9 @@
 
         <div class="campo full">
           <details>
-            <summary>Avançado: tamanhos / cores / letras (JSON, opcional)</summary>
-            <div class="ajuda">Só preencha se o produto tiver variação de tamanho, cor ou letra. Ex. tamanhos: <code>[{"t":"P","preco":39.9},{"t":"G","preco":49.9}]</code></div>
+            <summary>Avançado: tamanhos / letras (JSON, opcional)</summary>
+            <div class="ajuda">Só preencha se o produto tiver variação de tamanho (com preço por tamanho) ou letra (ex: pingente com inicial). Pra cor/acabamento, use o campo "Opções da peça" acima. Ex. tamanhos: <code>[{"t":"P","preco":39.9},{"t":"G","preco":49.9}]</code></div>
             <textarea id="fSizes" placeholder='sizes: [{"t":"P","preco":39.9},{"t":"G","preco":49.9}]'></textarea>
-            <textarea id="fCores" placeholder='cores: [{"c":"Dourado"},{"c":"Prata"}]' style="margin-top:6px;"></textarea>
             <textarea id="fLetras" placeholder='letras: [{"l":"A","q":2},{"l":"B","q":1}]' style="margin-top:6px;"></textarea>
           </details>
         </div>
@@ -282,6 +324,16 @@ async function carregarProdutosAdmin(){
   $('statusPainel').textContent = `${data.length} produtos cadastrados.`;
   preencherFiltroCategorias(data);
   renderTabela();
+  atualizarValorEstoqueTotal();
+}
+
+function atualizarValorEstoqueTotal(){
+  const total = produtosCache.reduce((soma, p) => {
+    if(p.estoque == null) return soma;
+    return soma + (Number(p.preco) || 0) * Number(p.estoque);
+  }, 0);
+  const txt = 'R$ ' + total.toFixed(2).replace('.', ',');
+  $('valorEstoqueTotal').innerHTML = `Valor em estoque: <b>${txt}</b>`;
 }
 
 function preencherFiltroCategorias(data){
@@ -299,22 +351,44 @@ function renderTabela(){
     if(!termo) return true;
     return p.nome.toLowerCase().includes(termo) || (p.cod||'').toLowerCase().includes(termo);
   });
-  if(!lista.length){ $('corpoTabela').innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--texto-claro);">Nenhum produto encontrado.</td></tr>`; return; }
-  $('corpoTabela').innerHTML = lista.map(p => `
+  if(!lista.length){ $('corpoTabela').innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--texto-claro);">Nenhum produto encontrado.</td></tr>`; return; }
+  $('corpoTabela').innerHTML = lista.map(p => {
+    const classeEstoque = p.estoque === 0 ? 'estoque-zero' : (p.estoque != null && p.estoque <= 3 ? 'estoque-baixo' : '');
+    return `
     <tr>
       <td class="col-foto">${p.img ? `<img src="${p.img}" alt="">` : ''}</td>
       <td>${p.cod}</td>
       <td>${p.nome}</td>
       <td>${p.cat}</td>
       <td>${p.preco ? 'R$ ' + Number(p.preco).toFixed(2).replace('.', ',') : 'Sob consulta'}</td>
+      <td>
+        <input type="number" class="estoque-inline ${classeEstoque}" min="0"
+          value="${p.estoque != null ? p.estoque : ''}" placeholder="∞"
+          onchange="atualizarEstoque(${p.id}, this.value, this)">
+      </td>
       <td>${p.ativo === false ? '<span class="pill-inativo">Inativo</span>' : '<span class="pill-ativo">Ativo</span>'}</td>
       <td class="col-acoes">
         <button class="btn btn-ghost btn-sm" onclick="abrirEdicao(${p.id})">Editar</button>
         <button class="btn btn-excluir btn-sm" onclick="excluirProduto(${p.id})">Excluir</button>
       </td>
     </tr>
-  `).join('');
+  `;
+  }).join('');
 }
+
+/* ---- Atualizar estoque direto na tabela ---- */
+async function atualizarEstoque(id, valor, inputEl){
+  const novoValor = valor.trim() === '' ? null : Math.max(0, parseInt(valor, 10) || 0);
+  const { error } = await sb.from('produtos').update({ estoque: novoValor }).eq('id', id);
+  if(error){ alert('Erro ao atualizar estoque: ' + error.message); return; }
+  const p = produtosCache.find(x => x.id === id);
+  if(p) p.estoque = novoValor;
+  inputEl.classList.remove('estoque-zero', 'estoque-baixo');
+  if(novoValor === 0) inputEl.classList.add('estoque-zero');
+  else if(novoValor != null && novoValor <= 3) inputEl.classList.add('estoque-baixo');
+  atualizarValorEstoqueTotal();
+}
+window.atualizarEstoque = atualizarEstoque;
 
 $('buscaAdmin').addEventListener('input', renderTabela);
 $('filtroCatAdmin').addEventListener('change', renderTabela);
@@ -346,8 +420,9 @@ function abrirForm(produto){
   $('fTag').value = produto ? (produto.tag || '') : '';
   $('fAtivo').checked = produto ? produto.ativo !== false : true;
   $('fSizes').value = produto && produto.sizes ? JSON.stringify(produto.sizes) : '';
-  $('fCores').value = produto && produto.cores ? JSON.stringify(produto.cores) : '';
   $('fLetras').value = produto && produto.letras ? JSON.stringify(produto.letras) : '';
+  opcoesAtual = produto && Array.isArray(produto.cores) ? produto.cores.map(c => c.c) : [];
+  renderOpcoes();
   $('fFotoPrincipal').value = '';
   $('fFotosExtra').value = '';
   $('previewPrincipal').innerHTML = produto && produto.img ? `<img src="${produto.img}">` : '';
@@ -358,6 +433,49 @@ function abrirForm(produto){
 }
 function fecharForm(){ $('modalForm').style.display = 'none'; editandoId = null; }
 window.abrirEdicao = (id) => abrirForm(produtosCache.find(p => p.id === id));
+
+/* ---- Opções da peça (cor/acabamento) como tags ---- */
+let opcoesAtual = [];
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderOpcoes(){
+  const chips = opcoesAtual.map((c, i) =>
+    `<span class="tag-chip">${escapeHtml(c)}<button type="button" onclick="removerOpcao(${i})" aria-label="Remover ${escapeHtml(c)}">&times;</button></span>`
+  ).join('');
+  $('opcoesWrap').innerHTML = chips + `<input type="text" id="fOpcaoInput" placeholder="${opcoesAtual.length ? 'Adicionar outra...' : 'Ex: Ouro — digite e aperte Enter'}">`;
+  $('fOpcaoInput').addEventListener('keydown', onOpcaoKeydown);
+}
+
+function onOpcaoKeydown(e){
+  if(e.key === 'Enter' || e.key === ','){
+    e.preventDefault();
+    adicionarOpcaoDoInput();
+  } else if(e.key === 'Backspace' && e.target.value === '' && opcoesAtual.length){
+    opcoesAtual.pop();
+    renderOpcoes();
+    $('fOpcaoInput').focus();
+  }
+}
+
+function adicionarOpcaoDoInput(){
+  const input = $('fOpcaoInput');
+  if(!input) return;
+  const val = input.value.trim();
+  if(val && !opcoesAtual.some(o => o.toLowerCase() === val.toLowerCase())){
+    opcoesAtual.push(val);
+  }
+  renderOpcoes();
+  $('fOpcaoInput').focus();
+}
+
+function removerOpcao(i){
+  opcoesAtual.splice(i, 1);
+  renderOpcoes();
+}
+window.removerOpcao = removerOpcao;
 
 /* ---- Upload de foto pro Storage ---- */
 async function subirFoto(file, codProduto){
@@ -375,6 +493,10 @@ $('formProduto').addEventListener('submit', async (e) => {
   $('erroForm').textContent = '';
   $('btnSalvarForm').disabled = true;
   try{
+    const opcaoPendente = $('fOpcaoInput').value.trim();
+    if(opcaoPendente && !opcoesAtual.some(o => o.toLowerCase() === opcaoPendente.toLowerCase())){
+      opcoesAtual.push(opcaoPendente);
+    }
     const cod = $('fCod').value.trim().toUpperCase();
     const parseJsonOpcional = (val, campo) => {
       if(!val.trim()) return null;
@@ -392,7 +514,7 @@ $('formProduto').addEventListener('submit', async (e) => {
       estoque: $('fEstoque').value === '' ? null : parseInt($('fEstoque').value, 10),
       ativo: $('fAtivo').checked,
       sizes: parseJsonOpcional($('fSizes').value, 'tamanhos'),
-      cores: parseJsonOpcional($('fCores').value, 'cores'),
+      cores: opcoesAtual.length ? opcoesAtual.map(c => ({ c })) : null,
       letras: parseJsonOpcional($('fLetras').value, 'letras'),
     };
 
