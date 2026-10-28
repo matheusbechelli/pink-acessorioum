@@ -118,8 +118,17 @@
   .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .campo.full{ grid-column:1 / -1; }
   .ajuda{ font-size:12px; color:var(--texto-claro); margin-top:3px; }
-  .preview-fotos{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-  .preview-fotos img{ width:58px; height:58px; object-fit:cover; border-radius:8px; border:1px solid var(--rosa-medio); }
+  .preview-fotos{ display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
+  .foto-preview-item{ position:relative; width:58px; height:58px; }
+  .foto-preview-item img{
+    width:58px; height:58px; object-fit:cover; border-radius:8px; border:1px solid var(--rosa-medio); display:block;
+  }
+  .foto-preview-item button{
+    position:absolute; top:-7px; right:-7px; width:20px; height:20px; border-radius:50%;
+    border:none; background:var(--verm); color:#fff; font-size:13px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0; box-shadow:0 1px 4px rgba(0,0,0,.3);
+  }
+  .foto-preview-item button:hover{ background:#9c3024; }
   details{ margin:10px 0; }
   details summary{ cursor:pointer; color:var(--rosa-escuro); font-size:13px; }
   details textarea{ margin-top:8px; font-family:monospace; font-size:12px; min-height:70px; }
@@ -144,6 +153,45 @@
   .tags-input input{
     flex:1; min-width:120px; border:none; background:transparent; padding:4px; outline:none;
   }
+  .opcoes-sugestoes{ display:flex; gap:8px; margin-top:8px; }
+
+  .tam-opcoes{ display:flex; gap:8px; margin-top:6px; }
+  .tam-botao{
+    width:44px; height:44px; border-radius:10px; border:1px solid var(--rosa-medio);
+    background:#fff; color:var(--texto); font-family:var(--serif); font-size:17px; font-weight:600;
+    cursor:pointer; transition:.15s;
+  }
+  .tam-botao:hover{ background:var(--rosa-suave); }
+  .tam-botao.ativo{ background:var(--rosa-forte); border-color:var(--rosa-forte); color:#fff; }
+  .tam-detalhes{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+  .tam-detalhe-linha{
+    display:flex; align-items:center; gap:10px; background:var(--rosa-bg);
+    border:1px solid var(--rosa-medio); border-radius:10px; padding:8px 12px; flex-wrap:wrap;
+  }
+  .tam-detalhe-linha b{ font-family:var(--serif); font-size:18px; width:20px; }
+  .tam-detalhe-linha label{ font-size:12px; color:var(--texto-claro); }
+  .tam-detalhe-linha input{ width:90px; padding:6px 8px; border:1px solid var(--rosa-medio); border-radius:8px; background:#fff; }
+
+  .letras-alfabeto{ margin-top:10px; }
+  .letras-grade{ display:flex; flex-wrap:wrap; gap:6px; }
+  .letra-botao{
+    width:34px; height:34px; border-radius:8px; border:1px solid var(--rosa-medio);
+    background:#fff; color:var(--texto); font-weight:600; cursor:pointer; transition:.15s;
+  }
+  .letra-botao:hover{ background:var(--rosa-suave); }
+  .letra-botao.ativo{ background:var(--rosa-forte); border-color:var(--rosa-forte); color:#fff; }
+  .letras-selecionadas{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .letra-chip{
+    display:flex; align-items:center; gap:6px; background:var(--rosa-medio); color:var(--texto);
+    padding:4px 8px 4px 12px; border-radius:999px; font-size:13px;
+  }
+  .letra-chip b{ font-family:var(--serif); font-size:16px; }
+  .letra-chip input{ width:50px; padding:4px 6px; border:1px solid var(--rosa); border-radius:6px; text-align:center; }
+  .letra-chip button{
+    border:none; background:transparent; color:var(--texto); cursor:pointer; font-size:15px;
+    line-height:1; padding:2px 5px; border-radius:50%;
+  }
+  .letra-chip button:hover{ background:var(--rosa); color:#fff; }
 </style>
 </head>
 <body>
@@ -237,7 +285,16 @@
           <div class="tags-input" id="opcoesWrap">
             <input type="text" id="fOpcaoInput" placeholder="Ex: Ouro — digite e aperte Enter">
           </div>
-          <div class="ajuda">Use quando a peça tiver mais de uma opção de cor/acabamento pra escolher (ex: Ouro, Ródio, Rosé). Digite uma opção e aperte Enter; pode adicionar quantas quiser.</div>
+          <div class="opcoes-sugestoes">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Ouro')">+ Ouro</button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Ródio Branco')">+ Ródio Branco</button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Pérola')">+ Pérola</button>
+          </div>
+          <div class="opcoes-sugestoes" id="opcoesSugestoesAnel" style="display:none;">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Fino')">+ Fino</button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Grosso')">+ Grosso</button>
+          </div>
+          <div class="ajuda">Use quando a peça tiver mais de uma opção de cor/acabamento pra escolher (ex: Ouro, Ródio, Rosé). Pra anel, dá pra usar também pra largura (Fino/Grosso). Digite uma opção e aperte Enter, ou use os atalhos acima; pode adicionar quantas quiser.</div>
         </div>
 
         <div class="campo full check-linha">
@@ -248,22 +305,33 @@
         <div class="campo full">
           <label for="fFotoPrincipal">Foto principal</label>
           <input type="file" id="fFotoPrincipal" accept="image/*">
-          <div class="ajuda">Deixe em branco ao editar pra manter a foto atual.</div>
+          <div class="ajuda">Deixe em branco pra manter a foto atual, ou clique no × pra removê-la.</div>
           <div class="preview-fotos" id="previewPrincipal"></div>
         </div>
         <div class="campo full">
           <label for="fFotosExtra">Fotos extras (opcional, pode escolher várias)</label>
           <input type="file" id="fFotosExtra" accept="image/*" multiple>
+          <div class="ajuda">Clique no × de uma foto pra removê-la.</div>
           <div class="preview-fotos" id="previewExtra"></div>
         </div>
 
         <div class="campo full">
-          <details>
-            <summary>Avançado: tamanhos / letras (JSON, opcional)</summary>
-            <div class="ajuda">Só preencha se o produto tiver variação de tamanho (com preço por tamanho) ou letra (ex: pingente com inicial). Pra cor/acabamento, use o campo "Opções da peça" acima. Ex. tamanhos: <code>[{"t":"P","preco":39.9},{"t":"G","preco":49.9}]</code></div>
-            <textarea id="fSizes" placeholder='sizes: [{"t":"P","preco":39.9},{"t":"G","preco":49.9}]'></textarea>
-            <textarea id="fLetras" placeholder='letras: [{"l":"A","q":2},{"l":"B","q":1}]' style="margin-top:6px;"></textarea>
-          </details>
+          <label id="labelTamanhos">Tamanhos (opcional — PP / P / M / G)</label>
+          <div class="tam-opcoes" id="tamOpcoesWrap"></div>
+          <div class="tam-detalhes" id="tamDetalhesWrap"></div>
+          <div class="ajuda">Marque os tamanhos que essa peça tem. Pra cada um, informe o preço (e o estoque, se quiser controlar separado).</div>
+        </div>
+
+        <div class="campo full">
+          <div class="check-linha">
+            <input type="checkbox" id="fTemLetras">
+            <label for="fTemLetras" style="margin:0;">Peça tem variação de letra (ex: pingente com inicial)</label>
+          </div>
+          <div class="letras-alfabeto" id="letrasAlfabetoWrap" style="display:none;">
+            <div class="letras-grade" id="letrasGradeWrap"></div>
+            <div class="letras-selecionadas" id="letrasSelecionadasWrap"></div>
+            <div class="ajuda">Clique nas letras disponíveis e informe quantas tem em estoque de cada uma.</div>
+          </div>
         </div>
       </div>
 
@@ -419,15 +487,21 @@ function abrirForm(produto){
   $('fEstoque').value = produto && produto.estoque != null ? produto.estoque : '';
   $('fTag').value = produto ? (produto.tag || '') : '';
   $('fAtivo').checked = produto ? produto.ativo !== false : true;
-  $('fSizes').value = produto && produto.sizes ? JSON.stringify(produto.sizes) : '';
-  $('fLetras').value = produto && produto.letras ? JSON.stringify(produto.letras) : '';
+  sizesAtual = produto && Array.isArray(produto.sizes) ? produto.sizes.map(s => ({...s})) : [];
+  renderTamanhos();
+  letrasAtual = produto && Array.isArray(produto.letras) ? produto.letras.map(l => ({...l})) : [];
+  $('fTemLetras').checked = letrasAtual.length > 0;
+  renderLetras();
   opcoesAtual = produto && Array.isArray(produto.cores) ? produto.cores.map(c => c.c) : [];
   renderOpcoes();
   $('fFotoPrincipal').value = '';
   $('fFotosExtra').value = '';
-  $('previewPrincipal').innerHTML = produto && produto.img ? `<img src="${produto.img}">` : '';
-  $('previewExtra').innerHTML = produto && Array.isArray(produto.imgs)
-    ? produto.imgs.map(i => `<img src="${typeof i === 'string' ? i : i.src}">`).join('') : '';
+  fotoPrincipalExistente = produto && produto.img ? produto.img : null;
+  fotoPrincipalNova = null;
+  fotosExtraExistentes = produto && Array.isArray(produto.imgs) ? [...produto.imgs] : [];
+  fotosExtraNovas = [];
+  renderFotoPrincipal();
+  renderFotosExtra();
   $('erroForm').textContent = '';
   $('modalForm').style.display = 'flex';
 }
@@ -460,14 +534,19 @@ function onOpcaoKeydown(e){
   }
 }
 
-function adicionarOpcaoDoInput(){
-  const input = $('fOpcaoInput');
-  if(!input) return;
-  const val = input.value.trim();
+function adicionarOpcao(val){
+  val = (val || '').trim();
   if(val && !opcoesAtual.some(o => o.toLowerCase() === val.toLowerCase())){
     opcoesAtual.push(val);
   }
   renderOpcoes();
+}
+window.adicionarOpcao = adicionarOpcao;
+
+function adicionarOpcaoDoInput(){
+  const input = $('fOpcaoInput');
+  if(!input) return;
+  adicionarOpcao(input.value);
   $('fOpcaoInput').focus();
 }
 
@@ -476,6 +555,192 @@ function removerOpcao(i){
   renderOpcoes();
 }
 window.removerOpcao = removerOpcao;
+
+function atualizarSugestoesAnel(){
+  $('opcoesSugestoesAnel').style.display = ehCategoriaAnel() ? 'flex' : 'none';
+}
+
+/* ---- Tamanhos (PP/P/M/G, ou numeração de anel) ---- */
+let sizesAtual = [];
+const TAMANHOS_PADRAO = ['PP', 'P', 'M', 'G'];
+const TAMANHOS_ANEL = ['10', '12', '14', '16', '18', '20', '22', '24'];
+
+function normalizarTexto(s){
+  return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+function ehCategoriaAnel(){
+  const cat = normalizarTexto($('fCat').value);
+  return cat.includes('anel') || cat.includes('aneis');
+}
+function opcoesTamanhoAtuais(){
+  return ehCategoriaAnel() ? TAMANHOS_ANEL : TAMANHOS_PADRAO;
+}
+
+function renderTamanhos(){
+  const opcoes = opcoesTamanhoAtuais();
+  $('labelTamanhos').textContent = ehCategoriaAnel()
+    ? 'Numeração do anel (opcional)'
+    : 'Tamanhos (opcional — PP / P / M / G)';
+  atualizarSugestoesAnel();
+  $('tamOpcoesWrap').innerHTML = opcoes.map(t => `
+    <button type="button" class="tam-botao ${sizesAtual.some(s => s.t === t) ? 'ativo' : ''}" data-t="${t}">${t}</button>
+  `).join('');
+  $('tamDetalhesWrap').innerHTML = sizesAtual.map((s, i) => `
+    <div class="tam-detalhe-linha">
+      <b>${escapeHtml(s.t)}</b>
+      <label>Preço (R$)<br>
+        <input type="number" step="0.01" min="0" value="${s.preco != null ? s.preco : ''}"
+          oninput="atualizarSize(${i},'preco',this.value)">
+      </label>
+      <label>Estoque (opcional)<br>
+        <input type="number" min="0" value="${s.estoque != null ? s.estoque : ''}" placeholder="∞"
+          oninput="atualizarSize(${i},'estoque',this.value)">
+      </label>
+    </div>
+  `).join('');
+}
+
+function atualizarSize(i, campo, valor){
+  if(campo === 'preco') sizesAtual[i].preco = valor === '' ? 0 : parseFloat(valor);
+  else sizesAtual[i].estoque = valor === '' ? null : Math.max(0, parseInt(valor, 10) || 0);
+}
+window.atualizarSize = atualizarSize;
+
+$('tamOpcoesWrap').addEventListener('click', (e) => {
+  const btn = e.target.closest('.tam-botao');
+  if(!btn) return;
+  const t = btn.dataset.t;
+  const idx = sizesAtual.findIndex(s => s.t === t);
+  if(idx === -1) sizesAtual.push({ t, preco: parseFloat($('fPreco').value) || 0, estoque: null });
+  else sizesAtual.splice(idx, 1);
+  renderTamanhos();
+});
+
+/* ---- Letras (pingente com inicial) ---- */
+let letrasAtual = [];
+const ALFABETO = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function renderLetras(){
+  $('letrasAlfabetoWrap').style.display = $('fTemLetras').checked ? 'block' : 'none';
+  $('letrasGradeWrap').innerHTML = ALFABETO.map(l => `
+    <button type="button" class="letra-botao ${letrasAtual.some(x => x.l === l) ? 'ativo' : ''}" data-l="${l}">${l}</button>
+  `).join('');
+  $('letrasSelecionadasWrap').innerHTML = letrasAtual.map((L, i) => `
+    <span class="letra-chip">
+      <b>${escapeHtml(L.l)}</b>
+      <input type="number" min="0" value="${L.q != null ? L.q : 1}" aria-label="Estoque da letra ${escapeHtml(L.l)}"
+        oninput="atualizarLetraQtd(${i}, this.value)">
+      <button type="button" onclick="removerLetra(${i})" aria-label="Remover letra ${escapeHtml(L.l)}">&times;</button>
+    </span>
+  `).join('');
+}
+
+function atualizarLetraQtd(i, valor){
+  letrasAtual[i].q = valor === '' ? 0 : Math.max(0, parseInt(valor, 10) || 0);
+}
+window.atualizarLetraQtd = atualizarLetraQtd;
+
+function removerLetra(i){
+  letrasAtual.splice(i, 1);
+  renderLetras();
+}
+window.removerLetra = removerLetra;
+
+$('letrasGradeWrap').addEventListener('click', (e) => {
+  const btn = e.target.closest('.letra-botao');
+  if(!btn) return;
+  const l = btn.dataset.l;
+  const idx = letrasAtual.findIndex(x => x.l === l);
+  if(idx === -1) letrasAtual.push({ l, q: 1 });
+  else letrasAtual.splice(idx, 1);
+  renderLetras();
+});
+
+$('fTemLetras').addEventListener('change', () => {
+  if(!$('fTemLetras').checked) letrasAtual = [];
+  renderLetras();
+});
+
+$('fCat').addEventListener('input', () => {
+  const opcoesValidas = opcoesTamanhoAtuais();
+  sizesAtual = sizesAtual.filter(s => opcoesValidas.includes(s.t));
+  renderTamanhos();
+});
+
+/* ---- Fotos (principal e extras), com opção de remover ---- */
+let fotoPrincipalExistente = null; // url já salva no produto (ou null)
+let fotoPrincipalNova = null;      // File escolhido agora (ou null)
+let fotosExtraExistentes = [];     // urls/objetos já salvos no produto
+let fotosExtraNovas = [];          // Files escolhidos agora
+
+function renderFotoPrincipal(){
+  if(fotoPrincipalNova){
+    $('previewPrincipal').innerHTML = `
+      <div class="foto-preview-item">
+        <img src="${URL.createObjectURL(fotoPrincipalNova)}">
+        <button type="button" onclick="removerFotoPrincipalNova()" aria-label="Remover foto">&times;</button>
+      </div>`;
+  } else if(fotoPrincipalExistente){
+    $('previewPrincipal').innerHTML = `
+      <div class="foto-preview-item">
+        <img src="${fotoPrincipalExistente}">
+        <button type="button" onclick="removerFotoPrincipalExistente()" aria-label="Remover foto">&times;</button>
+      </div>`;
+  } else {
+    $('previewPrincipal').innerHTML = '';
+  }
+}
+function removerFotoPrincipalNova(){
+  fotoPrincipalNova = null;
+  $('fFotoPrincipal').value = '';
+  renderFotoPrincipal();
+}
+window.removerFotoPrincipalNova = removerFotoPrincipalNova;
+function removerFotoPrincipalExistente(){
+  fotoPrincipalExistente = null;
+  renderFotoPrincipal();
+}
+window.removerFotoPrincipalExistente = removerFotoPrincipalExistente;
+
+$('fFotoPrincipal').addEventListener('change', () => {
+  const file = $('fFotoPrincipal').files[0];
+  if(file) fotoPrincipalNova = file;
+  renderFotoPrincipal();
+});
+
+function renderFotosExtra(){
+  const existentes = fotosExtraExistentes.map((item, i) => {
+    const src = typeof item === 'string' ? item : item.src;
+    return `
+      <div class="foto-preview-item">
+        <img src="${src}">
+        <button type="button" onclick="removerFotoExtraExistente(${i})" aria-label="Remover foto">&times;</button>
+      </div>`;
+  }).join('');
+  const novas = fotosExtraNovas.map((file, i) => `
+    <div class="foto-preview-item">
+      <img src="${URL.createObjectURL(file)}">
+      <button type="button" onclick="removerFotoExtraNova(${i})" aria-label="Remover foto">&times;</button>
+    </div>`
+  ).join('');
+  $('previewExtra').innerHTML = existentes + novas;
+}
+function removerFotoExtraExistente(i){
+  fotosExtraExistentes.splice(i, 1);
+  renderFotosExtra();
+}
+window.removerFotoExtraExistente = removerFotoExtraExistente;
+function removerFotoExtraNova(i){
+  fotosExtraNovas.splice(i, 1);
+  renderFotosExtra();
+}
+window.removerFotoExtraNova = removerFotoExtraNova;
+
+$('fFotosExtra').addEventListener('change', () => {
+  fotosExtraNovas.push(...$('fFotosExtra').files);
+  $('fFotosExtra').value = '';
+  renderFotosExtra();
+});
 
 /* ---- Upload de foto pro Storage ---- */
 async function subirFoto(file, codProduto){
@@ -498,11 +763,6 @@ $('formProduto').addEventListener('submit', async (e) => {
       opcoesAtual.push(opcaoPendente);
     }
     const cod = $('fCod').value.trim().toUpperCase();
-    const parseJsonOpcional = (val, campo) => {
-      if(!val.trim()) return null;
-      try{ return JSON.parse(val); }
-      catch(e){ throw new Error(`Campo "${campo}" tem um JSON inválido.`); }
-    };
 
     const payload = {
       cod,
@@ -513,26 +773,27 @@ $('formProduto').addEventListener('submit', async (e) => {
       tag: $('fTag').value.trim(),
       estoque: $('fEstoque').value === '' ? null : parseInt($('fEstoque').value, 10),
       ativo: $('fAtivo').checked,
-      sizes: parseJsonOpcional($('fSizes').value, 'tamanhos'),
+      sizes: sizesAtual.length ? sizesAtual : null,
       cores: opcoesAtual.length ? opcoesAtual.map(c => ({ c })) : null,
-      letras: parseJsonOpcional($('fLetras').value, 'letras'),
+      letras: $('fTemLetras').checked && letrasAtual.length ? letrasAtual : null,
     };
 
-    const arquivoPrincipal = $('fFotoPrincipal').files[0];
-    if(arquivoPrincipal) payload.img = await subirFoto(arquivoPrincipal, cod);
-
-    const arquivosExtra = [...$('fFotosExtra').files];
-    if(arquivosExtra.length){
-      const urls = [];
-      for(const f of arquivosExtra) urls.push(await subirFoto(f, cod));
-      payload.imgs = urls;
+    if(!editandoId && !fotoPrincipalNova && !fotoPrincipalExistente){
+      throw new Error('Escolha uma foto principal pro produto novo.');
     }
+    payload.img = fotoPrincipalNova
+      ? await subirFoto(fotoPrincipalNova, cod)
+      : fotoPrincipalExistente;
+
+    const urlsNovas = [];
+    for(const f of fotosExtraNovas) urlsNovas.push(await subirFoto(f, cod));
+    payload.imgs = [...fotosExtraExistentes, ...urlsNovas].length
+      ? [...fotosExtraExistentes, ...urlsNovas] : null;
 
     if(editandoId){
       const { error } = await sb.from('produtos').update(payload).eq('id', editandoId);
       if(error) throw error;
     } else {
-      if(!arquivoPrincipal) throw new Error('Escolha uma foto principal pro produto novo.');
       payload.data = new Date().toISOString().slice(0,10); // marca como "Novidade"
       const { error } = await sb.from('produtos').insert(payload);
       if(error) throw error;
