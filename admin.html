@@ -105,6 +105,16 @@
   input.estoque-zero{ border-color:var(--verm); color:var(--verm); background:#fdeceb; }
   input.estoque-baixo{ border-color:#c8882a; color:#c8882a; background:#fdf3e4; }
 
+  .estoque-variante{
+    display:inline-flex; flex-direction:column; align-items:center; gap:2px;
+    width:70px; padding:6px 8px; border:1px solid var(--rosa-medio); border-radius:8px;
+    background:var(--rosa-bg); color:var(--texto); text-align:center;
+    font-family:var(--serif); font-size:20px; font-weight:600;
+  }
+  .estoque-variante small{ font-family:inherit; font-size:9px; font-weight:500; color:var(--texto-claro); }
+  .estoque-variante.estoque-zero{ border-color:var(--verm); color:var(--verm); background:#fdeceb; }
+  .estoque-variante.estoque-baixo{ border-color:#c8882a; color:#c8882a; background:#fdf3e4; }
+
   /* ---- Modal de formulário ---- */
   #modalForm{
     display:none; position:fixed; inset:0; background:rgba(74,47,61,.4); z-index:50;
@@ -395,11 +405,27 @@ async function carregarProdutosAdmin(){
   atualizarValorEstoqueTotal();
 }
 
+/* Soma do estoque de produtos com variação (tamanho ou letra); null = sem variação */
+function totalEstoqueVariantes(p){
+  if(Array.isArray(p.sizes) && p.sizes.length) return p.sizes.reduce((s,t) => s + (Number(t.estoque) || 0), 0);
+  if(Array.isArray(p.letras) && p.letras.length) return p.letras.reduce((s,l) => s + (Number(l.q) || 0), 0);
+  return null;
+}
+
+function valorEstoqueProduto(p){
+  if(Array.isArray(p.sizes) && p.sizes.length){
+    return p.sizes.reduce((s,t) => s + (Number(t.preco) || Number(p.preco) || 0) * (Number(t.estoque) || 0), 0);
+  }
+  if(Array.isArray(p.letras) && p.letras.length){
+    const totalQ = p.letras.reduce((s,l) => s + (Number(l.q) || 0), 0);
+    return totalQ * (Number(p.preco) || 0);
+  }
+  if(p.estoque == null) return 0;
+  return (Number(p.preco) || 0) * Number(p.estoque);
+}
+
 function atualizarValorEstoqueTotal(){
-  const total = produtosCache.reduce((soma, p) => {
-    if(p.estoque == null) return soma;
-    return soma + (Number(p.preco) || 0) * Number(p.estoque);
-  }, 0);
+  const total = produtosCache.reduce((soma, p) => soma + valorEstoqueProduto(p), 0);
   const txt = 'R$ ' + total.toFixed(2).replace('.', ',');
   $('valorEstoqueTotal').innerHTML = `Valor em estoque: <b>${txt}</b>`;
 }
@@ -421,7 +447,15 @@ function renderTabela(){
   });
   if(!lista.length){ $('corpoTabela').innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--texto-claro);">Nenhum produto encontrado.</td></tr>`; return; }
   $('corpoTabela').innerHTML = lista.map(p => {
-    const classeEstoque = p.estoque === 0 ? 'estoque-zero' : (p.estoque != null && p.estoque <= 3 ? 'estoque-baixo' : '');
+    const totalVariante = totalEstoqueVariantes(p);
+    const temVariante = totalVariante != null;
+    const valorRef = temVariante ? totalVariante : p.estoque;
+    const classeEstoque = valorRef === 0 ? 'estoque-zero' : (valorRef != null && valorRef <= 3 ? 'estoque-baixo' : '');
+    const celulaEstoque = temVariante
+      ? `<span class="estoque-variante ${classeEstoque}" title="Soma dos tamanhos/letras cadastrados. Pra mudar, use 'Editar'.">${totalVariante}<small>por variante</small></span>`
+      : `<input type="number" class="estoque-inline ${classeEstoque}" min="0"
+          value="${p.estoque != null ? p.estoque : ''}" placeholder="∞"
+          onchange="atualizarEstoque(${p.id}, this.value, this)">`;
     return `
     <tr>
       <td class="col-foto">${p.img ? `<img src="${p.img}" alt="">` : ''}</td>
@@ -429,11 +463,7 @@ function renderTabela(){
       <td>${p.nome}</td>
       <td>${p.cat}</td>
       <td>${p.preco ? 'R$ ' + Number(p.preco).toFixed(2).replace('.', ',') : 'Sob consulta'}</td>
-      <td>
-        <input type="number" class="estoque-inline ${classeEstoque}" min="0"
-          value="${p.estoque != null ? p.estoque : ''}" placeholder="∞"
-          onchange="atualizarEstoque(${p.id}, this.value, this)">
-      </td>
+      <td>${celulaEstoque}</td>
       <td>${p.ativo === false ? '<span class="pill-inativo">Inativo</span>' : '<span class="pill-ativo">Ativo</span>'}</td>
       <td class="col-acoes">
         <button class="btn btn-ghost btn-sm" onclick="abrirEdicao(${p.id})">Editar</button>
@@ -563,7 +593,7 @@ function atualizarSugestoesAnel(){
 /* ---- Tamanhos (PP/P/M/G, ou numeração de anel) ---- */
 let sizesAtual = [];
 const TAMANHOS_PADRAO = ['PP', 'P', 'M', 'G'];
-const TAMANHOS_ANEL = ['10', '12', '14', '16', '18', '20', '22', '24'];
+const TAMANHOS_ANEL = ['6', '8', '10', '12', '14', '16', '18', '20', '22', '24', '26'];
 
 function normalizarTexto(s){
   return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
