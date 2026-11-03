@@ -155,6 +155,7 @@
     display:inline-flex; align-items:center; gap:6px; background:var(--rosa-medio); color:var(--texto);
     padding:4px 6px 4px 12px; border-radius:999px; font-size:13px; white-space:nowrap;
   }
+  .tag-chip input{ width:50px; padding:4px 6px; border:1px solid var(--rosa); border-radius:6px; text-align:center; }
   .tag-chip button{
     border:none; background:transparent; color:var(--texto); cursor:pointer; font-size:16px;
     line-height:1; padding:2px 6px; border-radius:50%;
@@ -304,7 +305,7 @@
             <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Fino')">+ Fino</button>
             <button type="button" class="btn btn-ghost btn-sm" onclick="adicionarOpcao('Grosso')">+ Grosso</button>
           </div>
-          <div class="ajuda">Use quando a peça tiver mais de uma opção de cor/acabamento pra escolher (ex: Ouro, Ródio, Rosé). Pra anel, dá pra usar também pra largura (Fino/Grosso). Digite uma opção e aperte Enter, ou use os atalhos acima; pode adicionar quantas quiser.</div>
+          <div class="ajuda">Use quando a peça tiver mais de uma opção de cor/acabamento pra escolher (ex: Ouro, Ródio, Rosé). Pra anel, dá pra usar também pra largura (Fino/Grosso). Digite uma opção e aperte Enter, ou use os atalhos acima; pode adicionar quantas quiser. Informe o estoque de cada opção no campinho ao lado dela (em branco = sempre disponível).</div>
         </div>
 
         <div class="campo full check-linha">
@@ -405,10 +406,11 @@ async function carregarProdutosAdmin(){
   atualizarValorEstoqueTotal();
 }
 
-/* Soma do estoque de produtos com variação (tamanho ou letra); null = sem variação */
+/* Soma do estoque de produtos com variação (tamanho, letra ou opção); null = sem variação */
 function totalEstoqueVariantes(p){
   if(Array.isArray(p.sizes) && p.sizes.length) return p.sizes.reduce((s,t) => s + (Number(t.estoque) || 0), 0);
   if(Array.isArray(p.letras) && p.letras.length) return p.letras.reduce((s,l) => s + (Number(l.q) || 0), 0);
+  if(Array.isArray(p.cores) && p.cores.length) return p.cores.reduce((s,c) => s + (Number(c.estoque) || 0), 0);
   return null;
 }
 
@@ -418,6 +420,10 @@ function valorEstoqueProduto(p){
   }
   if(Array.isArray(p.letras) && p.letras.length){
     const totalQ = p.letras.reduce((s,l) => s + (Number(l.q) || 0), 0);
+    return totalQ * (Number(p.preco) || 0);
+  }
+  if(Array.isArray(p.cores) && p.cores.length){
+    const totalQ = p.cores.reduce((s,c) => s + (Number(c.estoque) || 0), 0);
     return totalQ * (Number(p.preco) || 0);
   }
   if(p.estoque == null) return 0;
@@ -434,7 +440,8 @@ function preencherFiltroCategorias(data){
   const cats = [...new Set(data.map(p => p.cat))].sort();
   $('filtroCatAdmin').innerHTML = '<option value="">Todas as categorias</option>' +
     cats.map(c => `<option value="${c}">${c}</option>`).join('');
-  $('listaCategorias').innerHTML = cats.map(c => `<option value="${c}">`).join('');
+  const catsSugeridas = [...new Set([...cats, 'Colares de Letra'])].sort();
+  $('listaCategorias').innerHTML = catsSugeridas.map(c => `<option value="${c}">`).join('');
 }
 
 function renderTabela(){
@@ -522,7 +529,7 @@ function abrirForm(produto){
   letrasAtual = produto && Array.isArray(produto.letras) ? produto.letras.map(l => ({...l})) : [];
   $('fTemLetras').checked = letrasAtual.length > 0;
   renderLetras();
-  opcoesAtual = produto && Array.isArray(produto.cores) ? produto.cores.map(c => c.c) : [];
+  opcoesAtual = produto && Array.isArray(produto.cores) ? produto.cores.map(c => ({ c: c.c, q: c.estoque != null ? c.estoque : null })) : [];
   renderOpcoes();
   $('fFotoPrincipal').value = '';
   $('fFotosExtra').value = '';
@@ -546,12 +553,21 @@ function escapeHtml(s){
 }
 
 function renderOpcoes(){
-  const chips = opcoesAtual.map((c, i) =>
-    `<span class="tag-chip">${escapeHtml(c)}<button type="button" onclick="removerOpcao(${i})" aria-label="Remover ${escapeHtml(c)}">&times;</button></span>`
+  const chips = opcoesAtual.map((o, i) =>
+    `<span class="tag-chip">${escapeHtml(o.c)}
+      <input type="number" min="0" value="${o.q != null ? o.q : ''}" placeholder="∞" title="Estoque desta opção (em branco = sempre disponível)"
+        oninput="atualizarOpcaoQtd(${i}, this.value)">
+      <button type="button" onclick="removerOpcao(${i})" aria-label="Remover ${escapeHtml(o.c)}">&times;</button>
+    </span>`
   ).join('');
   $('opcoesWrap').innerHTML = chips + `<input type="text" id="fOpcaoInput" placeholder="${opcoesAtual.length ? 'Adicionar outra...' : 'Ex: Ouro — digite e aperte Enter'}">`;
   $('fOpcaoInput').addEventListener('keydown', onOpcaoKeydown);
 }
+
+function atualizarOpcaoQtd(i, valor){
+  opcoesAtual[i].q = valor === '' ? null : Math.max(0, parseInt(valor, 10) || 0);
+}
+window.atualizarOpcaoQtd = atualizarOpcaoQtd;
 
 function onOpcaoKeydown(e){
   if(e.key === 'Enter' || e.key === ','){
@@ -566,8 +582,8 @@ function onOpcaoKeydown(e){
 
 function adicionarOpcao(val){
   val = (val || '').trim();
-  if(val && !opcoesAtual.some(o => o.toLowerCase() === val.toLowerCase())){
-    opcoesAtual.push(val);
+  if(val && !opcoesAtual.some(o => o.c.toLowerCase() === val.toLowerCase())){
+    opcoesAtual.push({ c: val, q: null });
   }
   renderOpcoes();
 }
@@ -789,8 +805,8 @@ $('formProduto').addEventListener('submit', async (e) => {
   $('btnSalvarForm').disabled = true;
   try{
     const opcaoPendente = $('fOpcaoInput').value.trim();
-    if(opcaoPendente && !opcoesAtual.some(o => o.toLowerCase() === opcaoPendente.toLowerCase())){
-      opcoesAtual.push(opcaoPendente);
+    if(opcaoPendente && !opcoesAtual.some(o => o.c.toLowerCase() === opcaoPendente.toLowerCase())){
+      opcoesAtual.push({ c: opcaoPendente, q: null });
     }
     const cod = $('fCod').value.trim().toUpperCase();
 
@@ -804,7 +820,7 @@ $('formProduto').addEventListener('submit', async (e) => {
       estoque: $('fEstoque').value === '' ? null : parseInt($('fEstoque').value, 10),
       ativo: $('fAtivo').checked,
       sizes: sizesAtual.length ? sizesAtual : null,
-      cores: opcoesAtual.length ? opcoesAtual.map(c => ({ c })) : null,
+      cores: opcoesAtual.length ? opcoesAtual.map(o => ({ c: o.c, estoque: o.q })) : null,
       letras: $('fTemLetras').checked && letrasAtual.length ? letrasAtual : null,
     };
 
